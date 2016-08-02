@@ -46,8 +46,12 @@ THIRD_PARTY_APPS = (
 LOCAL_APPS = (
     # custom users app
     'redditalpha.users.apps.UsersConfig',
-    'redditalpha.index.apps.IndexConfig'
-    # Your stuff: custom apps go here
+    'redditalpha.clans.apps.ClansConfig',
+    'redditalpha.tournaments.apps.TournamentsConfig',
+    'redditalpha.index.apps.IndexConfig',
+    'redditalpha.handicap.apps.HandicapConfig',
+    'redditalpha.decks.apps.DecksConfig',
+
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
