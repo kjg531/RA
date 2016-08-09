@@ -1,11 +1,14 @@
 /**
+ * Created by KG on 8/8/16.
+ */
+/**
  * Created by KG on 8/1/16.
  */
 import React from "react"
 const iconImage = '/static/images/icon.png'
 
 
-export default class ComponentOne extends React.Component {
+export default class Logo extends React.Component {
     style = {
         icon: {
             height: '50px',

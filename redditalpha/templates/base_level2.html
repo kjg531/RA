@@ -1,10 +1,14 @@
 {% extends "base.html" %}
 {% load render_bundle from webpack_loader %}
 
-{% block content %}
-<div id="appone"></div>
+
+{% block body %}
+<div id="navbar"></div>
 {% render_bundle 'vendors' %}
-{% render_bundle 'NavBar' %}
-{#    {% block content %}#}
-{#        {% endblock %}#}
+{% render_bundle 'NavBarEntryPoint' %}
+<div style="background-image:url('../static/images/bg.jpg');background-repeat: no-repeat;background-position: center center;background-attachment: fixed;background-size: cover;">
+{% block content %}
+
+{% endblock %}
+</div>
 {% endblock %}

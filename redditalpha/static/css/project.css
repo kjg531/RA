@@ -36,3 +36,9 @@
 [hidden][style="display: block;"] {
   display: block !important;
 }
+
+
+@font-face {
+    font-family: SuperCell;
+    src: url(../Supercell-magic-webfont.ttf);
+}

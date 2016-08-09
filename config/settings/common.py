@@ -49,7 +49,6 @@ LOCAL_APPS = (
     'redditalpha.clans.apps.ClansConfig',
     'redditalpha.tournaments.apps.TournamentsConfig',
     'redditalpha.index.apps.IndexConfig',
-    'redditalpha.handicap.apps.HandicapConfig',
     'redditalpha.decks.apps.DecksConfig',
 
 )

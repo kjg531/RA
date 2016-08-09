@@ -1,13 +1,14 @@
 from django.db import models
-from django.db.models.signals import m2m_changed
-from django.core.exceptions import ValidationError
 from redditalpha.users.models import User
 
 # Create your models here.
 
 
 class Card(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=50)
+    cost = models.IntegerField()
+    rarity = models.CharField(max_length=50)
+    arena = models.CharField(max_length=50)
 
     class Meta:
         verbose_name = "Card"
@@ -21,6 +22,7 @@ class Deck(models.Model):
     cards = models.ManyToManyField(Card)
     popularity = models.IntegerField()
     current_favorite_of = models.ManyToManyField(User)
+    cost_average = models.IntegerField()
 
     class Meta:
         verbose_name = "Clan"
@@ -31,12 +33,3 @@ class Deck(models.Model):
 
     def favorite_user_count(self):
         return self.current_favorite_of.count
-
-
-
-
-# def deck_changed(sender, **kwargs):
-#         if kwargs['instance'].cards.count() > 8:
-#             raise ValidationError("You can't add more than 8 cards to a deck!")
-#
-# m2m_changed.connect(deck_changed(), sender=Deck.cards.through)

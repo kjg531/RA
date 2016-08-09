@@ -13,10 +13,10 @@ config.ip = ip
 
 // Use webpack dev server
 config.entry = {
-  NavBar: [
+  NavBarEntryPoint: [
     'webpack-dev-server/client?http://' + ip + ':3000',
     'webpack/hot/only-dev-server',
-    './redditalpha/static/js/Apps/NavBar',
+    './redditalpha/static/js/Apps/NavBarEntryPoint',
   ]
 }
 

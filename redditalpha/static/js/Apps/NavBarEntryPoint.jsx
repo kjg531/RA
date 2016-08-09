@@ -6,21 +6,21 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import ComponentOne from "../Components/ComponentOne"
+import NavBar from "../Components/NavBar"
+import theme from "../theme"
 
 
 
 
 
-class AppOne extends React.Component {
+class NavBarEntryPoint extends React.Component {
   render() {
     return (
-        <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
-            <ComponentOne />
+        <MuiThemeProvider muiTheme={theme.theme}>
+            <NavBar />
         </MuiThemeProvider>
     )
   }
 }
 injectTapEventPlugin();
-render(<AppOne />, document.getElementById('appone'))
+render(<NavBarEntryPoint />, document.getElementById('navbar'))
