@@ -50,6 +50,7 @@ LOCAL_APPS = (
     'redditalpha.tournaments.apps.TournamentsConfig',
     'redditalpha.index.apps.IndexConfig',
     'redditalpha.decks.apps.DecksConfig',
+    'redditalpha.cards.apps.CardsConfig',
 
 )
 
@@ -105,7 +106,7 @@ MANAGERS = ADMINS
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
 DATABASES = {
     # Raises ImproperlyConfigured exception if DATABASE_URL not in os.environ
-    'default': env.db('DATABASE_URL', default='postgres:///redditalpha'),
+    'default': env.db('DATABASE_URL', default='postgres://postgres:@localhost:5432/redditalpha'),
 }
 DATABASES['default']['ATOMIC_REQUESTS'] = True
 

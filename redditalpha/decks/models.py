@@ -1,21 +1,7 @@
 from django.db import models
 from redditalpha.users.models import User
 
-# Create your models here.
-
-
-class Card(models.Model):
-    name = models.CharField(max_length=50)
-    cost = models.IntegerField()
-    rarity = models.CharField(max_length=50)
-    arena = models.CharField(max_length=50)
-
-    class Meta:
-        verbose_name = "Card"
-        verbose_name_plural = "Cards"
-
-    def __str__(self):
-        return self.name
+from redditalpha.cards.models import Card
 
 
 class Deck(models.Model):
