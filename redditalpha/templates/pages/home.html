@@ -2,33 +2,34 @@
 {% load staticfiles %}
 
 {% block content %}
-<div style="border-radius:7px; padding-top: 120px; text-align: center">
-    <img id="" style="border-radius: 12px; height: auto; width: 40%" src="{% static "images/kgi1/leaderboards/KGI1_1_1.PNG" %}">
-    <img id="" style="border-radius: 12px; height: auto; width: 40%" src="{% static "images/kgi1/leaderboards/KGI1_2_1.PNG" %}"><br>
-    <img id="" style="border-radius: 12px; height: auto; width: 40%" src="{% static "images/kgi1/leaderboards/KGI1_1_2.PNG" %}">
-    <img id="" style="border-radius: 12px; height: auto; width: 40%" src="{% static "images/kgi1/leaderboards/KGI1_2_2.PNG" %}"><br>
-</div>
-
-<div style="text-align: center">
-    <iframe width="640" style="border-radius: 12px" height="360" src="https://www.youtube.com/embed/Hl-wyXwWWL4?showinfo=0" frameborder="0" allowfullscreen></iframe><br>
-    <img id="" style="border-radius: 12px; width:640px; height:860px" src="{% static "images/kgi1/games/Game1.PNG" %}"><br>
-
-    <iframe width="640" style="border-radius: 12px" height="360" src="https://www.youtube.com/embed/LZPE4dBhzlY?showinfo=0" frameborder="0" allowfullscreen></iframe><br>
-    <img id="" style="border-radius: 12px; width: 640px; height: 860px" src="{% static "images/kgi1/games/Game2.PNG" %}"><br>
-
-    <iframe width="640" style="border-radius: 12px" height="360" src="https://www.youtube.com/embed/f6BkbIoTNQ8?showinfo=0" frameborder="0" allowfullscreen></iframe><br>
-    <img id="" style="border-radius: 12px; width: 640px; height: 860px" src="{% static "images/kgi1/games/Game3.PNG" %}"><br>
-
-    <iframe width="640" style="border-radius: 12px" height="360" src="https://www.youtube.com/embed/YuP3i0FgqV4?showinfo=0" frameborder="0" allowfullscreen></iframe><br>
-    <img id="" style="border-radius: 12px; width: 640px; height: 860px" src="{% static "images/kgi1/games/Game4.PNG" %}"><br>
-
-    <iframe width="640" style="border-radius: 12px" height="360" src="https://www.youtube.com/embed/j0XBX4H4Vn8?showinfo=0" frameborder="0" allowfullscreen></iframe><br>
-    <img id="" style="border-radius: 12px; width: 640px; height: 860px" src="{% static "images/kgi1/games/Game5.PNG" %}"><br>
-
-    <iframe width="640" style="border-radius: 12px" height="360" src="https://www.youtube.com/embed/cT1zA1KaBts?showinfo=0" frameborder="0" allowfullscreen></iframe><br>
-    <img id="" style="border-radius: 12px; width: 640px; height: 860px" src="{% static "images/kgi1/games/Game6.PNG" %}"><br>
-
-    <iframe width="640" style="border-radius: 12px" height="360" src="https://www.youtube.com/embed/B6oVPVHE58k?showinfo=0" frameborder="0" allowfullscreen></iframe><br>
-    <img id="" style="border-radius: 12px; width: 640px; height: 860px" src="{% static "images/kgi1/games/Game7.PNG" %}">
-</div>
+    <div id="cardlist"></div>
+{#<div style="border-radius:7px; padding-top: 120px; text-align: center">#}
+{#    <img id="" style="border-radius: 12px; height: auto; width: 40%" src="{% static "images/kgi1/leaderboards/KGI1_1_1.PNG" %}">#}
+{#    <img id="" style="border-radius: 12px; height: auto; width: 40%" src="{% static "images/kgi1/leaderboards/KGI1_2_1.PNG" %}"><br>#}
+{#    <img id="" style="border-radius: 12px; height: auto; width: 40%" src="{% static "images/kgi1/leaderboards/KGI1_1_2.PNG" %}">#}
+{#    <img id="" style="border-radius: 12px; height: auto; width: 40%" src="{% static "images/kgi1/leaderboards/KGI1_2_2.PNG" %}"><br>#}
+{#</div>#}
+{##}
+{#<div style="text-align: center">#}
+{#    <iframe width="640" style="border-radius: 12px" height="360" src="https://www.youtube.com/embed/Hl-wyXwWWL4?showinfo=0" frameborder="0" allowfullscreen></iframe><br>#}
+{#    <img id="" style="border-radius: 12px; width:640px; height:860px" src="{% static "images/kgi1/games/Game1.PNG" %}"><br>#}
+{##}
+{#    <iframe width="640" style="border-radius: 12px" height="360" src="https://www.youtube.com/embed/LZPE4dBhzlY?showinfo=0" frameborder="0" allowfullscreen></iframe><br>#}
+{#    <img id="" style="border-radius: 12px; width: 640px; height: 860px" src="{% static "images/kgi1/games/Game2.PNG" %}"><br>#}
+{##}
+{#    <iframe width="640" style="border-radius: 12px" height="360" src="https://www.youtube.com/embed/f6BkbIoTNQ8?showinfo=0" frameborder="0" allowfullscreen></iframe><br>#}
+{#    <img id="" style="border-radius: 12px; width: 640px; height: 860px" src="{% static "images/kgi1/games/Game3.PNG" %}"><br>#}
+{##}
+{#    <iframe width="640" style="border-radius: 12px" height="360" src="https://www.youtube.com/embed/YuP3i0FgqV4?showinfo=0" frameborder="0" allowfullscreen></iframe><br>#}
+{#    <img id="" style="border-radius: 12px; width: 640px; height: 860px" src="{% static "images/kgi1/games/Game4.PNG" %}"><br>#}
+{##}
+{#    <iframe width="640" style="border-radius: 12px" height="360" src="https://www.youtube.com/embed/j0XBX4H4Vn8?showinfo=0" frameborder="0" allowfullscreen></iframe><br>#}
+{#    <img id="" style="border-radius: 12px; width: 640px; height: 860px" src="{% static "images/kgi1/games/Game5.PNG" %}"><br>#}
+{##}
+{#    <iframe width="640" style="border-radius: 12px" height="360" src="https://www.youtube.com/embed/cT1zA1KaBts?showinfo=0" frameborder="0" allowfullscreen></iframe><br>#}
+{#    <img id="" style="border-radius: 12px; width: 640px; height: 860px" src="{% static "images/kgi1/games/Game6.PNG" %}"><br>#}
+{##}
+{#    <iframe width="640" style="border-radius: 12px" height="360" src="https://www.youtube.com/embed/B6oVPVHE58k?showinfo=0" frameborder="0" allowfullscreen></iframe><br>#}
+{#    <img id="" style="border-radius: 12px; width: 640px; height: 860px" src="{% static "images/kgi1/games/Game7.PNG" %}">#}
+{#</div>#}
 {% endblock %}

@@ -13,11 +13,9 @@ config.ip = ip
 
 // Use webpack dev server
 config.entry = {
-  NavBarEntryPoint: [
-    'webpack-dev-server/client?http://' + ip + ':3000',
-    'webpack/hot/only-dev-server',
-    './redditalpha/static/js/Apps/NavBarEntryPoint',
-  ]
+  NavBarEntryPoint: ['./redditalpha/static/js/Apps/NavBarEntryPoint', 'webpack/hot/only-dev-server'],
+  Card: ['./redditalpha/static/js/Components/Card','webpack/hot/only-dev-server'],
+  devServerClient: 'webpack-dev-server/client?http://0.0.0.0:3000'
 }
 
 // override django's STATIC_URL for webpack bundles

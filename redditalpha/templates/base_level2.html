@@ -4,11 +4,14 @@
 
 {% block body %}
 <div id="navbar"></div>
+<div id="cardlist"></div>
+
 {% render_bundle 'vendors' %}
 {% render_bundle 'NavBarEntryPoint' %}
-<div style="background-image:url('../static/images/bg.jpg');background-repeat: no-repeat;background-position: center center;background-attachment: fixed;background-size: cover;">
+{% render_bundle 'Card' %}
+{#<div style="background-image:url('../static/images/bg.jpg');background-repeat: no-repeat;background-position: center center;background-attachment: fixed;background-size: cover;">#}
 {% block content %}
 
 {% endblock %}
-</div>
+{#</div>#}
 {% endblock %}
