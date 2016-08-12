@@ -20,9 +20,9 @@ var Card = React.createClass({
         // var cls = 'picture ' + (this.props.favorite ? 'favorite' : '');
 
         return (
-
             <div>
-                <img src={this.props.src} width="200" />
+                <h3>{this.props.name} ({this.props.cost})</h3>
+                <img src={this.props.image_url} width="200" alt={this.props.image_url}/>
             </div>
 
         );
@@ -33,19 +33,20 @@ var CardList = React.createClass({
     render: function() {
       return (
         <ul>
-          {this.props.list.map(function(listValue){
-            return <div>
-                <Card src={listValue}/>
-                     </div>
-             })}
+          {this.props.list.map(function(card){
+              return (
+                <Card key={card.id} name={card.name} cost={card.cost} image_url={card.image_url} />
+              );
+            })
+          }
         </ul>
       )
     }
   });
 
-var ourList = [
-    '/static/images/cards/clashroyale-icons-archers.jpg',
-    '/static/images/cards/clashroyale-icons-archers.jpg',
-];
+// var ourList = [
+//     '/static/images/cards/archers.jpg',
+//     '/static/images/cards/archers.jpg',
+// ];
 
-render(<CardList list={ourList} />, document.getElementById('cardlist'));
+render(<CardList list={BACKEND_CARDS} />, document.getElementById('cardlist'));

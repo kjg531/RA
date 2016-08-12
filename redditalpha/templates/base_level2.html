@@ -3,15 +3,19 @@
 
 
 {% block body %}
-<div id="navbar"></div>
-<div id="cardlist"></div>
+    <div id="navbar"></div>
+    <div id="cardlist"></div>
 
-{% render_bundle 'vendors' %}
-{% render_bundle 'NavBarEntryPoint' %}
-{% render_bundle 'Card' %}
-{#<div style="background-image:url('../static/images/bg.jpg');background-repeat: no-repeat;background-position: center center;background-attachment: fixed;background-size: cover;">#}
-{% block content %}
+    {% block tail_js %}
+        {% render_bundle 'vendors' %}
+        {% render_bundle 'NavBarEntryPoint' %}
+        {% render_bundle 'Card' %}
+    {% endblock %}
 
-{% endblock %}
-{#</div>#}
+    {#<div style="background-image:url('../static/images/bg.jpg');background-repeat: no-repeat;background-position: center center;background-attachment: fixed;background-size: cover;">#}
+    {% block content %}
+
+    {% endblock %}
+    {#</div>#}
+
 {% endblock %}

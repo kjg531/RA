@@ -12,7 +12,7 @@ module.exports = {
   },
 
   output: {
-      path: path.resolve('./eventhi/static/bundles/local/'),
+      path: path.resolve('./redditalpha/static/bundles/local/'),
       filename: "[name]-[hash].js"
   },
 

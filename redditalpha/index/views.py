@@ -1,3 +1,8 @@
 from django.shortcuts import render
 
-# Create your views here.
+from redditalpha.cards.models import Card
+
+
+def home(request, *args, **kwargs):
+    context = {'cards': Card.objects.all()}
+    return render(request, 'pages/home.html', context)

@@ -5,7 +5,7 @@ colorama==0.3.7
 coverage==4.2
 decorator==4.0.10
 defusedxml==0.4.1
-Django==1.9.5
+Django==1.9.8
 django-allauth==0.26.1
 django-autoslug==1.9.3
 django-braces==1.9.0
@@ -56,7 +56,3 @@ Unidecode==0.4.19
 wcwidth==0.1.7
 Werkzeug==0.11.10
 win-unicode-console==0.5
-
-# This file is here because many Platforms as a Service look for
-#   requirements.txt in the root directory of a project.
-# -r requirements/production.txt #

@@ -3,6 +3,24 @@
 
 {% block content %}
     <div id="cardlist"></div>
+
+    {% block tail_js %}
+        <script>
+            var BACKEND_CARDS = [
+                {% for card in cards %}
+                    {
+                        "id": {{ card.id }},
+                        "name": "{{ card.name }}",
+                        "cost": {{ card.cost|default:"null" }},
+                        "image_url": "{{ card.base_image_url }}",
+                    },
+                {% endfor %}
+            ];
+        </script>
+
+        {{ block.super }}
+    {% endblock %}
+
 {#<div style="border-radius:7px; padding-top: 120px; text-align: center">#}
 {#    <img id="" style="border-radius: 12px; height: auto; width: 40%" src="{% static "images/kgi1/leaderboards/KGI1_1_1.PNG" %}">#}
 {#    <img id="" style="border-radius: 12px; height: auto; width: 40%" src="{% static "images/kgi1/leaderboards/KGI1_2_1.PNG" %}"><br>#}
