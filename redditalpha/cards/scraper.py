@@ -97,11 +97,11 @@ def scrape_cards():
     cards_untouched = 0
 
     for i, card_tag in enumerate(card_tags): 
-        name, description, cost, rarity, card_type = scrape_general_data(card_tag)        
-
+        name, description, cost, rarity, card_type = scrape_general_data(card_tag)
         card, created = Card.objects.get_or_create(
             name__iexact=name,
             defaults={
+                'name': name,
                 'description': description,
                 'cost': cost,
                 'rarity': rarity,
