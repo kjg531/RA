@@ -1,5 +1,7 @@
 /* These styles are generated from project.scss. */
-
+body {
+  margin: 0;
+}
 .alert-debug {
   color: black;
   background-color: white;
@@ -41,4 +43,8 @@
 @font-face {
     font-family: SuperCell;
     src: url(../Supercell-magic-webfont.ttf);
+}
+
+h1 {
+  font-family: SuperCell;
 }
