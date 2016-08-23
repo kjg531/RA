@@ -318,12 +318,12 @@ export default class NavBar extends React.Component {
                 </List>
                 <Divider />
                 <List>
-                                      <ListItem primaryText="Account"
-                            style={{color: 'white'}}
-                            leftIcon={<i className="material-icons test">account_box</i>}/>
+                  <ListItem primaryText="Account"
+                    style={{color: 'white'}}
+                    leftIcon={<i className="material-icons test">account_box</i>}/>
                   <ListItem primaryText="Logout"
-                            style={{color: 'white'}}
-                            leftIcon={<i style={{transform: 'rotate(180deg)'}} className="material-icons test">exit_to_app</i>}/>
+                    style={{color: 'white'}}
+                    leftIcon={<i style={{transform: 'rotate(180deg)'}} className="material-icons test">exit_to_app</i>}/>
                 </List>
           </div>
           <div style={this.style.slide}>

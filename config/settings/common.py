@@ -51,6 +51,7 @@ LOCAL_APPS = (
     'redditalpha.index.apps.IndexConfig',
     'redditalpha.decks.apps.DecksConfig',
     'redditalpha.cards.apps.CardsConfig',
+    'redditalpha.utils',
 
 )
 

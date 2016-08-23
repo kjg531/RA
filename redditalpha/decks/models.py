@@ -4,7 +4,13 @@ from redditalpha.users.models import User
 from redditalpha.cards.models import Card
 
 
+class Archetype(models.Model):
+    name = models.CharField(max_length=50)
+    description = models.TextField()
+
+
 class Deck(models.Model):
+    archetype = models.ForeignKey('Archetype', related_name='decks')
     cards = models.ManyToManyField(Card)
     popularity = models.IntegerField()
     current_favorite_of = models.ManyToManyField(User)
