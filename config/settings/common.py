@@ -39,6 +39,8 @@ THIRD_PARTY_APPS = (
     'allauth',  # registration
     'allauth.account',  # registration
     'allauth.socialaccount',  # registration
+    'allauth.socialaccount.providers.reddit', # We Did It Reddit
+    'redditalpha.utils.providers.discord',
     'webpack_loader',
 )
 
@@ -216,7 +218,7 @@ AUTHENTICATION_BACKENDS = (
 )
 
 # Some really nice defaults
-ACCOUNT_AUTHENTICATION_METHOD = 'username'
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 

@@ -16,6 +16,12 @@
                     },
                 {% endfor %}
             ];
+
+            {% if request.user.is_authenticated %}
+                var AVATAR_URL = "{{ request.user.avatar }}";
+            {% else %}
+                var AVATAR_URL = "www.google.com";
+            {% endif %}
         </script>
 
         {{ block.super }}

@@ -227,7 +227,7 @@ export default class NavBar extends React.Component {
                 <div>
         <FlatButton
           style={this.style.AvatarButton}
-          icon={<Avatar src="/static/images/a1.jpg" />}
+          icon={<Avatar src={AVATAR_URL} />}
           onTouchTap={this.handleToggle}
         />
         <Drawer
