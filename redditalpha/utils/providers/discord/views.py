@@ -25,14 +25,10 @@ class DiscordAdapter(OAuth2Adapter):
         if isinstance(extra_data, list):
             extra_data = extra_data[0]
 
-        a = self.get_provider().sociallogin_from_response(
+        return self.get_provider().sociallogin_from_response(
             request,
             extra_data.json()
         )
-
-        print('****COMPLETE LOGIN****')
-        print(a)
-        return a
 
 
 oauth2_login = OAuth2LoginView.adapter_view(DiscordAdapter)

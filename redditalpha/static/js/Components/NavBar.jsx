@@ -111,14 +111,16 @@ import {Link, IndexLink} from 'react-router';
 
 export default class NavBar extends React.Component {
     constructor(props) {
-        super(props);
-        this.state = {
-            open: false,
-            slideIndex: 0,
-
-        };
+      super(props);
+      this.state = {
+        authenticated: (AUTH.user === null ? false:true),
+        open: false,
+        slideIndex: 0,
+      };
     }
 
+    componentWillMount
+    
     style = {
         Logo: {
         height: 65,
@@ -214,6 +216,12 @@ export default class NavBar extends React.Component {
     };
 
     render() {
+        if (this.state.authenticated){
+          var topLeftButton = <FlatButton style={this.style.AvatarButton} icon={<Avatar src={AVATAR_URL} />} onTouchTap={this.handleToggle}/>
+        }else{
+          var topLeftButton = <FlatButton style={this.style.AvatarButton} href="/accounts/discord/login/?process=login" label="Log in with discord"/>
+        }
+
         return ( <AppBar
                 title="Reddit Alpha Clan System"
                 titleStyle={this.style.Title}
@@ -225,11 +233,9 @@ export default class NavBar extends React.Component {
                 }
                 iconElementRight = {
                 <div>
-        <FlatButton
-          style={this.style.AvatarButton}
-          icon={<Avatar src={AVATAR_URL} />}
-          onTouchTap={this.handleToggle}
-        />
+        
+        {topLeftButton}
+
         <Drawer
           docked={false}
           width={250}
@@ -323,7 +329,9 @@ export default class NavBar extends React.Component {
                     leftIcon={<i className="material-icons test">account_box</i>}/>
                   <ListItem primaryText="Logout"
                     style={{color: 'white'}}
-                    leftIcon={<i style={{transform: 'rotate(180deg)'}} className="material-icons test">exit_to_app</i>}/>
+                    leftIcon={<i style={{transform: 'rotate(180deg)'}} className="material-icons test">exit_to_app</i>}
+                    href="/accounts/logout/"
+                    />
                 </List>
           </div>
           <div style={this.style.slide}>

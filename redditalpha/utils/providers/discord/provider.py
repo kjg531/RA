@@ -20,10 +20,14 @@ class DiscordProvider(OAuth2Provider):
 
     def extract_common_fields(self, data):
         fields = {}
-        fields['name'] = 'Fuck Is My Name'
-        fields['avatar'] = 'https://discordapp.com/api/users/{}/avatars/{}.jpg'.format(data.get('id'), data.get('avatar'))
-        print('these are the fields that will be used')
-        print(fields)
+        fields['email'] = data['email']
+        fields['display_name'] = data['username']
+
+        if bool(data.get('avatar')):
+            fields['avatar'] = 'https://discordapp.com/api/users/{}/avatars/{}.jpg'.format(data.get('id'), data.get('avatar'))
+        else:
+            fields['avatar'] = ''
+
         return fields
 
     def get_default_scope(self):

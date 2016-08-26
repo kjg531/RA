@@ -1,13 +1,13 @@
 from django.db import models
 
 
-class Clans(models.Model):
+class Clan(models.Model):
     name = models.CharField(max_length=100)
-    clan_score = models.BigIntegerField()
+    score = models.BigIntegerField()
 
     class Meta:
-        verbose_name = "Clan"
-        verbose_name_plural = "Clans"
+        verbose_name = "clan"
+        verbose_name_plural = "clans"
 
     def __str__(self):
         return self.name

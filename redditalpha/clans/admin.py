@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Clans
+from .models import Clan
 
 
-admin.site.register(Clans)
+admin.site.register(Clan)
