@@ -32,14 +32,14 @@ var Card = React.createClass({
 var CardList = React.createClass({
     render: function() {
       return (
-        <ul>
+        <div>
           {this.props.list.map(function(card){
               return (
                 <Card key={card.id} name={card.name} cost={card.cost} image_url={card.image_url} />
               );
             })
           }
-        </ul>
+        </div>
       )
     }
   });

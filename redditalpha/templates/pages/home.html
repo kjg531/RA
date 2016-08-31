@@ -3,7 +3,6 @@
 
 {% block content %}
     <div id="cardlist"></div>
-    <iframe src="https://discordapp.com/widget?id=218538204242903040&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0"></iframe>
     <iframe src="https://discordapp.com/widget?id=218539800876154884&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0"></iframe>
 
     {% block tail_js %}
@@ -14,29 +13,30 @@
                         "id": {{ card.id }},
                         "name": "{{ card.name }}",
                         "cost": {{ card.cost|default:"null" }},
-                        "image_url": "{{ card.base_image_url }}" 
+                        "image_url": "{{ card.base_image_url }}"
                     },
                 {% endfor %}
             ];
 
-
+            var AUTH;
+            var AVATAR_URL;
             {% if request.user.is_authenticated %}
-                var AUTH = {
+                AUTH = {
                     user: {{ request.user.as_json|safe }},
                     csrftoken: "{{ csrftoken }}",
                     sessionid: "{{ request.session.session_key }}"
                 };
 
-                var AVATAR_URL = AUTH.user.avatar;
+                AVATAR_URL = AUTH.user.avatar;
 
             {% else %}
-                var AUTH = {
+                AUTH = {
                     user: null,
                     csrftoken: null,
                     sessionid: null
                 };
 
-                var AVATAR_URL = 'http://vignette3.wikia.nocookie.net/siivagunner/images/9/9f/Discord_icon.svg/revision/latest?cb=20160623172043';
+                AVATAR_URL = 'http://vignette3.wikia.nocookie.net/siivagunner/images/9/9f/Discord_icon.svg/revision/latest?cb=20160623172043';
             {% endif %}
         </script>
 
