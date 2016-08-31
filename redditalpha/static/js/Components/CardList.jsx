@@ -1,42 +1,23 @@
 import React from 'react';
 import {GridList, GridTile} from 'material-ui/GridList';
 import Subheader from 'material-ui/Subheader';
-
-const styles = {
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around',
-  },
-  gridList: {
-    width: 500,
-    height: 500,
-    overflowY: 'auto',
-    marginBottom: 24,
-  },
-};
+import Card from './Card';
 
 
 class CardList extends React.Component {
-  style = {
-    icon: {
-      height: '50px',
-      width: '50px',
-      margin: '10px'
-    }
-  }
-
   render() {
     return (
-      <div style={styles.root}>
+      <div>
         <GridList
           cellHeight={200}
-          style={styles.gridList}
+          padding={10}
+          cols={6}
         >
-          <Subheader>58 Cards!!!</Subheader>
+          <Subheader>{this.props.cards.length + ' Cards'}</Subheader>
+
           {this.props.cards.map((card) => (
             <GridTile key={card.id}>
-              <img src={card.image_url} />
+              <Card data={card} onClick={this.props.onClick}/>
             </GridTile>
           ))}
         </GridList>
@@ -46,7 +27,8 @@ class CardList extends React.Component {
 }
 
 CardList.propTypes = {
-  cards: React.PropTypes.array.isRequired
+  cards: React.PropTypes.array.isRequired,
+  onClick: React.PropTypes.func.isRequired
 };
 
 export default CardList;

@@ -1,6 +1,6 @@
 import React from "react"
 import { render } from "react-dom"
-import CardList from './CardList';
+import CardPicker from './CardPicker';
 
 class DeckBuilder extends React.Component {
   style = {
@@ -8,7 +8,7 @@ class DeckBuilder extends React.Component {
 
   render() {
     return (
-      <CardList cards={this.props.cards} />
+      <CardPicker cards={this.props.cards} />
     )
   }
 }

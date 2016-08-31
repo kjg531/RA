@@ -13,13 +13,8 @@ class App extends React.Component {
     return (
         <MuiThemeProvider muiTheme={theme}>
             <div>
-                <div>
-                    <NavBar />
-                </div>
-
-                <div>
-                    <DeckBuilder cards={BACKEND_CARDS}/>
-                </div>
+                <NavBar />
+                <DeckBuilder cards={BACKEND_CARDS}/>
             </div>
         </MuiThemeProvider>
     )
