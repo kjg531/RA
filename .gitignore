@@ -71,3 +71,5 @@ redditalpha/media/
 # Hitch directory
 tests/.hitch
 
+# webpack shit
+webpack-stats-local.json

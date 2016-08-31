@@ -7,7 +7,6 @@ from .choices import RARITY_CHOICES, CARD_TYPE_CHOICES
 class Card(models.Model):
     name = models.CharField(max_length=50, unique=True)
     description = models.TextField()
-    # image = models.ImageField(upload_to='cards', blank=True)
     cost = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(10)], blank=True, null=True)
     rarity = models.CharField(max_length=30, choices=RARITY_CHOICES)
     card_type = models.CharField(max_length=30, choices=CARD_TYPE_CHOICES)
@@ -17,8 +16,11 @@ class Card(models.Model):
         verbose_name = 'card'
         verbose_name_plural = 'cards'
 
+    def base_image_filename(self):
+        return '%s.png' % slugify(self.name).replace('-', '')
+
     def base_image_url(self):
-        return ('/static/images/cards/%s.jpg' % slugify(self.name).replace('-', ''))
+        return '/static/images/cards/%s' % self.base_image_filename()
 
     def __str__(self):
         return self.name
