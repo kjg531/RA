@@ -70,4 +70,4 @@ var theme = getMuiTheme({
     }
 });
 
-exports.theme = theme;
+export default theme;

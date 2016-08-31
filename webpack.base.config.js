@@ -7,7 +7,7 @@ module.exports = {
 
   entry: {
     // Add as many entry points as you have container-react-components here
-    NavBarEntryPoint: './redditalpha/static/js/Apps/NavBarEntryPoint',
+    App: ['./redditalpha/static/js/App'],
     vendors: ['react'],
   },
 
@@ -31,4 +31,8 @@ module.exports = {
     modulesDirectories: ['node_modules', 'bower_components'],
     extensions: ['', '.js', '.jsx']
   },
+
+  watchOptions: {
+    poll: 400
+  }
 }

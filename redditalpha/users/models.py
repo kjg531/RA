@@ -98,7 +98,6 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 @receiver(user_signed_up)
 def set_initial_user_data(request, user, sociallogin=None, **kwargs):
-    print("user_signed_up receiver")
     if sociallogin:
         # Our provider is always going to be discord (for now)        
         # Code slightly duplicated from our discord provider, because we don't know when the provider's
@@ -120,10 +119,6 @@ def set_initial_user_data(request, user, sociallogin=None, **kwargs):
 
 @receiver(user_logged_in)
 def update_user_avatar(request, user, sociallogin=None, **kwargs):
-    print("user_logged_in receiver")
-    print(user)
-    print(sociallogin)
-    print(kwargs)
     # Will change only the avatar image obtained from discord
     
     if sociallogin:
