@@ -1,4 +1,4 @@
-RedditAlpha
+redditalpha
 ==============================
 
 A short description of the project.
@@ -47,12 +47,34 @@ Running tests with py.test
   $ py.test
 
 
-Live reloading and Sass CSS compilation
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Running javascript tests with karma
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Moved to `Live reloading and SASS compilation`_.
+::
 
-.. _`Live reloading and SASS compilation`: http://cookiecutter-django.readthedocs.io/en/latest/live-reloading-and-sass-compilation.html
+  $ npm test
+
+
+Hot reloading with React and Webpack
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Install npm depenencies::
+
+  $ npm install
+
+Start the development server::
+
+  $ npm start
+
+
+A more detailed explanation for `Developing locally with webpack`_
+
+
+The `static project readme`_ contains a lot of information about React / Redux and Webpack for this project.
+
+.. _`static project readme`: redditalpha/static/redditalpha/README.md
+.. _`Developing locally with webpack`: http://cookiecutter-django.readthedocs.io/en/latest/developing-locally-webpack.html
+
 
 
 
@@ -65,17 +87,7 @@ Moved to `Live reloading and SASS compilation`_.
 Deployment
 ----------
 
-
-
-Heroku
-^^^^^^
-
-.. image:: https://www.herokucdn.com/deploy/button.png
-    :target: https://heroku.com/deploy
-
-See detailed `cookiecutter-django Heroku documentation`_.
-
-.. _`cookiecutter-django Heroku documentation`: http://cookiecutter-django.readthedocs.io/en/latest/deployment-on-heroku.html
+The following details how to deploy this application.
 
 
 

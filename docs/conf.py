@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# RedditAlpha documentation build configuration file, created by
+# redditalpha documentation build configuration file, created by
 # sphinx-quickstart.
 #
 # This file is execfile()d with the current directory set to its containing dir.
@@ -43,7 +43,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = 'RedditAlpha'
+project = 'redditalpha'
 copyright = """2016, Kenneth Gabbara"""
 
 # The version info for the project you're documenting, acts as replacement for
@@ -188,7 +188,7 @@ latex_elements = {
 latex_documents = [
     ('index',
      'redditalpha.tex',
-     'RedditAlpha Documentation',
+     'redditalpha Documentation',
      """Kenneth Gabbara""", 'manual'),
 ]
 
@@ -218,7 +218,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'redditalpha', 'RedditAlpha Documentation',
+    ('index', 'redditalpha', 'redditalpha Documentation',
      ["""Kenneth Gabbara"""], 1)
 ]
 
@@ -232,8 +232,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    ('index', 'redditalpha', 'RedditAlpha Documentation',
-     """Kenneth Gabbara""", 'RedditAlpha',
+    ('index', 'redditalpha', 'redditalpha Documentation',
+     """Kenneth Gabbara""", 'redditalpha',
      """A short description of the project.""", 'Miscellaneous'),
 ]
 

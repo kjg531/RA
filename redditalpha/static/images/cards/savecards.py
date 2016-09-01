@@ -60,7 +60,7 @@ cards = ['knight.png',
 'thelog.png',
 ]
 
-for x in range(0, len(cards)):
+for x in cards:
     str1 = '%s' % (cards[x-1])
     str2 = 'http://clashroyaledeckbuilder.com/assets/cards/%s.png' % (x)
 

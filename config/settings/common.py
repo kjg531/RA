@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Django settings for RedditAlpha project.
+Django settings for redditalpha project.
 
 For more information on this file, see
 https://docs.djangoproject.com/en/dev/topics/settings/
@@ -35,26 +35,23 @@ DJANGO_APPS = (
     'django.contrib.admin',
 )
 THIRD_PARTY_APPS = (
-    'crispy_forms',  # Form layouts
     'allauth',  # registration
     'allauth.account',  # registration
     'allauth.socialaccount',  # registration
-    'allauth.socialaccount.providers.reddit', # We Did It Reddit
     'redditalpha.utils.providers.discord',
-    'webpack_loader',
 )
 
 # Apps specific for this project go here.
 LOCAL_APPS = (
     # custom users app
     'redditalpha.users.apps.UsersConfig',
+    # Your stuff: custom apps go here
     'redditalpha.clans.apps.ClansConfig',
     'redditalpha.tournaments.apps.TournamentsConfig',
     'redditalpha.index.apps.IndexConfig',
     'redditalpha.decks.apps.DecksConfig',
     'redditalpha.cards.apps.CardsConfig',
     'redditalpha.utils',
-
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -98,7 +95,7 @@ EMAIL_BACKEND = env('DJANGO_EMAIL_BACKEND', default='django.core.mail.backends.s
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#admins
 ADMINS = (
-    ("""Kenneth Gabbara""", 'kenneth@eventhi.io'),
+    ("""Kenneth Gabbara""", 'redditalpha@gmail.com'),
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#managers
@@ -108,8 +105,14 @@ MANAGERS = ADMINS
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
 DATABASES = {
-    # Raises ImproperlyConfigured exception if DATABASE_URL not in os.environ
-    'default': env.db('DATABASE_URL', default='postgres://postgres:@localhost:5432/redditalpha'),
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'redditalpha',
+        'USER': 'vagrant',
+        'PASSWORD': 'vagrant',
+        'HOST': '',
+        'PORT': '',
+    }
 }
 DATABASES['default']['ATOMIC_REQUESTS'] = True
 
@@ -173,9 +176,6 @@ TEMPLATES = [
     },
 ]
 
-# See: http://django-crispy-forms.readthedocs.io/en/latest/install.html#template-packs
-CRISPY_TEMPLATE_PACK = 'bootstrap3'
-
 # STATIC FILE CONFIGURATION
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#static-root
@@ -218,11 +218,9 @@ AUTHENTICATION_BACKENDS = (
 )
 
 # Some really nice defaults
-ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+ACCOUNT_AUTHENTICATION_METHOD = 'username'
 ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_USERNAME_REQUIRED = False
-ACCOUNT_AUTHENTICATION_METHOD = 'email'
-ACCOUNT_EMAIL_VERIFICATION = 'optional'
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 
 ACCOUNT_ALLOW_REGISTRATION = env.bool('DJANGO_ACCOUNT_ALLOW_REGISTRATION', True)
 ACCOUNT_ADAPTER = 'redditalpha.users.adapters.AccountAdapter'
@@ -231,7 +229,7 @@ SOCIALACCOUNT_ADAPTER = 'redditalpha.users.adapters.SocialAccountAdapter'
 # Custom user app defaults
 # Select the correct user model
 AUTH_USER_MODEL = 'users.User'
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = 'users:redirect'
 LOGIN_URL = 'account_login'
 
 # SLUGLIFIER
@@ -245,6 +243,18 @@ AUTOSLUG_SLUGIFY_FUNCTION = 'slugify.slugify'
 # Location of root django.contrib.admin URL, use {% url 'admin:index' %}
 ADMIN_URL = r'^admin/'
 
-# CUSTOM STUFF
+# WEBPACK
+# ------------------------------------------------------------------------------
+INSTALLED_APPS += ('webpack_loader',)
+# Webpack Local Stats file
+STATS_FILE = ROOT_DIR('webpack-stats.json')
+# Webpack config
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'STATS_FILE': STATS_FILE
+    }
+}
 
+
+# Your common stuff: Below this line define 3rd party library settings
 DEFAULT_AVATAR_URL = 'http://vignette3.wikia.nocookie.net/siivagunner/images/9/9f/Discord_icon.svg/revision/latest?cb=20160623172043'

@@ -1,7 +1,5 @@
 /* These styles are generated from project.scss. */
-body {
-  margin: 0;
-}
+
 .alert-debug {
   color: black;
   background-color: white;
@@ -38,7 +36,6 @@ body {
 [hidden][style="display: block;"] {
   display: block !important;
 }
-
 
 @font-face {
     font-family: SuperCell;

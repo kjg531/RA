@@ -21,7 +21,7 @@ TEMPLATES[0]['OPTIONS']['debug'] = DEBUG
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
 # Note: This key only used for development and testing.
-SECRET_KEY = env('DJANGO_SECRET_KEY', default='5@f=emqaxdoxzq+n51pum3h+*og_7_7fk_0dooe06t-ns+e^(p')
+SECRET_KEY = env('DJANGO_SECRET_KEY', default='w7%*27_&ed5q^+dex+o3qdu-&-x67bzg)ye!(a8fyv&88!5ukf')
 
 # Mail settings
 # ------------------------------------------------------------------------------
@@ -69,10 +69,3 @@ INSTALLED_APPS += ('django_extensions', )
 TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
 # Your local stuff: Below this line define 3rd party library settings
-
-WEBPACK_LOADER = {
-    'DEFAULT': {
-        'BUNDLE_DIR_NAME': 'bundles/local/',  # end with slash
-        'STATS_FILE': str(ROOT_DIR.path('webpack-stats-local.json')),
-    }
-}

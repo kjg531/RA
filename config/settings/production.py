@@ -109,8 +109,8 @@ INSTALLED_APPS = ('collectfast', ) + INSTALLED_APPS
 # EMAIL
 # ------------------------------------------------------------------------------
 DEFAULT_FROM_EMAIL = env('DJANGO_DEFAULT_FROM_EMAIL',
-                         default='RedditAlpha <noreply@redditalpha.com>')
-EMAIL_SUBJECT_PREFIX = env('DJANGO_EMAIL_SUBJECT_PREFIX', default='[RedditAlpha] ')
+                         default='redditalpha <noreply@redditalpha.com>')
+EMAIL_SUBJECT_PREFIX = env('DJANGO_EMAIL_SUBJECT_PREFIX', default='[redditalpha] ')
 SERVER_EMAIL = env('DJANGO_SERVER_EMAIL', default=DEFAULT_FROM_EMAIL)
 
 # Anymail with Mailgun
@@ -200,6 +200,19 @@ LOGGING = {
 
 # Custom Admin URL, use {% url 'admin:index' %}
 ADMIN_URL = env('DJANGO_ADMIN_URL')
+
+
+# WEBPACK
+# ------------------------------------------------------------------------------
+# Webpack Production Stats file
+STATS_FILE = ROOT_DIR('webpack-stats-production.json')
+# Webpack config
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'BUNDLE_DIR_NAME': 'redditalpha/static/redditalpha/dist/',
+        'STATS_FILE': STATS_FILE
+    }
+}
 
 
 # Your production stuff: Below this line define 3rd party library settings

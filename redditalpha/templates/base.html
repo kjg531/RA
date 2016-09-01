@@ -1,8 +1,8 @@
-{% load render_bundle from webpack_loader %}
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Reddit Alpha</title>
+{% load staticfiles i18n %}
+{% load render_bundle from webpack_loader %}<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Reddit Alpha</title>
 
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -12,20 +12,74 @@
         <meta name="author" content="">
         <link rel="shortcut icon" type="image/png" href="{% static 'images/icon.png' %}"/>
 
-        {% block head_css %}
-            <link href="{% static 'css/project.css' %}" rel="stylesheet">
-            <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        {% endblock %}
 
-    </head>
-    <body>
-        <h1>Hello</h1>
-        <div id="app"></div>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
 
-        {% block tail_js %}
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-            {% render_bundle 'vendors' %}
-            <script src="{% static 'js/project.js' %}"></script>
-        {% endblock %}
-    </body>
+    {% block css %}
+        <!-- Your stuff: Third-party CSS libraries go here -->
+
+        <!-- This file stores project-specific CSS -->
+        <link href="{% static 'css/project.css' %}" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    {% endblock %}
+
+  </head>
+
+  <body>
+
+      <div id="app"></div>
+    </div> <!-- /container -->
+
+    {% block modal %}{% endblock modal %}
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    {% block javascript %}
+      <!-- Required by Bootstrap v4 Alpha 3 -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
+      <!-- Your stuff: Third-party javascript libraries go here -->
+        <script>
+        var BACKEND_CARDS = [
+                    {% for card in cards %}
+                        {
+                            "id": {{ card.id }},
+                            "name": "{{ card.name }}",
+                            "cost": {{ card.cost|default:"null" }},
+                            "image_url": "{{ card.base_image_url }}"
+                        },
+                    {% endfor %}
+                ];
+
+
+                {% if request.user.is_authenticated %}
+                    var AUTH = {
+                        user: {{ request.user.as_json|safe }},
+                        csrftoken: "{{ csrftoken }}",
+                        sessionid: "{{ request.session.session_key }}"
+                    };
+
+                    var AVATAR_URL = AUTH.user.avatar;
+
+                {% else %}
+                    var AUTH = {
+                        user: null,
+                        csrftoken: null,
+                        sessionid: null
+                    };
+
+                    var AVATAR_URL = 'http://vignette3.wikia.nocookie.net/siivagunner/images/9/9f/Discord_icon.svg/revision/latest?cb=20160623172043';
+                {% endif %}
+        </script>
+        <!-- Webpack bundles -->
+      {% render_bundle 'vendor' %}
+{#      {% render_bundle 'common' %}#}
+      {% render_bundle 'main' %}
+
+    {% endblock javascript %}
+  </body>
 </html>
+
