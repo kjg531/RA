@@ -10,8 +10,9 @@ class CardList extends React.Component {
       <div>
         <GridList
           cellHeight={200}
-          padding={10}
-          cols={6}
+          padding={0}
+          cols={8}
+          style={{marginLeft:40}}
         >
           <Subheader>{this.props.cards.length + ' Cards'}</Subheader>
 

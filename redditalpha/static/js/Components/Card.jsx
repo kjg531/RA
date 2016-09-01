@@ -25,7 +25,7 @@ class Card extends React.Component {
       // selected      this.props.data.selected
 
     return (
-      <img src={this.props.data.image_url} onClick={this.onClick}></img>
+      <img style={{height:200}}src={this.props.data.image_url} onClick={this.onClick} />
     )
   }
 }
