@@ -20,6 +20,7 @@ urlpatterns = [
     url(r'^accounts/', include('redditalpha.utils.providers.discord.urls')),
     # Your stuff: custom urls includes go here
 
+    # url(r'^.*$', home, name='home'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

@@ -280,28 +280,28 @@ export default class NavBar extends React.Component {
                         />
                       <MenuItem
                           linkButton
-                          containerElement={<Link to="/create" style={this.style.MenuItemLink} activeStyle={this.style.MenuItemLinkActive} />}
+                          containerElement={<Link to="/about" style={this.style.MenuItemLink} activeStyle={this.style.MenuItemLinkActive} />}
                           style={this.style.MenuItem}
                           primaryText="About Us"
                           leftIcon={<i className="material-icons">info</i>}
                         />
                       <MenuItem
                           linkButton
-                          containerElement={<Link to="/browse" style={this.style.MenuItemLink} activeStyle={this.style.MenuItemLinkActive} />}
+                          containerElement={<Link to="/deckbuilder" style={this.style.MenuItemLink} activeStyle={this.style.MenuItemLinkActive} />}
                           style={this.style.MenuItem}
                           primaryText="Deck Builder"
                           leftIcon={<i className="material-icons">build</i>}
                         />
                       <MenuItem
                           linkButton
-                          containerElement={<Link to="/dashboard" style={this.style.MenuItemLink} activeStyle={this.style.MenuItemLinkActive} />}
+                          containerElement={<Link to="/tournaments" style={this.style.MenuItemLink} activeStyle={this.style.MenuItemLinkActive} />}
                           style={this.style.MenuItem}
                           primaryText="Tournaments"
                           leftIcon={<i className="material-icons">schedule</i>}
                         />
                       <MenuItem
                           linkButton
-                          containerElement={<Link to="/account" style={this.style.MenuItemLink} activeStyle={this.style.MenuItemLinkActive} />}
+                          containerElement={<Link to="/rankings" style={this.style.MenuItemLink} activeStyle={this.style.MenuItemLinkActive} />}
                           style={this.style.MenuItem}
                           primaryText="Rankings"
                           leftIcon={<i className="material-icons">equalizer</i>}
@@ -309,14 +309,14 @@ export default class NavBar extends React.Component {
 
                       <MenuItem
                           linkButton
-                          containerElement={<Link to="/account" style={this.style.MenuItemLink} activeStyle={this.style.MenuItemLinkActive} />}
+                          containerElement={<Link to="/feed" style={this.style.MenuItemLink} activeStyle={this.style.MenuItemLinkActive} />}
                           style={this.style.MenuItem}
                           primaryText="Live Feed"
                           leftIcon={<i className="material-icons">rss_feed</i>}
                         />
                       <MenuItem
                           linkButton
-                          containerElement={<Link to="/account" style={this.style.MenuItemLink} activeStyle={this.style.MenuItemLinkActive} />}
+                          containerElement={<Link to="/library" style={this.style.MenuItemLink} activeStyle={this.style.MenuItemLinkActive} />}
                           style={this.style.MenuItem}
                           primaryText="Video Library"
                           leftIcon={<i className="material-icons">live_tv</i>}
