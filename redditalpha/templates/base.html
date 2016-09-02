@@ -44,36 +44,36 @@
       <!-- Your stuff: Third-party javascript libraries go here -->
         <script>
         var BACKEND_CARDS = [
-                    {% for card in cards %}
-                        {
-                            "id": {{ card.id }},
-                            "name": "{{ card.name }}",
-                            "cost": "{{ card.cost|default:"?" }}",
-                            "rarity": "{{ card.rarity }}",
-                            "image_url": "{{ card.image.url }}"
-                        },
-                    {% endfor %}
-                ];
+            {% for card in cards %}
+                {
+                    "id": {{ card.id }},
+                    "name": "{{ card.name }}",
+                    "cost": "{{ card.cost|default:"?" }}",
+                    "rarity": "{{ card.rarity }}",
+                    "image_url": "{{ card.image.url }}"
+                },
+            {% endfor %}
+        ];
 
 
-                {% if request.user.is_authenticated %}
-                    var AUTH = {
-                        user: {{ request.user.as_json|safe }},
-                        csrftoken: "{{ csrftoken }}",
-                        sessionid: "{{ request.session.session_key }}"
-                    };
+        {% if request.user.is_authenticated %}
+            var AUTH = {
+                user: {{ request.user.as_json|safe }},
+                csrftoken: "{{ csrftoken }}",
+                sessionid: "{{ request.session.session_key }}"
+            };
 
-                    var AVATAR_URL = AUTH.user.avatar;
+            var AVATAR_URL = AUTH.user.avatar;
 
-                {% else %}
-                    var AUTH = {
-                        user: null,
-                        csrftoken: null,
-                        sessionid: null
-                    };
+        {% else %}
+            var AUTH = {
+                user: null,
+                csrftoken: null,
+                sessionid: null
+            };
 
-                    var AVATAR_URL = 'http://vignette3.wikia.nocookie.net/siivagunner/images/9/9f/Discord_icon.svg/revision/latest?cb=20160623172043';
-                {% endif %}
+            var AVATAR_URL = 'http://vignette3.wikia.nocookie.net/siivagunner/images/9/9f/Discord_icon.svg/revision/latest?cb=20160623172043';
+        {% endif %}
         </script>
         <!-- Webpack bundles -->
       {% render_bundle 'vendor' %}

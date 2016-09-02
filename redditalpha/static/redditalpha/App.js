@@ -6,7 +6,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import NavBar from "./components/NavBar"
 import DeckBuilder from './components/DeckBuilder';
 import theme from "./theme"
-import Card2 from './components/Card2'
+import Card from './components/Card'
 
 export default class App extends React.Component {
     render() {

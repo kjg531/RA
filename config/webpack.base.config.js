@@ -61,7 +61,8 @@ module.exports = (opts) => {
           loaders: ['babel-loader'],
         },
         {test: /\.scss$/, loader: 'style-loader!css-loader!sass-loader'},
-        {test: /\.css$/, loader: 'style-loader!css-loader'},
+        {test: /\.css$/, loader: 'style-loader!css-loader', exclude: /flexboxgrid/},  // so we have to exclude it
+        {test: /\.css$/, loader: 'style!css?modules', include: /flexboxgrid/},
         {test: /\.(png|jpg|gif)$/, loader: 'url-loader', query: {limit: 8192}},  // inline base64 URLs <=8k
         {test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'file-loader'},
       ], // add all common loaders here
