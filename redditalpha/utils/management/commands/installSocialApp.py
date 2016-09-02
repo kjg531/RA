@@ -17,10 +17,10 @@ class Command(BaseCommand):
                     provider = id
 
             assert redditalpha_site is not None, "YOU NEED TO HAVE A SITE WITH THE NAME OF 'redditalpha'"
-            
+
             if SocialApp.objects.filter(name='Discord').exists():
                 self.stdout.write(self.style.SUCCESS("SocialApp for Discord already exists"))
-            else:    
+            else:
                 discord_app = SocialApp(
                     provider=provider,
                     name='Discord',
@@ -30,7 +30,7 @@ class Command(BaseCommand):
                 )
 
                 discord_app.save()
-                discord_app.sites.add(discord_site)
+                discord_app.sites.add(redditalpha_site)
                 self.stdout.write(self.style.SUCCESS("Created SocialApp for Discord"))
             self.stdout.write(self.style.SUCCESS("Finished successfully"))
         except Exception as ex:
