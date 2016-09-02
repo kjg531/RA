@@ -48,8 +48,9 @@
                         {
                             "id": {{ card.id }},
                             "name": "{{ card.name }}",
-                            "cost": {{ card.cost|default:"null" }},
-                            "image_url": "{{ card.base_image_url }}"
+                            "cost": "{{ card.cost|default:"?" }}",
+                            "rarity": "{{ card.rarity }}",
+                            "image_url": "{{ card.image.url }}"
                         },
                     {% endfor %}
                 ];

@@ -7,15 +7,14 @@ import NavBar from "./components/NavBar"
 import DeckBuilder from './components/DeckBuilder';
 import theme from "./theme"
 import Card2 from './components/Card2'
-// <NavBar />
-//                   <DeckBuilder cards={BACKEND_CARDS}/>
 
 export default class App extends React.Component {
     render() {
       return (
           <MuiThemeProvider muiTheme={theme}>
               <div>
-                <Card2 />
+                <NavBar />
+                <DeckBuilder cards={BACKEND_CARDS} />
               </div>
           </MuiThemeProvider>
     )

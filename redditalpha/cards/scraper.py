@@ -1,10 +1,13 @@
+import json
 import urllib
-from PIL import Image
-from io import StringIO
-from urllib.parse import quote as url_quote
+from io import BytesIO
+
 from django.core.files.base import ContentFile
+from django.utils.text import slugify
 
 import requests
+from PIL import Image
+from urllib.parse import quote as url_quote
 from dateutil.parser import parse as parse_date
 from bs4 import BeautifulSoup
 
@@ -13,15 +16,54 @@ from .models import Card, Balance
 
 base_url = 'http://clashroyaledeckbuilder.com'
 
+def get_image_urls():
+    print('Gathering image urls...')
 
-# def download_image(name, image, url):
-#     input_file = StringIO(str(urllib.request.urlopen(url).read()))
-#     output_file = StringIO()
-#     img = Image.open(input_file)
-#     if img.mode != "RGB":
-#         img = img.convert("RGB")
-#     img.save(output_file, "JPEG")
-#     image.save(name+".jpg", ContentFile(output_file.getvalue()), save=False)
+    page_urls = [
+        'http://clashroyale.wikia.com/index.php?action=ajax&articleId=Troop+Cards&method=axGetArticlesPage&rs=CategoryExhibitionAjax&page=1',
+        'http://clashroyale.wikia.com/index.php?action=ajax&articleId=Troop+Cards&method=axGetArticlesPage&rs=CategoryExhibitionAjax&page=2',
+        'http://clashroyale.wikia.com/index.php?action=ajax&articleId=Troop+Cards&method=axGetArticlesPage&rs=CategoryExhibitionAjax&page=3',
+        'http://clashroyale.wikia.com/index.php?action=ajax&articleId=Spell+Cards&method=axGetArticlesPage&rs=CategoryExhibitionAjax&page=1',
+        'http://clashroyale.wikia.com/index.php?action=ajax&articleId=Building+Cards&method=axGetArticlesPage&rs=CategoryExhibitionAjax&page=1'
+    ]
+
+    image_urls = dict()
+
+    for i, page_url in enumerate(page_urls):
+        r = requests.get(page_url)
+        data = json.loads(r.text)
+        soup = BeautifulSoup(data['page'])
+        count = 0
+        for item in soup.contents:
+            if item.name == 'div':
+                card_name = item.a.get('title')
+                card_detail_url = item.a.get('href')
+                card_detail_html = requests.get(card_detail_url).text
+                card_detail_soup = BeautifulSoup(card_detail_html)
+
+                card_image_url = card_detail_soup.find(
+                    'div',
+                    {'id': 'mw-content-text'}
+                ).find(
+                    'div',
+                    {'class':'center'}
+                ).div.img.get('src')
+
+                image_urls[slugify(card_name)] = card_image_url
+                count += 1
+        print('Got {0} urls from page {1}...'.format(count, i + 1))
+
+    return image_urls
+
+def download_image(name, image, url):
+    print('Downloading image for "{0}"...'.format(name, url))
+    r = requests.get(url)
+    output_file = BytesIO()
+    img = Image.open(BytesIO(r.content))
+    # if img.mode != "RGB":
+    #     img = img.convert("RGB")
+    img.save(output_file, "PNG")
+    image.save(name + ".png", ContentFile(output_file.getvalue()), save=False)
 
 
 # def get_card_image_url(card):
@@ -44,7 +86,6 @@ def scrape_balance_data(card):
     r = requests.get(card_detail_url)
     soup = BeautifulSoup(r.text)
     balance_table = soup.find('table')
-    # print(lenbalance_table) or '---'
     balances = []
 
     if balance_table is not None:
@@ -86,6 +127,7 @@ def scrape_general_data(card_tag):
 
 
 def scrape_cards():
+    image_urls = get_image_urls()
     cards_url = '%s/cards' % (base_url)
 
     r = requests.get(cards_url)
@@ -111,6 +153,8 @@ def scrape_cards():
 
         print('%d/%d Synchronizing "%s"...' % (i + 1, len(card_tags), card.name))
 
+        download_image('{0}'.format(card.slug()), card.image, image_urls[card.slug()])
+
         if created:
             cards_created += 1
         if not created:
@@ -122,11 +166,11 @@ def scrape_cards():
                 card.cost = cost
                 card.rarity = rarity
                 card.card_type = card_type
-                card.save()
                 cards_updated += 1
             else:
                 cards_untouched += 1
 
+        card.save()
 
         for date, description in scrape_balance_data(card):
             if not Balance.objects.filter(card=card, date=date, description=description).exists():

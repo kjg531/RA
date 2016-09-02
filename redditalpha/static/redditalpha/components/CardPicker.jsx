@@ -16,6 +16,7 @@ class CardPicker extends React.Component {
           "id": card.id,
           "name": card.name,
           "cost": card.cost,
+          "rarity": card.rarity,
           "image_url": card.image_url,
           "selected": false
         };
