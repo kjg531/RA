@@ -1,7 +1,4 @@
 from django.db import models
-from redditalpha.users.models import User
-
-from redditalpha.cards.models import Card
 
 
 class Archetype(models.Model):
@@ -10,18 +7,36 @@ class Archetype(models.Model):
 
 
 class Deck(models.Model):
-    archetype = models.ForeignKey('Archetype', related_name='decks')
-    cards = models.ManyToManyField(Card)
-    popularity = models.IntegerField()
-    current_favorite_of = models.ManyToManyField(User)
-    cost_average = models.IntegerField()
+    # archetype = models.ForeignKey('Archetype', related_name='decks')
+    cards = models.ManyToManyField('cards.Card', related_name='decks')
+    creator = models.ForeignKey('users.User', related_name='created_decks')
+    created = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        verbose_name = "Clan"
-        verbose_name_plural = "Clans"
+        verbose_name = 'deck'
+        verbose_name_plural = 'decks'
+
+    def __eq__(self, other):
+        if self.cards.count() != other.cards.count():
+            return False
+
+        for card in self.cards.all():
+            if card not in other.cards.all():
+                return False
+        else:
+            return True
+
+    def is_equivalent_to(self, cards):
+        if len(cards) != self.cards.count():
+            return False
+
+        for card in cards:
+            if card not in self.cards.all():
+                return False
+        else:
+            return True
 
     def __str__(self):
-        return self.name
-
-    def favorite_user_count(self):
-        return self.current_favorite_of.count
+        return ', '.join(
+            list(self.cards.values_list('name', flat=True))
+        )

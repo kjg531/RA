@@ -11,18 +11,23 @@ from django.views import defaults as default_views
 from redditalpha.index.views import home
 
 urlpatterns = [
-    url(r'^$', home, name='home'),
+    # url(r'^$', home, name='home'),
     # Django Admin, use {% url 'admin:index' %}
     url(settings.ADMIN_URL, include(admin.site.urls)),
     # User management
     url(r'^users/', include('redditalpha.users.urls', namespace='users')),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^accounts/', include('redditalpha.utils.providers.discord.urls')),
+    url(r'^decks/', include('redditalpha.decks.urls', namespace='decks')),
     # Your stuff: custom urls includes go here
+    
 
+    # CATCH-ALL for react-router
     # url(r'^.*$', home, name='home'),
 
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
 
 if settings.DEBUG:
     # This allows the error pages to be debugged during development, just visit
@@ -33,3 +38,5 @@ if settings.DEBUG:
         url(r'^404/$', default_views.page_not_found, kwargs={'exception': Exception('Page not Found')}),
         url(r'^500/$', default_views.server_error),
     ]
+
+urlpatterns.append(url(r'^.*$', home, name='home'))

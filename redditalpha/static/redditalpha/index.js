@@ -9,6 +9,7 @@ import theme from "./theme"
 import routes from './routes';
 import configureStore from './store/configureStore';
 
+import NavBar from './components/NavBar';
 
 const
   STORE = configureStore(),
@@ -19,7 +20,10 @@ const
 ReactDOM.render(
     <Provider store={STORE}>
         <MuiThemeProvider muiTheme={theme}>
-            <Router history={browserHistory} routes={routes} />
+            <div>
+                <NavBar />
+                <Router history={browserHistory} routes={routes} />
+            </div>
         </MuiThemeProvider>
     </Provider>,
     document.getElementById(ROOT_ELEMENT)

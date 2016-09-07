@@ -43,17 +43,21 @@
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
       <!-- Your stuff: Third-party javascript libraries go here -->
         <script>
-        var BACKEND_CARDS = [
-            {% for card in cards %}
+        var DJ = {
+            BACKEND_CARDS: [
+                {% for card in cards %}
                 {
                     "id": {{ card.id }},
                     "name": "{{ card.name }}",
-                    "cost": "{{ card.cost|default:"?" }}",
+                    "cost": "{{ card.cost|default:'?' }}",
                     "rarity": "{{ card.rarity }}",
                     "image_url": "{{ card.image.url }}"
                 },
-            {% endfor %}
-        ];
+                {% endfor %}
+            ],
+
+            CSRFTOKEN: "{{ csrf_token }}"
+        };
 
 
         {% if request.user.is_authenticated %}

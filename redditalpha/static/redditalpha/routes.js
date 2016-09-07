@@ -2,20 +2,20 @@ import React from 'react';
 import {Route, IndexRoute, Redirect} from 'react-router';
 
 import App from './App';
+import Home from './components/Home';
 import DeckBuilder from './components/DeckBuilder';
 import About from './components/About';
 
 
 export default (
     <Route path="/" component={App}>
-        <IndexRoute component={DeckBuilder} />
+        <IndexRoute component={Home} />
         <Route path="about" component={About} />
-        <Route path="about" componente={About} />
-        <Route path="deckbuilder" componente={DeckBuilder} />
-        <Route path="tournaments" componente={About} />
-        <Route path="rankings" componente={About} />
-        <Route path="feed" componente={About} />
-        <Route path="library" componente={About} />
+        <Route path="deckbuilder" component={DeckBuilder} />
+        <Route path="tournaments" component={About} />
+        <Route path="rankings" component={About} />
+        <Route path="feed" component={About} />
+        <Route path="library" component={About} />
     </Route>
 );
 

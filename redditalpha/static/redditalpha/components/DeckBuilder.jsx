@@ -12,11 +12,10 @@ class DeckBuilder extends React.Component {
   render() {
     return (
       <div>
-        <NavBar/>
+        <br/>
+        <br/>
         <h1>Deck Builder</h1>
-        <h5>Links</h5>
-        <Link to="about">About</Link>
-        <CardPicker cards={BACKEND_CARDS} />
+        <CardPicker cards={this.props.cards} />
       </div>
     )
   }
@@ -24,6 +23,10 @@ class DeckBuilder extends React.Component {
 
 DeckBuilder.propTypes = {
   cards: React.PropTypes.array.isRequired,
+};
+
+DeckBuilder.defaultProps = { 
+  cards: DJ.BACKEND_CARDS
 };
 
 export default DeckBuilder;

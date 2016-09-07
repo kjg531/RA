@@ -21,8 +21,49 @@ class CardPicker extends React.Component {
           "selected": false
         };
       }),
-      'selectedCards': 0
+      'selectedCards': 0,
+      'submitting': false
     };
+  }
+
+  save = () => {
+    let fd = new FormData();
+
+    this.state.cards.map(function(card, index){
+      if (card.selected){
+        fd.append('cards', card.id);
+      }
+    });
+
+    this.setState({
+      'submitting': true
+    });
+
+    var request = $.ajax({
+      url: '/decks/create',
+      method: 'POST',
+      headers: {'X-CSRFTOKEN': DJ.CSRFTOKEN},
+      type: "POST",
+      data: fd,
+      processData: false,  // tell jQuery not to process the data
+      contentType: false   // tell jQuery not to set contentType
+    });
+
+    let self = this;
+
+    request.done(function(data, textStatus, jqXHR) {
+      alert(data.status);
+      self.setState({
+        'submitting': false
+      });
+    });
+     
+    request.fail(function(jqXHR, textStatus, errorThrown) {
+      alert('Error: ' + jqXHR.responseJSON.cards[0]);
+      self.setState({
+        'submitting': false
+      });
+    });
   }
 
   onClick = (card) => {
@@ -52,7 +93,8 @@ class CardPicker extends React.Component {
       <div style={{paddingTop:100}}>
         <br/>
         <SelectedCardsList cards={this.state.cards} onClick={this.onClick}/>
-        <br/>
+        {this.state.selectedCards == 8 ? <button type="button" onClick={this.save}>Save</button> : ""}
+        {this.state.submitting ? <h3>Submitting...</h3>:''}
         <br/>
         <UnselectedCardsList cards={this.state.cards} onClick={this.onClick}/>
       </div>

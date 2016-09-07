@@ -50,6 +50,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     clan = models.ForeignKey(Clan, on_delete=models.CASCADE, null=True)
     is_leader = models.BooleanField(default=False)
     avatar = models.URLField(blank=True)
+    decks = models.ManyToManyField('decks.Deck', related_name='users')
 
     is_staff = models.BooleanField(
         _('staff status'), default=False, help_text=_(
@@ -76,7 +77,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         return self.display_name.strip() or self.email
 
     def get_absolute_url(self):
-        return reverse('users:detail', kwargs={'username': self.username})
+        return reverse('users:detail', kwargs={'email': self.email})
 
     def natural_key(self):
         return self.email
