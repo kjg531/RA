@@ -68,8 +68,8 @@ class Card extends React.Component {
   }
 
   onClick = (event) => {
-    console.log('Clicked card ' + this.props.data.name);
-    console.log('Calling cardSelectionHandler from parent');
+    // console.log('Clicked card ' + this.props.data.name);
+    // console.log('Calling cardSelectionHandler from parent');
     // this.setState({'selected': !this.state.selected});
     this.props.onClick(this.props.data);
   }
@@ -83,7 +83,7 @@ class Card extends React.Component {
       // selected      this.props.data.selected
 
     return (
-      <div>
+      <div style={{display:'inline-block'}}>
         <img style={{height:160}}src={this.props.data.image_url} onClick={this.onClick} />
         <span style={this.style[this.props.data.rarity]} data-rarity={this.props.data.rarity}>{this.props.data.cost}</span>
       </div>
@@ -94,6 +94,10 @@ class Card extends React.Component {
 Card.propTypes = {
   data: React.PropTypes.object.isRequired,
   onClick: React.PropTypes.func
+};
+
+Card.defaultProps = {
+  onClick: function(){} // no-op. by default, don't do anything on click
 };
 
 export default Card;

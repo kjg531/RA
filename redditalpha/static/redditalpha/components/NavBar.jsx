@@ -137,7 +137,7 @@ export default class NavBar extends React.Component {
         marginTop: 3
     },
     AppBar: {
-       margin: 0,
+       margin: '0 0 30px 0',
        position: 'fixed',
        top: 0,
        height: 65,

@@ -1,10 +1,9 @@
 from django.http import JsonResponse
-from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_http_methods
 
-from .models import Deck
-from .forms import DeckForm
+from redditalpha.decks.models import Deck
+from redditalpha.decks.forms import DeckForm
 
 
 @require_http_methods(['GET', 'POST'])

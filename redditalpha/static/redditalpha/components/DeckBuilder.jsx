@@ -3,7 +3,7 @@ import { render } from "react-dom";
 import {Link} from "react-router";
 
 import CardPicker from './CardPicker';
-import NavBar from './NavBar';
+
 
 class DeckBuilder extends React.Component {
   style = {

@@ -40,7 +40,7 @@ class CardPicker extends React.Component {
     });
 
     var request = $.ajax({
-      url: '/decks/create',
+      url: '/api/decks/',
       method: 'POST',
       headers: {'X-CSRFTOKEN': DJ.CSRFTOKEN},
       type: "POST",

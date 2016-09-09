@@ -18,7 +18,9 @@ urlpatterns = [
     url(r'^users/', include('redditalpha.users.urls', namespace='users')),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^accounts/', include('redditalpha.utils.providers.discord.urls')),
-    url(r'^decks/', include('redditalpha.decks.urls', namespace='decks')),
+    url(r'^api/', include('redditalpha.api.urls', namespace='api')),
+    # url(r'^decks/', include('redditalpha.decks.urls', namespace='decks')),
+
     # Your stuff: custom urls includes go here
     
 

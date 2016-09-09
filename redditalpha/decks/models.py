@@ -40,3 +40,8 @@ class Deck(models.Model):
         return ', '.join(
             list(self.cards.values_list('name', flat=True))
         )
+
+    def as_dict(self):
+        return {
+            'cards': [c.as_dict() for c in self.cards.all()]
+        }

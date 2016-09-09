@@ -29,6 +29,17 @@ class Card(models.Model):
     def __str__(self):
         return self.name
 
+    def as_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'description': self.description,
+            'image_url': self.image.url,
+            'cost': self.cost,
+            'rarity': self.get_rarity_display(),
+            'card_type': self.get_card_type_display()
+        }
+
 
 class Balance(models.Model):
     card = models.ForeignKey('Card')
