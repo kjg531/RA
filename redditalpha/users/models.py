@@ -51,6 +51,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_leader = models.BooleanField(default=False)
     avatar = models.URLField(blank=True)
     decks = models.ManyToManyField('decks.Deck', related_name='users')
+    favorite_decks = models.ManyToManyField('decks.Deck', related_name='fans')
 
     is_staff = models.BooleanField(
         _('staff status'), default=False, help_text=_(

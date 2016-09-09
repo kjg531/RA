@@ -41,8 +41,9 @@ class Deck(models.Model):
             list(self.cards.values_list('name', flat=True))
         )
 
-    def as_dict(self):
+    def as_dict(self, user):
         return {
             'id': self.id,
+            'have_it': user in self.users.all(),
             'cards': [c.as_dict() for c in self.cards.all()]
         }

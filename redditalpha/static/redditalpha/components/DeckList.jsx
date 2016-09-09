@@ -1,19 +1,19 @@
 import React from "react";
-
 import Deck from './Deck';
+import {Button, IconButton} from 'react-toolbox/lib/button';
 
 
 class DeckList extends React.Component {
   render() {
     return (
       <div style={{display:'inline-block'}}>
-        { this.props.decks.map(function(deck){
+        { this.props.decks.map((deck) => {
             return (
                 <div key={deck.id}>
-                    <button type="button">Upvote</button>
-                    <button type="button">Downvote</button>
-                    <button type="button">Copy</button>
-                    <button type="button">Star</button>
+                    <Button icon='chevron_left' floating accent mini />
+                    <Button icon='chevron_right' floating mini />
+                    <Button icon='content_copy' onClick={this.props.copyHandler.bind(this, deck.id)} disabled={deck.have_it ? true:false} floating accent mini />
+                    <IconButton icon='favorite_border' onClick={this.props.favoriteHandler.bind(this, deck.id)} accent />
                     <Deck cards={deck.cards} />
                 </div>
             );
@@ -25,10 +25,12 @@ class DeckList extends React.Component {
 
 DeckList.propTypes = {
   decks: React.PropTypes.array.isRequired,
+  copyHandler: React.PropTypes.func.isRequired
 };
 
 DeckList.defaultProps = { 
-  decks: []
+  decks: [],
+  copyHandler: function(){}
 };
 
 export default DeckList;

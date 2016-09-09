@@ -33,8 +33,8 @@ class Tournament(models.Model):
     series = models.ForeignKey('tournaments.Series', related_name='tournaments')
     start = models.DateTimeField()
     length = models.IntegerField(choices=LENGTH_CHOICES)
-    added = models.DateTimeField(auto_now_add=True)
     size = models.IntegerField(choices=SIZE_CHOICES)
+    created = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         ordering = ('name',)

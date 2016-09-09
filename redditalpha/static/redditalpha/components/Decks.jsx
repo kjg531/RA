@@ -61,7 +61,7 @@ class Decks extends React.Component {
       <div>
         <br/>
         <br/>
-        <h1>This is the deck index!</h1>
+        <h1>These are your decks</h1>
         <MyDeckList decks={this.state.decks} deleteHandler={this.deleteDeck}/>
       </div>
     )

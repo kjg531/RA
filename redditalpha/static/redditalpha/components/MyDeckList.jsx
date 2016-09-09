@@ -12,7 +12,7 @@ class MyDeckList extends React.Component {
           return (
             <div key={deck.id}>
               <IconButton icon='favorite' accent />
-              <Button type="button" onClick={this.props.deleteHandler.bind(this, deck.id)}>Delete</Button>
+              <Button onClick={this.props.deleteHandler.bind(this, deck.id)} icon='delete' floating mini />
               <Button type="button">Edit</Button>
               <Deck cards={deck.cards} />
             </div>

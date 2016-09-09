@@ -12,7 +12,7 @@ from redditalpha.decks.forms import DeckForm
 def index(request):
     if request.method == 'GET':
         return JsonResponse({
-            'decks': [d.as_dict() for d in Deck.objects.all()]
+            'decks': [d.as_dict(user=request.user) for d in Deck.objects.all()]
         })
 
 
@@ -21,7 +21,7 @@ def index(request):
 def mine(request):
     if request.method == 'GET':
         return JsonResponse({
-            'decks': [d.as_dict() for d in request.user.decks.all()]
+            'decks': [d.as_dict(user=request.user) for d in request.user.decks.all()]
         })
     elif request.method == 'POST':
         form = DeckForm(request.POST, user=request.user)
@@ -63,3 +63,28 @@ def delete(request, id):
         request.user.decks.remove(deck)
 
     return JsonResponse({})
+
+
+@require_http_methods(['POST'])
+@login_required
+def copy(request, id):
+    deck = Deck.objects.filter(id=id).first()
+    if deck is not None:
+        request.user.decks.add(deck)
+
+    return JsonResponse({})
+
+
+@require_http_methods(['POST'])
+@login_required
+def favorite(request, id):
+    deck = Deck.objects.filter(id=id).first()
+    if deck is not None:
+        if deck in request.user.favorite_decks.all():
+            request.user.favorite_decks.remove(deck)
+            action = 'removed'
+        else:
+            request.user.favorite_decks.add(deck)
+            action = 'added'
+
+    return JsonResponse({'action': action})

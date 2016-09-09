@@ -21,7 +21,6 @@ ReactDOM.render(
     <Provider store={STORE}>
         <MuiThemeProvider muiTheme={theme}>
             <div>
-                <NavBar />
                 <Router history={browserHistory} routes={routes} />
             </div>
         </MuiThemeProvider>

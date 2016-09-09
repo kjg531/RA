@@ -1,5 +1,8 @@
 import React from "react";
 
+import { List, ListItem, ListSubHeader, ListDivider, ListCheckbox } from 'react-toolbox/lib/list';
+import {Link, IndexLink} from 'react-router';
+
 class Home extends React.Component {
   style = {
   }
@@ -9,6 +12,26 @@ class Home extends React.Component {
       <div>
         <h1>Welcome to Reddit Alpha</h1>
         <h5>Links</h5>
+        <List selectable ripple>
+          <ListSubHeader caption='Explore characters' />
+          <ListItem legend='Decks' rightIcon='star'><Link to="/decks">Go to decks</Link></ListItem>
+          <ListItem
+            avatar='https://dl.dropboxusercontent.com/u/2247264/assets/o.jpg'
+            caption='Ozymandias'
+            legend='Adrian Veidt'
+            rightIcon='star'
+          />
+          <ListItem
+            avatar='https://dl.dropboxusercontent.com/u/2247264/assets/r.jpg'
+            caption='Rorschach'
+            legend='Walter Joseph Kovacs'
+            rightIcon='star'
+          />
+          <ListSubHeader caption='Configuration' />
+          <ListDivider />
+          <ListItem caption='Contact the publisher' leftIcon='send' />
+          <ListItem caption='Remove this publication' leftIcon='delete' />
+        </List>
       </div>
     )
   }

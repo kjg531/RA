@@ -2,13 +2,15 @@ import React from "react";
 import { render } from "react-dom";
 
 import DeckList from './DeckList';
+import Dialog from 'react-toolbox/lib/dialog';
 
 
 class DeckIndex extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      'decks': []
+      decks: [],
+      dialogOpen: false
     };
   }
 
@@ -31,16 +33,73 @@ class DeckIndex extends React.Component {
     });
   }
 
+  copyDeck = (id) => {
+    var request = $.ajax({
+      url: '/api/decks/' + id + '/copy',
+      type: 'POST',
+      headers: {'X-CSRFTOKEN': DJ.CSRFTOKEN}
+    });
+
+    request.done((data, textStatus, jqXHR) => {
+      this.setState({dialogOpen: true});
+      this.setState({
+        decks: this.state.decks.map((deck) => {
+          if (deck.id == id){
+            deck.have_it = true;
+          }
+          return deck;
+        })
+      });
+    });
+
+    request.fail((jqXHR, textStatus, errorThrown) => {
+      console.log('Error loading decks from api');
+    });
+  }
+
+  favoriteDeck = (id) => {
+    var request = $.ajax({
+      url: '/api/decks/' + id + '/favorite',
+      type: 'POST',
+      headers: {'X-CSRFTOKEN': DJ.CSRFTOKEN}
+    });
+
+    request.done((data, textStatus, jqXHR) => {
+      console.log('Favorite ' + data.action);
+    });
+
+    request.fail((jqXHR, textStatus, errorThrown) => {
+      console.log('Favorite ' + data.action);
+    });
+  }
+
+  closeDialog = () => {
+    this.setState({dialogOpen: false});
+  }
+
   componentDidMount() {
     this.loadDecks();
   }
+
   render() {
+    let actions = [{ label: "Ok", onClick: this.closeDialog }];
+
     return (
       <div>
         <br/>
         <br/>
         <h1>This is the deck index!</h1>
-        <DeckList decks={this.state.decks}/>
+        <h3>These are all the decks that have been created by other users. See anything you like? <del>STEAL</del> COPY THAT SHIT!!</h3>
+        <DeckList decks={this.state.decks} copyHandler={this.copyDeck} favoriteHandler={this.favoriteDeck}/>
+        <Dialog
+          actions={actions}
+          active={this.state.dialogOpen}
+          onEscKeyDown={this.closeDialog}
+          onOverlayClick={this.closeDialog}
+          title='My awesome dialog'
+        >
+          <p>Deck copied</p>
+        </Dialog>
       </div>
     )
   }
