@@ -44,6 +44,14 @@ class UserManager(BaseUserManager):
         return user
 
 
+class Vote(models.Model):
+    VALUE_CHOICES = ((1, 'Up'), (-1, 'Down'))
+
+    user = models.ForeignKey('users.User')
+    deck = models.ForeignKey('decks.Deck')
+    value = models.IntegerField(choices=VALUE_CHOICES)    
+
+
 class User(AbstractBaseUser, PermissionsMixin):
     display_name = models.CharField(max_length=14, blank=True)
     email = models.EmailField(verbose_name='email address', max_length=255, unique=True)
@@ -52,6 +60,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     avatar = models.URLField(blank=True)
     decks = models.ManyToManyField('decks.Deck', related_name='users')
     favorite_decks = models.ManyToManyField('decks.Deck', related_name='fans')
+    voted_decks = models.ManyToManyField('decks.Deck', related_name='voters', through='users.Vote')
 
     is_staff = models.BooleanField(
         _('staff status'), default=False, help_text=_(
