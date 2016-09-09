@@ -11,7 +11,7 @@ class Deck extends React.Component {
     return (
       <div style={{padding:5, backgroundColor: 'black', margin: 10}}>
         {this.props.cards.map(function(card, i){
-          return <Card data={card} />;
+          return <Card key={card.id} data={card} />;
         })}
       </div>
     )

@@ -1,7 +1,7 @@
 import React from "react";
 import { render } from "react-dom";
 
-import DeckList from './DeckList';
+import MyDeckList from './MyDeckList';
 
 
 class Decks extends React.Component {
@@ -14,7 +14,7 @@ class Decks extends React.Component {
 
   loadDecks = () => {
     var request = $.ajax({
-      url: '/api/decks/',
+      url: '/api/decks/mine',
       type: 'GET'
     });
 
@@ -31,6 +31,28 @@ class Decks extends React.Component {
     });
   }
 
+  deleteDeck = (id) => {
+    var request = $.ajax({
+      url: '/api/decks/' + id + '/delete' ,
+      type: 'DELETE',
+      headers: {'X-CSRFTOKEN': DJ.CSRFTOKEN}
+    });
+
+    let self = this;
+
+    request.done(function(data, textStatus, jqXHR) {
+      self.setState({
+        'decks': self.state.decks.filter((deck) => {
+          return deck.id != id;
+        })
+      });
+    });
+     
+    request.fail(function(jqXHR, textStatus, errorThrown) {
+      console.log('Delete deck ' + id + ' failed!');
+    });
+  }
+
   componentDidMount() {
     this.loadDecks();
   }
@@ -40,7 +62,7 @@ class Decks extends React.Component {
         <br/>
         <br/>
         <h1>This is the deck index!</h1>
-        <DeckList decks={this.state.decks}/>
+        <MyDeckList decks={this.state.decks} deleteHandler={this.deleteDeck}/>
       </div>
     )
   }

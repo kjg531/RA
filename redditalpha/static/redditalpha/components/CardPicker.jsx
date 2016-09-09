@@ -8,8 +8,6 @@ import UnselectedCardsList from './UnselectedCardsList';
 class CardPicker extends React.Component {
   constructor(props){
     super(props);
-    console.log('CardPicker constructor. these are the props:');
-    console.log(props);
     this.state = {
       'cards': props.cards.map((card) => {
         return {
@@ -26,6 +24,16 @@ class CardPicker extends React.Component {
     };
   }
 
+  clear = () => {
+    this.setState({
+      'cards': this.state.cards.map(function(card){
+        card.selected = false;
+        return card;
+      }),
+      'selectedCards': 0,
+    });
+  }
+
   save = () => {
     let fd = new FormData();
 
@@ -40,7 +48,7 @@ class CardPicker extends React.Component {
     });
 
     var request = $.ajax({
-      url: '/api/decks/',
+      url: '/api/decks/mine',
       method: 'POST',
       headers: {'X-CSRFTOKEN': DJ.CSRFTOKEN},
       type: "POST",
@@ -94,6 +102,7 @@ class CardPicker extends React.Component {
         <br/>
         <SelectedCardsList cards={this.state.cards} onClick={this.onClick}/>
         {this.state.selectedCards == 8 ? <button type="button" onClick={this.save}>Save</button> : ""}
+        {this.state.selectedCards > 0? <button type="button" onClick={this.clear}>Clear</button> : ""}
         {this.state.submitting ? <h3>Submitting...</h3>:''}
         <br/>
         <UnselectedCardsList cards={this.state.cards} onClick={this.onClick}/>

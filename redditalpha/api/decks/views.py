@@ -1,4 +1,5 @@
 from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_http_methods
 
@@ -6,12 +7,21 @@ from redditalpha.decks.models import Deck
 from redditalpha.decks.forms import DeckForm
 
 
-@require_http_methods(['GET', 'POST'])
+@require_http_methods(['GET'])
 @login_required
 def index(request):
     if request.method == 'GET':
         return JsonResponse({
             'decks': [d.as_dict() for d in Deck.objects.all()]
+        })
+
+
+@require_http_methods(['GET', 'POST'])
+@login_required
+def mine(request):
+    if request.method == 'GET':
+        return JsonResponse({
+            'decks': [d.as_dict() for d in request.user.decks.all()]
         })
     elif request.method == 'POST':
         form = DeckForm(request.POST, user=request.user)
@@ -43,3 +53,13 @@ def index(request):
                 return JsonResponse({'status': 'Deck added!'})
         else:
             return JsonResponse(form.errors, status=400)
+
+
+@require_http_methods(['DELETE'])
+@login_required
+def delete(request, id):
+    deck = Deck.objects.filter(id=id).first()
+    if deck is not None:
+        request.user.decks.remove(deck)
+
+    return JsonResponse({})

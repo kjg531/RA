@@ -13,7 +13,7 @@ export default (
     <Route path="/" component={App}>
         <IndexRoute component={Home} />
         <Route path="about" component={About} />
-        <Route path="deckbuilder" component={DeckBuilder} />
+        <Route path="deckbuilder/(:id)" component={DeckBuilder} />
         <Route path="deckindex" component={DeckIndex} />
         <Route path="decks" component={Decks} />
         <Route path="tournaments" component={About} />

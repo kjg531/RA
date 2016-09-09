@@ -43,5 +43,6 @@ class Deck(models.Model):
 
     def as_dict(self):
         return {
+            'id': self.id,
             'cards': [c.as_dict() for c in self.cards.all()]
         }

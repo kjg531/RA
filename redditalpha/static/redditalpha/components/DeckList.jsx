@@ -6,8 +6,18 @@ import Deck from './Deck';
 class DeckList extends React.Component {
   render() {
     return (
-      <div>
-        { this.props.decks.map(function(deck, i){return <Deck cards={deck.cards} />;})}
+      <div style={{display:'inline-block'}}>
+        { this.props.decks.map(function(deck){
+            return (
+                <div key={deck.id}>
+                    <button type="button">Upvote</button>
+                    <button type="button">Downvote</button>
+                    <button type="button">Copy</button>
+                    <button type="button">Star</button>
+                    <Deck cards={deck.cards} />
+                </div>
+            );
+        })}
       </div>
     )
   }

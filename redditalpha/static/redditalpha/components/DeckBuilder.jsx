@@ -15,7 +15,7 @@ class DeckBuilder extends React.Component {
         <br/>
         <br/>
         <h1>Deck Builder</h1>
-        <CardPicker cards={this.props.cards} />
+        <CardPicker deck={this.props.params.id} cards={this.props.cards} />
       </div>
     )
   }
