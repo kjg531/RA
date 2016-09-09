@@ -3,6 +3,7 @@ import {GridList, GridTile} from 'material-ui/GridList';
 import Subheader from 'material-ui/Subheader';
 import SelectedCardsList from './SelectedCardsList';
 import UnselectedCardsList from './UnselectedCardsList';
+import {Button, IconButton} from 'react-toolbox/lib/button';
 
 
 class CardPicker extends React.Component {
@@ -65,7 +66,7 @@ class CardPicker extends React.Component {
         'submitting': false
       });
     });
-     
+
     request.fail(function(jqXHR, textStatus, errorThrown) {
       alert('Error: ' + jqXHR.responseJSON.cards[0]);
       self.setState({
@@ -101,8 +102,8 @@ class CardPicker extends React.Component {
       <div style={{paddingTop:100}}>
         <br/>
         <SelectedCardsList cards={this.state.cards} onClick={this.onClick}/>
-        {this.state.selectedCards == 8 ? <button type="button" onClick={this.save}>Save</button> : ""}
-        {this.state.selectedCards > 0? <button type="button" onClick={this.clear}>Clear</button> : ""}
+        {this.state.selectedCards > 0 ? <Button icon='clear' onMouseUp={this.clear} floating inverse mini /> : ""}
+        {this.state.selectedCards == 8 ? <Button icon='add' onMouseUp={this.save} floating accent mini /> : ""}
         {this.state.submitting ? <h3>Submitting...</h3>:''}
         <br/>
         <UnselectedCardsList cards={this.state.cards} onClick={this.onClick}/>

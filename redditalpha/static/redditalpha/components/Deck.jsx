@@ -9,7 +9,7 @@ class Deck extends React.Component {
   }
   render() {
     return (
-      <div style={{padding:5, backgroundColor: 'black', margin: 10}}>
+      <div>
         {this.props.cards.map(function(card, i){
           return <Card key={card.id} data={card} />;
         })}
@@ -22,7 +22,7 @@ Deck.propTypes = {
   cards: React.PropTypes.array.isRequired,
 };
 
-Deck.defaultProps = { 
+Deck.defaultProps = {
   cards: []
 };
 

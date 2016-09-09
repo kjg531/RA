@@ -2,7 +2,7 @@ import React from "react";
 
 import { List, ListItem, ListSubHeader, ListDivider, ListCheckbox } from 'react-toolbox/lib/list';
 import {Link, IndexLink} from 'react-router';
-
+import TwitterTimeline from './TwitterTimeline';
 class Home extends React.Component {
   style = {
   }
@@ -10,6 +10,10 @@ class Home extends React.Component {
   render() {
     return (
       <div>
+        <TwitterTimeline />
+
+
+
         <h1>Welcome to Reddit Alpha</h1>
         <h5>Links</h5>
         <List selectable ripple>

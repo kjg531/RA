@@ -84,7 +84,7 @@ class Card extends React.Component {
 
     return (
       <div style={{display:'inline-block'}}>
-        <img style={{height:160}}src={this.props.data.image_url} onClick={this.onClick} />
+        <img style={{height:100}}src={this.props.data.image_url} onClick={this.onClick} />
         <span style={this.style[this.props.data.rarity]} data-rarity={this.props.data.rarity}>{this.props.data.cost}</span>
       </div>
     )
