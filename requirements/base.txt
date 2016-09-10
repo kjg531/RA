@@ -50,4 +50,5 @@ redis>=2.10.0
 django-webpack-loader==0.3.3
 
 # Your custom requirements go here
+channels
 beautifulsoup4

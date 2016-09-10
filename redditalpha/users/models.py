@@ -47,8 +47,8 @@ class UserManager(BaseUserManager):
 class Vote(models.Model):
     VALUE_CHOICES = ((1, 'Up'), (-1, 'Down'))
 
-    user = models.ForeignKey('users.User')
-    deck = models.ForeignKey('decks.Deck')
+    user = models.ForeignKey('users.User', related_name='votes')
+    deck = models.ForeignKey('decks.Deck', related_name='votes')
     value = models.IntegerField(choices=VALUE_CHOICES)    
 
 

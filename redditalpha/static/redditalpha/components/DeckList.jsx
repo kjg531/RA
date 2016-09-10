@@ -11,15 +11,15 @@ class DeckList extends React.Component {
             return (
                 <div key={deck.id}>
                     <div style={{display:'block'}}>
-                      <Button icon='chevron_left' floating accent mini />
+                      <Button icon='chevron_left' floating mini onClick={this.props.upvoteHandler.bind(this, deck.id)} accent={deck.vote_status == 1 ? true:false} />
                       <Button icon='content_copy' onClick={this.props.copyHandler.bind(this, deck.id)} disabled={deck.have_it ? true:false} floating accent mini />
                     </div>
 
                     <div style={{display:'block'}}>
-                      <Button icon='chevron_right' floating mini />
+                      <Button icon='chevron_right' floating mini onClick={this.props.downvoteHandler.bind(this, deck.id)} accent={deck.vote_status == -1 ? true:false} />
                       <IconButton icon='favorite_border' onClick={this.props.favoriteHandler.bind(this, deck.id)} accent />
                     </div>
-
+                    <h5>Votes: {deck.vote_sum}</h5>
                     <div style={{display:'inline-block'}}>
                       <Deck cards={deck.cards} />
                     </div>

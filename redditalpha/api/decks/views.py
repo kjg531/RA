@@ -3,6 +3,7 @@ from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_http_methods
 
+from redditalpha.users.models import Vote
 from redditalpha.decks.models import Deck
 from redditalpha.decks.forms import DeckForm
 
@@ -87,4 +88,55 @@ def favorite(request, id):
             request.user.favorite_decks.add(deck)
             action = 'added'
 
-    return JsonResponse({'action': action})
+        deck.socket_notify('update', user=request.user)
+        return JsonResponse({'action': action})
+
+
+@require_http_methods(['POST'])
+@login_required
+def upvote(request, id):
+    deck = Deck.objects.filter(id=id).first()
+    value = None
+
+    if deck is not None:
+        # CAREFUL HERE PLEASE
+        vote, created = Vote.objects.get_or_create(deck=deck, user=request.user, defaults={'value': 1})
+
+        if created:
+            # if it's a newly created vote, set it to 1 (because this is an upvote)
+            value = 1
+        elif vote.value == 1: # if the vote was 1, un-upvote. so, delete the row
+            vote.delete()
+            value = 0
+        elif vote.value == -1: # if the vote was a downvote, make it an upvote
+            vote.value = 1
+            vote.save()
+            value = 1
+
+        deck.socket_notify('update', user=request.user)
+        return JsonResponse({'value': value})
+
+
+@require_http_methods(['POST'])
+@login_required
+def downvote(request, id):
+    deck = Deck.objects.filter(id=id).first()
+    value = None
+
+    if deck is not None:
+        # CAREFUL HERE PLEASE
+        vote, created = Vote.objects.get_or_create(deck=deck, user=request.user, defaults={'value': -1})
+
+        if created:
+            # if it's a newly created vote, set it to -1 (because this is a downvote)
+            value = -1
+        elif vote.value == -1: # if the vote was -1, un-downvote. so, delete the row
+            vote.delete()
+            value = 0
+        elif vote.value == 1: # if the vote was an upvote, make it a downvote
+            vote.value = -1
+            vote.save()
+            value = -1
+
+        deck.socket_notify('update', user=request.user)
+        return JsonResponse({'value': value})

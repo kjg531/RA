@@ -39,6 +39,7 @@ THIRD_PARTY_APPS = (
     'allauth.account',  # registration
     'allauth.socialaccount',  # registration
     'redditalpha.utils.providers.discord',
+    'channels',
 )
 
 # Apps specific for this project go here.
@@ -261,3 +262,15 @@ WEBPACK_LOADER = {
 
 # Your common stuff: Below this line define 3rd party library settings
 DEFAULT_AVATAR_URL = 'http://vignette3.wikia.nocookie.net/siivagunner/images/9/9f/Discord_icon.svg/revision/latest?cb=20160623172043'
+
+
+# Channels stuff
+
+# CHANNELS STUFF
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "asgiref.inmemory.ChannelLayer",
+        "ROUTING": "redditalpha.routing.channel_routing",
+    },
+}

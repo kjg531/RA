@@ -1,4 +1,7 @@
+import json
 from django.db import models
+
+from channels import Group
 
 
 class Archetype(models.Model):
@@ -41,9 +44,34 @@ class Deck(models.Model):
             list(self.cards.values_list('name', flat=True))
         )
 
-    def as_dict(self, user):
-        return {
+    def vote_sum(self):
+        return sum(list(self.votes.values_list('value', flat=True)))
+
+    def favorites_sum(self):
+        return self.fans.count()
+
+    def vote_status(self, user):
+        vote = self.votes.filter(user=user).first()
+        return vote.value if vote is not None else 0
+
+    def as_dict(self, user=None):
+        res = {
             'id': self.id,
-            'have_it': user in self.users.all(),
-            'cards': [c.as_dict() for c in self.cards.all()]
+            'cards': [c.as_dict() for c in self.cards.all()],
+            'vote_sum': self.vote_sum(),
+            'favorites_sum': self.favorites_sum()
         }
+
+        if user is not None:
+            res.update({
+                'have_it': user in self.users.all(),
+                'vote_status': self.vote_status(user),
+            })
+
+        return res
+
+    def socket_notify(self, action, user=None):
+        assert action in ['add', 'update'], "You're using this function incorrectly!"
+        data = self.as_dict(user=user)
+        data['action'] = action
+        Group('deckfeed').send({'text': json.dumps(data)})
