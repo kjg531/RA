@@ -45,27 +45,37 @@ class Deck(models.Model):
         )
 
     def vote_sum(self):
-        return sum(list(self.votes.values_list('value', flat=True)))
-
-    def favorites_sum(self):
-        return self.fans.count()
+        # this feels hacky
+        # if _vote_sum is present, the sum of votes was calculated
+        # from outside, by an annotate() call. So we use that if possible
+        if hasattr(self, '_vote_sum'):
+            return self._vote_sum
+        else:
+            return sum(list(self.votes.values_list('value', flat=True)))
 
     def vote_status(self, user):
         vote = self.votes.filter(user=user).first()
         return vote.value if vote is not None else 0
+
+    def favorite_sum(self):
+        return self.fans.count()
+
+    def is_favorite(self, user):
+        return user in self.fans.all()
 
     def as_dict(self, user=None):
         res = {
             'id': self.id,
             'cards': [c.as_dict() for c in self.cards.all()],
             'vote_sum': self.vote_sum(),
-            'favorites_sum': self.favorites_sum()
+            'favorite_sum': self.favorite_sum()
         }
 
         if user is not None:
             res.update({
                 'have_it': user in self.users.all(),
                 'vote_status': self.vote_status(user),
+                'favorite': self.is_favorite(user),
             })
 
         return res

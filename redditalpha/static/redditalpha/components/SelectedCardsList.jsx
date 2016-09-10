@@ -10,7 +10,7 @@ class SelectedCardsList extends React.Component {
     return (
       <CardList
         cards={this.props.cards.filter((card) => {return card.selected})}
-        onClick={this.props.onClick}
+        clickHandler={this.props.clickHandler}
       />
     );
   }
@@ -18,7 +18,7 @@ class SelectedCardsList extends React.Component {
 
 SelectedCardsList.propTypes = {
   cards: React.PropTypes.array.isRequired,
-  onClick: React.PropTypes.func.isRequired
+  clickHandler: React.PropTypes.func.isRequired
 };
 
 export default SelectedCardsList;

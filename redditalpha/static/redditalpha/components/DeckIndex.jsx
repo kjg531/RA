@@ -3,6 +3,7 @@ import { render } from "react-dom";
 
 import DeckList from './DeckList';
 import Dialog from 'react-toolbox/lib/dialog';
+import { RadioGroup, RadioButton } from 'react-toolbox/lib/radio';
 
 
 class DeckIndex extends React.Component {
@@ -10,7 +11,8 @@ class DeckIndex extends React.Component {
     super(props);
     this.state = {
       decks: [],
-      dialogOpen: false
+      dialogOpen: false,
+      ordering: 'votes'
     };
   }
 
@@ -21,6 +23,7 @@ class DeckIndex extends React.Component {
       })
     });
   }
+
   socketOpen = () => { 
     this.socket = new WebSocket("ws://" + window.location.host);
     this.socket.onmessage = this.socketMessage;
@@ -49,38 +52,10 @@ class DeckIndex extends React.Component {
     }
 
     this.sortByVotes();
-    // This isn't a thing. You don't DELETE a deck. like, EVER.
-    /* else if (action == 'delete'){
-      console.log('Deck delete');
-      this.setState({
-        'events': this.state.events.filter(function(event){
-          return event.id != data.id;
-        })
-      });
-    }*/
   }
 
   socketClose = () => {
     this.socket.close();
-  }
-
-  loadEvents = () => {
-    var request = $.ajax({
-      url: '/api/events/',
-      type: 'GET'
-    });
-
-    let self = this;
-
-    request.done(function(data, textStatus, jqXHR) {
-      self.setState({
-        events: data.events
-      });
-    });
-
-    request.fail(function(jqXHR, textStatus, errorThrown) {
-      console.log('Error loading events from api');
-    });
   }
 
   loadDecks = () => {
@@ -89,15 +64,13 @@ class DeckIndex extends React.Component {
       type: 'GET'
     });
 
-    let self = this;
-
-    request.done(function(data, textStatus, jqXHR) {
-      self.setState({
+    request.done((data, textStatus, jqXHR) => {
+      this.setState({
         decks: data.decks
       });
     });
 
-    request.fail(function(jqXHR, textStatus, errorThrown) {
+    request.fail((jqXHR, textStatus, errorThrown) => {
       console.log('Error loading decks from api');
     });
   }
@@ -172,11 +145,19 @@ class DeckIndex extends React.Component {
     });
 
     request.done((data, textStatus, jqXHR) => {
-      console.log('Favorite ' + data.action);
+      this.setState({
+        decks: this.state.decks.map((deck) => {
+          if (deck.id == id){
+            deck.favorite = data.favorite;
+          }
+          return deck;
+        })
+      });
+      // console.log('Favorite ' + data.action);
     });
 
     request.fail((jqXHR, textStatus, errorThrown) => {
-      console.log('Favorite ' + data.action);
+      console.log('Favorite ajax failed!');
     });
   }
 
@@ -193,6 +174,7 @@ class DeckIndex extends React.Component {
     this.socketClose();
   }
 
+
   render() {
     let actions = [{ label: "Ok", onClick: this.closeDialog }];
 
@@ -200,9 +182,26 @@ class DeckIndex extends React.Component {
       <div>
         <br/>
         <br/>
+        
         <h1>This is the deck index!</h1>
+        
         <h3>These are all the decks that have been created by other users. See anything you like? <del>STEAL</del> COPY THAT SHIT!!</h3>
-        <DeckList decks={this.state.decks} copyHandler={this.copyDeck} favoriteHandler={this.favoriteDeck} upvoteHandler={this.upvoteDeck} downvoteHandler={this.downvoteDeck}/>
+        
+        <RadioGroup name='comic' value={this.state.value} onChange={this.handleChange}>
+          <RadioButton label='The Walking Dead' value='thewalkingdead'/>
+          <RadioButton label='From Hell' value='fromhell' disabled/>
+          <RadioButton label='V for a Vendetta' value='vvendetta'/>
+          <RadioButton label='Watchmen' value='watchmen'/>
+        </RadioGroup>
+
+        <DeckList
+          decks={this.state.decks}
+          copyHandler={this.copyDeck}
+          favoriteHandler={this.favoriteDeck}
+          upvoteHandler={this.upvoteDeck}
+          downvoteHandler={this.downvoteDeck}
+        />
+        
         <Dialog
           actions={actions}
           active={this.state.dialogOpen}
@@ -217,108 +216,4 @@ class DeckIndex extends React.Component {
   }
 }
 
-DeckIndex.propTypes = {
-  cards: React.PropTypes.array.isRequired,
-};
-
-DeckIndex.defaultProps = { 
-  cards: DJ.BACKEND_CARDS
-};
-
 export default DeckIndex;
-
-
-
-
-
-
-// import React, {Component, PropTypes} from 'react';
-
-// import EventBox from '../components/events/EventBox';
-
-// export default class BrowseContainer extends Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = { events: [] };
-//   }
-
-    
-//   socketOpen = () => { 
-//     this.socket = new WebSocket("ws://" + window.location.host);
-//     this.socket.onmessage = this.socketMessage;
-//   }
-
-//   socketMessage = (e) => {
-//     let data = JSON.parse(e.data);
-//     let action = data.action;
-//     delete data.action;
-
-//     if (action == 'add'){
-//       data['tag'] = true;
-//       console.log('Event add');
-//       this.setState({
-//         'events': this.state.events.slice().concat(data)
-//       });
-//     } else if (action == 'update'){
-//       data['tag'] = true;
-//       console.log('Event update');
-//       this.setState({
-//         'events': this.state.events.map(function(event){
-//           return (event.id == data.id ? data:event);
-//         })
-//       });
-//     } else if (action == 'delete'){
-//       console.log('Event delete');
-//       this.setState({
-//         'events': this.state.events.filter(function(event){
-//           return event.id != data.id;
-//         })
-//       });
-//     }
-//   }
-
-//   socketClose = () => {
-//     this.socket.close();
-//   }
-
-//   loadEvents = () => {
-//     var request = $.ajax({
-//       url: '/api/events/',
-//       type: 'GET'
-//     });
-
-//     let self = this;
-
-//     request.done(function(data, textStatus, jqXHR) {
-//       self.setState({
-//         events: data.events
-//       });
-//     });
-
-//     request.fail(function(jqXHR, textStatus, errorThrown) {
-//       console.log('Error loading events from api');
-//     });
-//   }
-
-//   componentDidMount() {
-//     this.loadEvents();
-//     this.socketOpen();
-//   }
-
-//   componentWillUnmount() {
-//     this.socketClose();
-//   }
-
-//   render() {
-//     return (
-//       <div>
-//         <h1>This is the browse page</h1>
-//         <h3>It contains a list of events, <strong>STRAIGHT OUTTA <del>COMPTON</del> THE DATABASE</strong></h3>
-//         <hr/>
-//         {this.state.events.map((event) => {
-//           return <EventBox key={event.id} event={event} />
-//         })}
-//       </div>
-//     );
-//   }
-// }

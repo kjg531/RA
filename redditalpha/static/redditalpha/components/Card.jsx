@@ -10,7 +10,7 @@ class Card extends React.Component {
   }
 
   style = {
-    common: {
+    Common: {
       position: 'absolute',
       top: 6,
       left: 2,
@@ -23,7 +23,7 @@ class Card extends React.Component {
       textShadow: '1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 2px #000',
     },
 
-    rare: {
+    Rare: {
       position: 'absolute',
       top: 8,
       left: 3,
@@ -36,7 +36,7 @@ class Card extends React.Component {
       textShadow: '1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 2px #000',
     },
 
-    epic: {
+    Epic: {
       position: 'absolute',
       top: 8,
       left: 3,
@@ -49,7 +49,7 @@ class Card extends React.Component {
       textShadow: '1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 2px #000',
     },
 
-    legendary: {
+    Legendary: {
       position: 'absolute',
       top: 8,
       left: 3,

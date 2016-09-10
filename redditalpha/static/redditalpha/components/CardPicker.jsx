@@ -4,116 +4,35 @@ import Subheader from 'material-ui/Subheader';
 import SelectedCardsList from './SelectedCardsList';
 import UnselectedCardsList from './UnselectedCardsList';
 import {Button, IconButton} from 'react-toolbox/lib/button';
-
+import ProgressBar from 'react-toolbox/lib/progress_bar';
 
 class CardPicker extends React.Component {
   constructor(props){
     super(props);
-    this.state = {
-      'cards': props.cards.map((card) => {
-        return {
-          "id": card.id,
-          "name": card.name,
-          "cost": card.cost,
-          "rarity": card.rarity,
-          "image_url": card.image_url,
-          "selected": false
-        };
-      }),
-      'selectedCards': 0,
-      'submitting': false
-    };
-  }
-
-  clear = () => {
-    this.setState({
-      'cards': this.state.cards.map(function(card){
-        card.selected = false;
-        return card;
-      }),
-      'selectedCards': 0,
-    });
-  }
-
-  save = () => {
-    let fd = new FormData();
-
-    this.state.cards.map(function(card, index){
-      if (card.selected){
-        fd.append('cards', card.id);
-      }
-    });
-
-    this.setState({
-      'submitting': true
-    });
-
-    var request = $.ajax({
-      url: '/api/decks/mine',
-      method: 'POST',
-      headers: {'X-CSRFTOKEN': DJ.CSRFTOKEN},
-      type: "POST",
-      data: fd,
-      processData: false,  // tell jQuery not to process the data
-      contentType: false   // tell jQuery not to set contentType
-    });
-
-    let self = this;
-
-    request.done(function(data, textStatus, jqXHR) {
-      alert(data.status);
-      self.setState({
-        'submitting': false
-      });
-    });
-
-    request.fail(function(jqXHR, textStatus, errorThrown) {
-      alert('Error: ' + jqXHR.responseJSON.cards[0]);
-      self.setState({
-        'submitting': false
-      });
-    });
-  }
-
-  onClick = (card) => {
-    // if we're trying to select a card but there are already 8 selected,
-    // just return and do nothing. don't update states.
-    if (card.selected == false && this.state.selectedCards == 8){
-      return;
-    }
-
-    // else, carry on as usual
-    this.setState({
-      'cards': this.state.cards.map((item) => {
-        if (item.id == card.id){
-          item.selected = !item.selected;
-        }
-        return item;
-      })
-    });
-
-    this.setState({
-      'selectedCards': this.state.cards.filter((item) => {return item.selected;}).length
-    })
   }
 
   render() {
     return (
       <div style={{paddingTop:100}}>
         <br/>
-        <SelectedCardsList cards={this.state.cards} onClick={this.onClick}/>
-        <Button style={{position: 'fixed', bottom: 10, left: 10, zIndex: 10}}  icon='clear'onMouseUp={this.clear} floating inverse mini />
-        <Button style={{position: 'fixed', bottom: 10, right: 10, zIndex: 10}} icon='add'  onMouseUp={this.save}  floating accent  mini />
-        {this.state.submitting ? <h3>Submitting...</h3>:''}
+        <SelectedCardsList cards={this.props.cards} clickHandler={this.props.clickHandler}/>
+        <Button style={{position: 'fixed', bottom: 10, left: 10, zIndex: 10}}  icon='clear'onMouseUp={this.props.clearHandler} floating inverse mini />
+        <Button style={{position: 'fixed', bottom: 10, right: 10, zIndex: 10}} icon='add'  onMouseUp={this.props.saveHandler}  floating accent  mini />
+        {this.props.submitting ? <ProgressBar mode="indeterminate" />:''}
         <br/>
-        <UnselectedCardsList cards={this.state.cards} onClick={this.onClick}/>
+        <UnselectedCardsList cards={this.props.cards} clickHandler={this.props.clickHandler}/>
       </div>
     )
   }
 }
 
 CardPicker.propTypes = {
-  'cards': React.PropTypes.array.isRequired
+  cards: React.PropTypes.array.isRequired,
+  selectedCards: React.PropTypes.number.isRequired,
+  submitting: React.PropTypes.bool.isRequired,
+  saveHandler: React.PropTypes.func.isRequired,
+  clearHandler: React.PropTypes.func.isRequired,
+  clickHandler: React.PropTypes.func.isRequired 
 };
 
 export default CardPicker;

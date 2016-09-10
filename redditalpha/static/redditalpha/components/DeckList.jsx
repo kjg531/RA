@@ -17,9 +17,10 @@ class DeckList extends React.Component {
 
                     <div style={{display:'block'}}>
                       <Button icon='chevron_right' floating mini onClick={this.props.downvoteHandler.bind(this, deck.id)} accent={deck.vote_status == -1 ? true:false} />
-                      <IconButton icon='favorite_border' onClick={this.props.favoriteHandler.bind(this, deck.id)} accent />
+                      <IconButton icon={deck.favorite? 'favorite':'favorite_border'} onClick={this.props.favoriteHandler.bind(this, deck.id)} accent />
                     </div>
                     <h5>Votes: {deck.vote_sum}</h5>
+                    <h5>Favorites: {deck.favorite_sum}</h5>
                     <div style={{display:'inline-block'}}>
                       <Deck cards={deck.cards} />
                     </div>
@@ -33,12 +34,11 @@ class DeckList extends React.Component {
 
 DeckList.propTypes = {
   decks: React.PropTypes.array.isRequired,
-  copyHandler: React.PropTypes.func.isRequired
+  copyHandler: React.PropTypes.func.isRequired,
+  upvoteHandler: React.PropTypes.func.isRequired,  
+  downvoteHandler: React.PropTypes.func.isRequired,  
+  favoriteHandler: React.PropTypes.func.isRequired,    
 };
 
-DeckList.defaultProps = { 
-  decks: [],
-  copyHandler: function(){}
-};
 
 export default DeckList;

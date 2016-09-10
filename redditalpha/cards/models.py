@@ -33,6 +33,7 @@ class Card(models.Model):
         return {
             'id': self.id,
             'name': self.name,
+            'slug': self.slug(),
             'description': self.description,
             'image_url': self.image.url,
             'cost': self.cost,

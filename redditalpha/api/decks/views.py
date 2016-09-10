@@ -1,3 +1,5 @@
+from django.db.models import Sum
+from django.db.models.functions import Coalesce
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
@@ -13,7 +15,7 @@ from redditalpha.decks.forms import DeckForm
 def index(request):
     if request.method == 'GET':
         return JsonResponse({
-            'decks': [d.as_dict(user=request.user) for d in Deck.objects.all()]
+            'decks': [d.as_dict(user=request.user) for d in Deck.objects.annotate(_vote_sum=Coalesce(Sum('votes__value'), 0)).order_by('-_vote_sum')]
         })
 
 
@@ -83,13 +85,13 @@ def favorite(request, id):
     if deck is not None:
         if deck in request.user.favorite_decks.all():
             request.user.favorite_decks.remove(deck)
-            action = 'removed'
+            result = False
         else:
             request.user.favorite_decks.add(deck)
-            action = 'added'
+            result = True
 
         deck.socket_notify('update', user=request.user)
-        return JsonResponse({'action': action})
+        return JsonResponse({'favorite': result})
 
 
 @require_http_methods(['POST'])
