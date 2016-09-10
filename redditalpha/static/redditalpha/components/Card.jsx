@@ -11,13 +11,12 @@ class Card extends React.Component {
 
   style = {
     common: {
-      position: 'relative',
-      display: 'inline-block',
-      top: -132,
-      left: -122,
+      position: 'absolute',
+      top: 6,
+      left: 2,
       fontFamily: 'SuperCell',
       color: 'white',
-      fontSize: '1rem',
+      fontSize: '.5rem',
       width: 14,
       height: 24,
       textAlign: 'center',
@@ -25,13 +24,12 @@ class Card extends React.Component {
     },
 
     rare: {
-      position: 'relative',
-      display: 'inline-block',
-      top: -128,
-      left: -122,
+      position: 'absolute',
+      top: 8,
+      left: 3,
       fontFamily: 'SuperCell',
       color: 'white',
-      fontSize: '1rem',
+      fontSize: '.5rem',
       width: 14,
       height: 24,
       textAlign: 'center',
@@ -39,13 +37,12 @@ class Card extends React.Component {
     },
 
     epic: {
-      position: 'relative',
-      display: 'inline-block',
-      top: -128,
-      left: -122,
+      position: 'absolute',
+      top: 8,
+      left: 3,
       fontFamily: 'SuperCell',
       color: 'white',
-      fontSize: '1rem',
+      fontSize: '.5rem',
       width: 14,
       height: 24,
       textAlign: 'center',
@@ -53,13 +50,12 @@ class Card extends React.Component {
     },
 
     legendary: {
-      position: 'relative',
-      display: 'inline-block',
-      top: -129,
-      left: -113,
+      position: 'absolute',
+      top: 8,
+      left: 3,
       fontFamily: 'SuperCell',
       color: 'white',
-      fontSize: '1rem',
+      fontSize: '.5rem',
       width: 14,
       height: 24,
       textAlign: 'center',
@@ -83,8 +79,8 @@ class Card extends React.Component {
       // selected      this.props.data.selected
 
     return (
-      <div style={{display:'inline-block'}}>
-        <img style={{height:100}}src={this.props.data.image_url} onClick={this.onClick} />
+      <div style={{display:'inline-block', position: 'relative', height:90, minWidth: 70}}>
+        <img style={{height:90, width:70}}src={this.props.data.image_url} onClick={this.onClick} />
         <span style={this.style[this.props.data.rarity]} data-rarity={this.props.data.rarity}>{this.props.data.cost}</span>
       </div>
     )

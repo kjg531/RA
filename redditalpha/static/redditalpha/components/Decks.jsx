@@ -47,7 +47,7 @@ class Decks extends React.Component {
         })
       });
     });
-     
+
     request.fail(function(jqXHR, textStatus, errorThrown) {
       console.log('Delete deck ' + id + ' failed!');
     });
@@ -72,7 +72,7 @@ Decks.propTypes = {
   cards: React.PropTypes.array.isRequired,
 };
 
-Decks.defaultProps = { 
+Decks.defaultProps = {
   cards: DJ.BACKEND_CARDS
 };
 

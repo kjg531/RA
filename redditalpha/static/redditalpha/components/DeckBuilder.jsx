@@ -14,7 +14,7 @@ class DeckBuilder extends React.Component {
       <div>
         <br/>
         <br/>
-        <h1>Deck Builder</h1>
+        <h1 style={{textAlign:'center'}}>Deck Builder</h1>
         <CardPicker deck={this.props.params.id} cards={this.props.cards} />
       </div>
     )
@@ -25,7 +25,7 @@ DeckBuilder.propTypes = {
   cards: React.PropTypes.array.isRequired,
 };
 
-DeckBuilder.defaultProps = { 
+DeckBuilder.defaultProps = {
   cards: DJ.BACKEND_CARDS
 };
 

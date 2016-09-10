@@ -12,7 +12,7 @@ export default class LogoButton extends React.Component {
     }
 
     componentDidMount() {
-        twttr.widgets.load()
+        twttr.widgets.load();
         twttr.widgets.createTimeline({
         sourceType: "list",
         ownerScreenName: "__kenny_g_)",

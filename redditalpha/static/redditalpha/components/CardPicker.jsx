@@ -102,8 +102,8 @@ class CardPicker extends React.Component {
       <div style={{paddingTop:100}}>
         <br/>
         <SelectedCardsList cards={this.state.cards} onClick={this.onClick}/>
-        {this.state.selectedCards > 0 ? <Button icon='clear' onMouseUp={this.clear} floating inverse mini /> : ""}
-        {this.state.selectedCards == 8 ? <Button icon='add' onMouseUp={this.save} floating accent mini /> : ""}
+        <Button style={{position: 'fixed', bottom: 10, left: 10, zIndex: 10}}  icon='clear'onMouseUp={this.clear} floating inverse mini />
+        <Button style={{position: 'fixed', bottom: 10, right: 10, zIndex: 10}} icon='add'  onMouseUp={this.save}  floating accent  mini />
         {this.state.submitting ? <h3>Submitting...</h3>:''}
         <br/>
         <UnselectedCardsList cards={this.state.cards} onClick={this.onClick}/>
