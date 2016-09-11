@@ -4,6 +4,8 @@ from .models import Deck
 
 
 class DeckForm(forms.ModelForm):
+    notes = forms.CharField(required=False, strip=True)
+
     class Meta:
         model = Deck
         fields = ['cards']

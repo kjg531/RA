@@ -1,6 +1,9 @@
 import React from "react";
 import { render } from "react-dom";
 
+import Checkbox from 'react-toolbox/lib/checkbox';
+import Chip from 'react-toolbox/lib/chip';
+
 import MyDeckList from './MyDeckList';
 
 
@@ -8,9 +11,12 @@ class MyDecks extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      'decks': []
+      decks: [],
+      tags: [],
+      tagFilters: []
     };
   }
+
 
   loadDecks = () => {
     var request = $.ajax({
@@ -20,7 +26,9 @@ class MyDecks extends React.Component {
 
     request.done((data, textStatus, jqXHR) => {
       this.setState({
-        decks: data.decks
+        decks: data.decks,
+        tags: data.tags,
+        tagFilters: data.tags
       });
     });
 
@@ -76,14 +84,38 @@ class MyDecks extends React.Component {
     this.loadDecks();
   }
 
+  toggleTagFilter = (tag) => {
+    if (this.state.tagFilters.indexOf(tag) >= 0){
+      this.setState({
+        tagFilters: this.state.tagFilters.filter((item) => {return item != tag})
+      });
+    } else {
+      this.setState({
+        tagFilters: this.state.tagFilters.concat(tag)
+      });
+    }
+  }
+
   render() {
     return (
       <div>
-        <br/>
-        <br/>
         <h1>These are your decks</h1>
+
+        <div>
+          <p>Here you can filter your decks by the tags you assigned to them</p>
+          {this.state.tags.map((tag) => {
+            return (
+              <Checkbox
+                checked={this.state.tagFilters.indexOf(tag) >= 0}
+                label={<Chip>{tag}</Chip>}
+                onChange={this.toggleTagFilter.bind(this, tag)}
+            />);
+          })}
+        </div>
+
         <MyDeckList 
-          decks={this.state.decks} 
+          decks={this.state.decks}
+          tagFilters={this.state.tagFilters}
           favoriteHandler={this.favoriteDeck}
           deleteHandler={this.deleteDeck} 
         />
