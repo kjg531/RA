@@ -69,6 +69,9 @@ module.exports = (opts) => {
     watchOptions: {
       poll: 400
     },
+    sassLoader: {
+      data: '@import "' + path.resolve(__dirname, '../redditalpha/static/redditalpha/theme/_theme.scss') + '";'
+    },
     resolve: {
       extensions: ['', '.js', '.jsx'],
       modules: [

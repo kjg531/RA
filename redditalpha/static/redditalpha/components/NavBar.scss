@@ -1,0 +1,37 @@
+$black: #000;
+$white: #fff;
+
+
+.appBar {
+  background-color: $black;
+  height: 60px;
+}
+.title {
+  color: $white;
+  padding-left: 40px;
+}
+
+.leftIcon {
+  position: absolute;
+  left: 0px;
+}
+
+.rightIcon {
+  position: absolute;
+  right: 10px;
+
+}
+.avatar {
+  height: 45px;
+  width: 45px;
+}
+
+.drawer {
+  position: absolute;
+  top: 60px;
+  bottom: 0px;
+  right:0;
+  background-color: black;
+  color: $white;
+  transition: .3s;
+}

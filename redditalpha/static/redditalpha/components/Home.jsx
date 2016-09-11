@@ -3,8 +3,9 @@ import React from "react";
 import { List, ListItem, ListSubHeader, ListDivider, ListCheckbox } from 'react-toolbox/lib/list';
 import {Link, IndexLink, browserHistory} from 'react-router';
 import TwitterTimeline from './TwitterTimeline';
-
+import AutoComplete from './AutoComplete'
 import {LinkContainer, IndexLinkContainer} from 'react-router-bootstrap';
+import NavBar from './NavBar'
 
 class Home extends React.Component {
   style = {
@@ -12,11 +13,10 @@ class Home extends React.Component {
 
   render() {
     return (
-      <div>
+      <div style={{maxWidth:360}}>
+        <NavBar/>
+        <AutoComplete />
         <TwitterTimeline />
-
-
-
         <h1>Welcome to Reddit Alpha</h1>
         <h5>Links</h5>
         <List selectable ripple>
