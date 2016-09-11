@@ -1,7 +1,7 @@
 import React from 'react';
 import Input from 'react-toolbox/lib/input';
 import Chip from 'react-toolbox/lib/chip';
-
+import theme from './Tagger.scss'
 class Tagger extends React.Component {
   constructor(props){
     super(props);
@@ -42,7 +42,7 @@ class Tagger extends React.Component {
 Tagger.propTypes = {
   tags: React.PropTypes.array.isRequired,
   addTagHandler: React.PropTypes.func.isRequired,
-  deleteTagHandler: React.PropTypes.func.isRequired 
+  deleteTagHandler: React.PropTypes.func.isRequired
 };
 
 export default Tagger;
