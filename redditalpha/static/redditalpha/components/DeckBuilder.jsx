@@ -1,7 +1,7 @@
 import React from "react";
 import { render } from "react-dom";
 import {Link} from "react-router";
-
+import Input from 'react-toolbox/lib/input';
 import CardPicker from './CardPicker';
 
 
@@ -9,9 +9,11 @@ class DeckBuilder extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      'cards': [],
-      'selectedCards': 0,
-      'submitting': false
+      cards: [],
+      selectedCards: 0,
+      submitting: false,
+      tags: [],
+      notes: ''
     }
   }
 
@@ -35,7 +37,24 @@ class DeckBuilder extends React.Component {
     });
   }
 
-  clear = () => {
+  addTag = (tag) => {
+    if (this.state.tags.indexOf(tag) >= 0){
+      return false
+    } else {
+      this.setState({
+        tags: this.state.tags.concat(tag)
+      });
+      return true;
+    }
+  }
+
+  deleteTag = (tag) => {
+    this.setState({
+      tags: this.state.tags.filter((item) => {return item != tag})
+    });
+  }
+
+  clearCards = () => {
     this.setState({
       'cards': this.state.cards.map((card) => {
         card.selected = false;
@@ -45,14 +64,20 @@ class DeckBuilder extends React.Component {
     });
   }
 
-  save = () => {
+  saveDeck = () => {
     let fd = new FormData();
 
-    this.state.cards.map(function(card, index){
+    this.state.cards.map((card) =>{
       if (card.selected){
         fd.append('cards', card.id);
       }
     });
+
+    this.state.tags.map((tag) => {
+      fd.append('tags', tag);
+    });
+
+    fd.append('notes', this.state.notes);
 
     this.setState({
       'submitting': true
@@ -60,9 +85,8 @@ class DeckBuilder extends React.Component {
 
     var request = $.ajax({
       url: '/api/decks/mine',
-      method: 'POST',
+      type: 'POST',
       headers: {'X-CSRFTOKEN': DJ.CSRFTOKEN},
-      type: "POST",
       data: fd,
       processData: false,  // tell jQuery not to process the data
       contentType: false   // tell jQuery not to set contentType
@@ -119,14 +143,16 @@ class DeckBuilder extends React.Component {
         <br/>
         <br/>
         <h1 style={{textAlign:'center'}}>Deck Builder</h1>
-        <h3>There are {this.state.cards.length} cards to choose from</h3>
         <CardPicker
           cards={this.state.cards}
           selectedCards={this.state.selectedCards}
           submitting={this.state.submitting}
-          saveHandler={this.save}
-          clearHandler={this.clear}
+          saveHandler={this.saveDeck}
+          clearHandler={this.clearCards}
           clickHandler={this.click}
+          tags={this.state.tags}
+          addTagHandler={this.addTag}
+          deleteTagHandler={this.deleteTag}
         />
       </div>
     )

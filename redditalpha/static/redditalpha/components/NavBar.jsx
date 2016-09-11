@@ -3,9 +3,10 @@ import AppBar from 'react-toolbox/lib/app_bar';
 import Logo from './Logo';
 import theme from './NavBar.scss';
 import Avatar from 'react-toolbox/lib/avatar';
-import Drawer from 'react-toolbox/lib/drawer/Drawer.js';
+import Drawer from 'react-toolbox/lib/drawer';
+import { List, ListItem, ListSubHeader, ListDivider, ListCheckbox } from 'react-toolbox/lib/list';
+import {Link, IndexLink, browserHistory} from 'react-router';
 import {Button, IconButton} from 'react-toolbox/lib/button';
-
 
 export default class NavBar extends React.Component {
   constructor(props) {
@@ -23,6 +24,11 @@ export default class NavBar extends React.Component {
     });
   };
 
+  redirect = (route) => {
+    browserHistory.push(route);
+    this.setState({active: false});
+  }
+
   render() {
       if (this.state.authenticated) {
         var topRightButton = <Avatar image={AVATAR_URL} onClick={this.handleToggle} theme={theme} />
@@ -34,7 +40,36 @@ export default class NavBar extends React.Component {
           <AppBar leftIcon={<Logo />} rightIcon={topRightButton} title="title" fixed flat theme={theme} />
           <Drawer active={this.state.active} type='right' onOverlayClick={this.handleToggle}>
           <h5>This is your Drawer.</h5>
-          <p>You can embed any content you want, for example a Menu.</p>
+          
+          <List selectable ripple>
+            <ListItem
+              caption='Home'
+              rightIcon='star'
+              onClick={this.redirect.bind(this, '/')}
+            />
+            <ListItem
+              caption='Dashboard'
+              rightIcon='star'
+              onClick={this.redirect.bind(this, '/dashboard')}
+            />
+            <ListItem
+              caption='Deck Index'
+              rightIcon='star'
+              onClick={this.redirect.bind(this, '/decks')}
+            />
+            <ListItem
+              caption='My Decks'
+              rightIcon='star'
+              onClick={this.redirect.bind(this, '/decklist')}
+            />
+            <ListItem
+              caption='Deckbuilder'
+              rightIcon='star'
+              onClick={this.redirect.bind(this, '/deckbuilder')}
+            />
+            
+            
+          </List>
           </Drawer>
           </div>
       );

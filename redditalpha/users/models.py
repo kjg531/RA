@@ -15,15 +15,10 @@ from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
 
-try:
-    from django.utils.encoding import force_text
-except ImportError:
-    from django.utils.encoding import force_unicode as force_text
 
 from allauth.account.signals import user_signed_up, user_logged_in
 
 from redditalpha.clans.models import Clan
-
 
 class UserManager(BaseUserManager):
     def create_user(self, email, password=None):
@@ -44,23 +39,15 @@ class UserManager(BaseUserManager):
         return user
 
 
-class Vote(models.Model):
-    VALUE_CHOICES = ((1, 'Up'), (-1, 'Down'))
-
-    user = models.ForeignKey('users.User', related_name='votes')
-    deck = models.ForeignKey('decks.Deck', related_name='votes')
-    value = models.IntegerField(choices=VALUE_CHOICES)    
-
-
 class User(AbstractBaseUser, PermissionsMixin):
     display_name = models.CharField(max_length=14, blank=True)
     email = models.EmailField(verbose_name='email address', max_length=255, unique=True)
     clan = models.ForeignKey(Clan, on_delete=models.CASCADE, null=True)
     is_leader = models.BooleanField(default=False)
     avatar = models.URLField(blank=True)
-    decks = models.ManyToManyField('decks.Deck', related_name='users')
+    decks = models.ManyToManyField('decks.Deck', related_name='users', through='decks.Inclusion')
     favorite_decks = models.ManyToManyField('decks.Deck', related_name='fans')
-    voted_decks = models.ManyToManyField('decks.Deck', related_name='voters', through='users.Vote')
+    voted_decks = models.ManyToManyField('decks.Deck', related_name='voters', through='decks.Vote')
 
     is_staff = models.BooleanField(
         _('staff status'), default=False, help_text=_(
@@ -105,7 +92,8 @@ class User(AbstractBaseUser, PermissionsMixin):
             'avatar': self.avatar_url(),
         }
 
-        return json.dumps(res)
+        return json.dumps(res)   
+
 
 @receiver(user_signed_up)
 def set_initial_user_data(request, user, sociallogin=None, **kwargs):

@@ -77,13 +77,20 @@ class Card extends React.Component {
       // cost      this.props.data.cost
       // image_url       this.props.data.image_url
       // selected      this.props.data.selected
-
-    return (
-      <div style={{display:'inline-block', position: 'relative', height:90, minWidth: 70}}>
-        <img style={{height:90, width:70}}src={this.props.data.image_url} onClick={this.onClick} />
-        <span style={this.style[this.props.data.rarity]} data-rarity={this.props.data.rarity}>{this.props.data.cost}</span>
-      </div>
-    )
+    if (this.props.data){
+      return (
+        <div style={{display:'inline-block', position: 'relative', height:90, minWidth: 70}}>
+          <img style={{height:90, width:70}}src={this.props.data.image_url} onClick={this.onClick} />
+          <span style={this.style[this.props.data.rarity]} data-rarity={this.props.data.rarity}>{this.props.data.cost}</span>
+        </div>
+      );
+    } else {
+      return (
+        <div style={{display:'inline-block', position: 'relative', height:90, minWidth: 70}}>
+          <img style={{height:90, width:70}}src="http://localhost:8000/static/images/blank_card.png" />
+        </div>
+      );
+    }
   }
 }
 

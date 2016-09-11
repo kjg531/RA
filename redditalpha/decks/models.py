@@ -9,6 +9,32 @@ class Archetype(models.Model):
     description = models.TextField()
 
 
+class Tag(models.Model):
+    name = models.TextField(max_length=30)
+    inclusion = models.ForeignKey('decks.Inclusion', related_name='tags')
+
+
+class Inclusion(models.Model):
+    # THROUGH model for user_deck m2m
+    user = models.ForeignKey('users.User', related_name='inclusions')
+    deck = models.ForeignKey('decks.Deck', related_name='inclusions')
+    notes = models.TextField(blank=True)
+
+    class Meta:
+        unique_together = ('user', 'deck')
+
+
+class Vote(models.Model):
+    # THROUGH model for user_deck m2m
+    VALUE_CHOICES = ((1, 'Up'), (-1, 'Down'))
+
+    user = models.ForeignKey('users.User', related_name='votes')
+    deck = models.ForeignKey('decks.Deck', related_name='votes')
+    value = models.IntegerField(choices=VALUE_CHOICES) 
+
+    class Meta:
+        unique_together = (('user', 'deck'))
+
 class Deck(models.Model):
     # archetype = models.ForeignKey('Archetype', related_name='decks')
     cards = models.ManyToManyField('cards.Card', related_name='decks')
@@ -57,6 +83,12 @@ class Deck(models.Model):
         vote = self.votes.filter(user=user).first()
         return vote.value if vote is not None else 0
 
+    def tags(self, user):
+        return list(Tag.objects.filter(
+            inclusion__user=user,
+            inclusion__deck=self
+        ).values_list('name', flat=True))
+
     def favorite_sum(self):
         return self.fans.count()
 
@@ -76,6 +108,7 @@ class Deck(models.Model):
                 'have_it': user in self.users.all(),
                 'vote_status': self.vote_status(user),
                 'favorite': self.is_favorite(user),
+                'tags': self.tags(user)
             })
 
         return res

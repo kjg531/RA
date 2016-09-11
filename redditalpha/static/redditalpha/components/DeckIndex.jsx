@@ -3,7 +3,6 @@ import { render } from "react-dom";
 
 import DeckList from './DeckList';
 import Dialog from 'react-toolbox/lib/dialog';
-import { RadioGroup, RadioButton } from 'react-toolbox/lib/radio';
 
 
 class DeckIndex extends React.Component {
@@ -186,13 +185,6 @@ class DeckIndex extends React.Component {
         <h1>This is the deck index!</h1>
         
         <h3>These are all the decks that have been created by other users. See anything you like? <del>STEAL</del> COPY THAT SHIT!!</h3>
-        
-        <RadioGroup name='comic' value={this.state.value} onChange={this.handleChange}>
-          <RadioButton label='The Walking Dead' value='thewalkingdead'/>
-          <RadioButton label='From Hell' value='fromhell' disabled/>
-          <RadioButton label='V for a Vendetta' value='vvendetta'/>
-          <RadioButton label='Watchmen' value='watchmen'/>
-        </RadioGroup>
 
         <DeckList
           decks={this.state.decks}

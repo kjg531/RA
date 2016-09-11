@@ -4,6 +4,7 @@ from redditalpha.api.decks import views
 
 
 urlpatterns = [
+    url(r'^test$', views.test, name='test'), # yes, you can delete this
     url(r'^$', views.index, name='index'),
     url(r'^mine$', views.mine, name='mine'),
     url(r'^(?P<id>\d+)/delete$', views.delete, name='delete'),
