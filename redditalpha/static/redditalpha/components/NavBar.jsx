@@ -31,7 +31,7 @@ export default class NavBar extends React.Component {
 
   render() {
       if (this.state.authenticated) {
-        var topRightButton = <Avatar image={AVATAR_URL} onClick={this.handleToggle} theme={theme}/>
+        var topRightButton = <Avatar image={AVATAR_URL} onClick={this.handleToggle} theme={theme} />
       } else {
         var topRightButton = <Button icon='add' href='/accounts/discord/login/?process=login' onClick={this.handleToggle} label='Add this' flat primary />
       }

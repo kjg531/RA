@@ -19,7 +19,7 @@ class CardList extends React.Component {
         {this.props.cards.map((card) => (
           <Card data={card} onClick={this.props.clickHandler.bind(this, card.id)}/>
         ))}
-        
+
         {this.renderPlaceholders()}
       </div>
     );

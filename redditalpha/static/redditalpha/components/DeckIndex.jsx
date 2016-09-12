@@ -23,7 +23,7 @@ class DeckIndex extends React.Component {
     });
   }
 
-  socketOpen = () => { 
+  socketOpen = () => {
     this.socket = new WebSocket("ws://" + window.location.host);
     this.socket.onmessage = this.socketMessage;
   }
@@ -181,10 +181,8 @@ class DeckIndex extends React.Component {
       <div>
         <br/>
         <br/>
-        
-        <h1>This is the deck index!</h1>
-        
-        <h3>These are all the decks that have been created by other users. See anything you like? <del>STEAL</del> COPY THAT SHIT!!</h3>
+
+        <h1 style={{textAlign: 'center'}}>This is the deck index!</h1>
 
         <DeckList
           decks={this.state.decks}
@@ -193,7 +191,7 @@ class DeckIndex extends React.Component {
           upvoteHandler={this.upvoteDeck}
           downvoteHandler={this.downvoteDeck}
         />
-        
+
         <Dialog
           actions={actions}
           active={this.state.dialogOpen}

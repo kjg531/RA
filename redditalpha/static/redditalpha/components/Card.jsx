@@ -86,7 +86,7 @@ class Card extends React.Component {
       );
     } else {
       return (
-        <div style={{display:'inline-block', position: 'relative', height:90, minWidth: 70}}>
+        <div style={{display:'inline-block', position: 'relative', height:90, minWidth: 70, margin: 8}}>
           <img style={{height:90, width:70}}src="http://localhost:8000/static/images/blank_card.png" />
         </div>
       );

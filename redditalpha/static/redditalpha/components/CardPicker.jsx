@@ -34,7 +34,7 @@ class CardPicker extends React.Component {
         <Button style={{position: 'fixed', bottom: 10, right: 10, zIndex: 10}} icon='add'  onMouseUp={this.props.saveHandler}  floating accent  mini />
         {this.props.submitting ? <ProgressBar mode="indeterminate" />:''}
         <br/>
-        <CardList cards={this.props.cards.filter((card) => {return !card.selected})} placeholders={58} clickHandler={this.props.clickHandler}/>
+        <CardList cards={this.props.cards.filter((card) => {return !card.selected})} clickHandler={this.props.clickHandler}/>
         <br/>
         <Tagger tags={this.props.tags} addTagHandler={this.props.addTagHandler} deleteTagHandler={this.props.deleteTagHandler}/>
       </div>
