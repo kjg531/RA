@@ -27,8 +27,8 @@ class MyDecks extends React.Component {
     request.done((data, textStatus, jqXHR) => {
       this.setState({
         decks: data.decks,
-        tags: data.tags,
-        tagFilters: data.tags
+        tags: data.tags.concat('untagged'),
+        tagFilters: data.tags.concat('untagged')
       });
     });
 

@@ -12,14 +12,21 @@ class MyDeckList extends React.Component {
       hidden: {display: 'none'}
     }
   }
+
   isHidden = (deck) => {
-    for (var i = 0; i < deck.tags.length; i++){
-      if (this.props.tagFilters.indexOf(deck.tags[i]) >= 0){
-        console.log(deck.tags[i] + ' isHidden false');
-        return false;
+    const {tagFilters} = this.props;
+    
+    if (deck.tags.length == 0 && tagFilters.indexOf('untagged') >= 0){
+      return false;
+    }else{
+      for (var i = 0; i < deck.tags.length; i++){
+        if (tagFilters.indexOf(deck.tags[i]) >= 0){
+          console.log(deck.tags[i] + ' isHidden false');
+          return false;
+        }
       }
+      return true;
     }
-    return true;
   }
 
   render() {

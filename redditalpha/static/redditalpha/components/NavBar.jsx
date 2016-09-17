@@ -4,8 +4,8 @@ import Logo from './Logo';
 import theme from './NavBar.scss';
 import Avatar from 'react-toolbox/lib/avatar';
 import Drawer from 'react-toolbox/lib/drawer';
-import { List, ListItem, ListSubHeader, ListDivider, ListCheckbox } from 'react-toolbox/lib/list';
-import {Link, IndexLink, browserHistory} from 'react-router';
+import { List, ListItem} from 'react-toolbox/lib/list';
+import {browserHistory} from 'react-router';
 import {Button, IconButton} from 'react-toolbox/lib/button';
 
 export default class NavBar extends React.Component {
