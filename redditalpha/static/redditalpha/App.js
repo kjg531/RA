@@ -1,6 +1,6 @@
 import React, {PropTypes, Component} from 'react';
 import NavBar from './components/NavBar'
-
+import Card from 'react-toolbox/lib/card'
 export default class App extends Component {
 
   render() {

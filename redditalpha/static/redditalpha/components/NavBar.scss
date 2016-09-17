@@ -1,14 +1,31 @@
-$black: #000;
-$white: #fff;
-
-
 .appBar {
-  background-color: $black;
+  background-color: black;
   height: 60px;
 }
-.title {
-  color: $white;
-  padding-left: 40px;
+
+.avatar {
+  height: 45px !important;
+  width: 45px !important;
+}
+
+.drawer {
+  position: absolute;
+  top: 60px !important;
+  bottom: 0px;
+  right:0;
+  background-color: black !important;
+  transition: .3s;
+  border: none !important;
+}
+
+
+.itemAction > [data-react-toolbox="font-icon"] {
+  color: white !important;
+}
+
+.itemText {
+  font-family: SuperCell;
+  color: white !important;
 }
 
 .leftIcon {
@@ -19,15 +36,10 @@ $white: #fff;
 .rightIcon {
   position: absolute;
   right: 10px;
-
 }
 
-.drawer {
-  position: absolute;
-  top: 60px;
-  bottom: 0px;
-  right:0;
-  background-color: black;
-  color: $white;
-  transition: .3s;
+.title {
+  color: white;
+  padding-left: 40px;
+  font-family: SuperCell;
 }

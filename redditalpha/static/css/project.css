@@ -42,6 +42,6 @@
     src: url(../Supercell-magic-webfont.ttf);
 }
 
-h1 {
-  font-family: SuperCell;
+h1, h2 , p {
+  font-family: Roboto;
 }

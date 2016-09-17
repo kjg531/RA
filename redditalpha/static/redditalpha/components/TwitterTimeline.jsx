@@ -16,7 +16,8 @@ export default class LogoButton extends React.Component {
         sourceType: "list",
         ownerScreenName: "__kenny_g_)",
         slug: "national-parks"
-      }, document.getElementById("container"));
+      }, document.getElementById("container"))
+
     }
 
     componentDidMount() {
@@ -27,10 +28,12 @@ export default class LogoButton extends React.Component {
     render() {
         return (
             <div>
-                <a className="twitter-timeline" href="https://twitter.com/__Kenny_G_">
+                <a className="twitter-timeline" href="https://twitter.com/__Kenny_G_" width="400" height="800">
             Tweets from https://twitter.com/twitter/lists/official-twitter-accts
                  </a>
             </div>
         )
     }
 }
+
+

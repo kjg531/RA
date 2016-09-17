@@ -33,42 +33,43 @@ export default class NavBar extends React.Component {
       if (this.state.authenticated) {
         var topRightButton = <Avatar image={AVATAR_URL} onClick={this.handleToggle} theme={theme} />
       } else {
-        var topRightButton = <Button icon='add' href='/accounts/discord/login/?process=login' onClick={this.handleToggle} label='Add this' flat primary />
+        var topRightButton = <Button icon='add' href='/accounts/discord/login/?process=login' label='Add this' flat primary />
       }
         return (
           <div>
-          <AppBar leftIcon={<Logo />} rightIcon={topRightButton} title="title" fixed flat theme={theme} />
-          <Drawer active={this.state.active} type='right' onOverlayClick={this.handleToggle}>
-          <h5>This is your Drawer.</h5>
-          
+          <AppBar leftIcon={<Logo />} rightIcon={topRightButton} title="Reddit Alpha Clan Family" fixed flat theme={theme} />
+          <Drawer theme={theme} active={this.state.active} type='right' onOverlayClick={this.handleToggle}>
           <List selectable ripple>
             <ListItem
               caption='Home'
-              rightIcon='star'
+              leftIcon='home'
               onClick={this.redirect.bind(this, '/')}
+              theme={theme}
             />
             <ListItem
               caption='Dashboard'
-              rightIcon='star'
+              leftIcon='dashboard'
               onClick={this.redirect.bind(this, '/dashboard')}
-            />
-            <ListItem
-              caption='Deck Index'
-              rightIcon='star'
-              onClick={this.redirect.bind(this, '/decks')}
-            />
-            <ListItem
-              caption='My Decks'
-              rightIcon='star'
-              onClick={this.redirect.bind(this, '/decklist')}
+              theme={theme}
             />
             <ListItem
               caption='Deckbuilder'
-              rightIcon='star'
+              leftIcon='build'
               onClick={this.redirect.bind(this, '/deckbuilder')}
+              theme={theme}
             />
-            
-            
+            <ListItem
+              caption='Browse'
+              leftIcon='pageview'
+              onClick={this.redirect.bind(this, '/decks')}
+              theme={theme}
+            />
+            <ListItem
+              caption='My Decks'
+              leftIcon='view_list'
+              onClick={this.redirect.bind(this, '/decklist')}
+              theme={theme}
+            />
           </List>
           </Drawer>
           </div>

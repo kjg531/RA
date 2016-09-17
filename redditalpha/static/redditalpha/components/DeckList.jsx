@@ -10,7 +10,7 @@ class DeckList extends React.Component {
       <div style={{width: '100%', textAlign: 'center'}}>
         { this.props.decks.map((deck) => {
             return (
-              <div>
+              <div style={{}}>
                 <FlipMove
                   duration={1000}
                   delay={0}
