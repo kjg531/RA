@@ -63,7 +63,7 @@ node_modules/
 .sass-cache
 
 # virtual environments
-.env
+*.env
 
 # User-uploaded media
 redditalpha/media/
