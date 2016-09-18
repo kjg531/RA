@@ -16,7 +16,7 @@ module.exports = (opts) => {
       ...config.output,
       path: path.resolve(PROJECT_ROOT, 'redditalpha/static/redditalpha/dist/'),
       // set CDN_PATH to your cdn static file directory
-      publicPath: CDN_PATH || '/',
+      // publicPath: CDN_PATH || '/',
     },
     plugins: [
       ...config.plugins,
