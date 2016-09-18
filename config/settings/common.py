@@ -10,6 +10,7 @@ https://docs.djangoproject.com/en/dev/ref/settings/
 """
 from __future__ import absolute_import, unicode_literals
 
+import os
 import environ
 
 ROOT_DIR = environ.Path(__file__) - 3  # (redditalpha/config/settings/common.py - 3 = redditalpha/)
@@ -235,14 +236,6 @@ ADMIN_URL = r'^admin/'
 # WEBPACK
 # ------------------------------------------------------------------------------
 INSTALLED_APPS += ('webpack_loader',)
-# Webpack Local Stats file
-STATS_FILE = ROOT_DIR('webpack-stats.json')
-# Webpack config
-WEBPACK_LOADER = {
-    'DEFAULT': {
-        'STATS_FILE': STATS_FILE
-    }
-}
 
 
 # Your common stuff: Below this line define 3rd party library settings

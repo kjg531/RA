@@ -85,3 +85,12 @@ DATABASES = {
     }
 }
 DATABASES['default']['ATOMIC_REQUESTS'] = True
+
+# Webpack Local Stats file
+STATS_FILE = ROOT_DIR('webpack-stats.json')
+# Webpack config
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'STATS_FILE': STATS_FILE
+    }
+}
