@@ -8,5 +8,5 @@ keep_alive = 2
 
 preload = True
 
-accesslog = '../../logs/access.log'
-errorlog = '../../logs/error.log'
+accesslog = '../logs/access.log'
+errorlog = '../logs/error.log'
