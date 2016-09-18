@@ -20,6 +20,8 @@ class DiscordProvider(OAuth2Provider):
 
     def extract_common_fields(self, data):
         fields = {}
+        print('THis is the data provided by the allauth login:')
+        print(data)
         fields['email'] = data['email']
         fields['display_name'] = data['username']
 
