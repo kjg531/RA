@@ -107,6 +107,9 @@ AWS_HEADERS = {
 # # For Django 1.7+, 'collectfast' should come before
 # # 'django.contrib.staticfiles'
 # AWS_PRELOAD_METADATA = True
+
+STATIC_ROOT = os.path.join(os.path.dirname(ROOT_DIR), 'static')
+
 INSTALLED_APPS = ('collectfast', ) + INSTALLED_APPS
 
 # EMAIL

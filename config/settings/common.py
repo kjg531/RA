@@ -166,8 +166,6 @@ TEMPLATES = [
 
 # STATIC FILE CONFIGURATION
 # ------------------------------------------------------------------------------
-# See: https://docs.djangoproject.com/en/dev/ref/settings/#static-root
-STATIC_ROOT = os.path.join(os.path.dirname(ROOT_DIR), 'static')
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#static-url
 STATIC_URL = '/static/'
@@ -186,10 +184,11 @@ STATICFILES_FINDERS = (
 # MEDIA CONFIGURATION
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#media-root
-MEDIA_ROOT = STATIC_ROOT = os.path.join(os.path.dirname(ROOT_DIR), 'media')
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#media-url
 MEDIA_URL = '/media/'
+
+MEDIA_ROOT = os.path.join(os.path.dirname(ROOT_DIR), 'media')
 
 # URL Configuration
 # ------------------------------------------------------------------------------
