@@ -13,7 +13,7 @@ from redditalpha.index.views import home
 urlpatterns = [
     # url(r'^$', home, name='home'),
     # Django Admin, use {% url 'admin:index' %}
-    url(settings.ADMIN_URL, include(admin.site.urls)),
+    url(r'^admin/', include(admin.site.urls)),
     # User management
     url(r'^users/', include('redditalpha.users.urls', namespace='users')),
     url(r'^accounts/', include('allauth.urls')),
