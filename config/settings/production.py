@@ -17,6 +17,9 @@ from django.utils import six
 
 from .common import *  # noqa
 
+environ.Env.read_env('production.env')
+
+
 # SECRET CONFIGURATION
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
