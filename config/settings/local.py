@@ -69,3 +69,19 @@ INSTALLED_APPS += ('django_extensions', )
 TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
 # Your local stuff: Below this line define 3rd party library settings
+
+
+# DATABASE CONFIGURATION
+# ------------------------------------------------------------------------------
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'redditalpha',
+        'USER': 'vagrant',
+        'PASSWORD': 'vagrant',
+        'HOST': '',
+        'PORT': '',
+    }
+}
+DATABASES['default']['ATOMIC_REQUESTS'] = True
