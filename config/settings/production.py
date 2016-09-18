@@ -110,6 +110,7 @@ AWS_HEADERS = {
 
 STATIC_ROOT = os.path.join(os.path.dirname(ROOT_DIR), 'static')
 
+COLLECTFAST_ENABLED = False
 INSTALLED_APPS = ('collectfast', ) + INSTALLED_APPS
 
 # EMAIL
