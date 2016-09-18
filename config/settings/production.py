@@ -142,8 +142,6 @@ DATABASES = {
         'PORT': '',
     }
 }
-print('production database settings:')
-print(DATABASES)
 
 # LOGGING CONFIGURATION
 # ------------------------------------------------------------------------------
