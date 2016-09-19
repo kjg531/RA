@@ -9,14 +9,25 @@ import DeckIndex from './components/DeckIndex';
 import Home from './components/Home';
 import MyDecks from './components/MyDecks';
 
+import auth from './auth';
+
+function requireAuth(nextState, replace) {
+  if (!auth.user().authenticated) {
+    replace({
+      pathname: '/accounts/discord/login/?process=login',
+      state: { nextPathname: nextState.location.pathname }
+    })
+    window.location = '/accounts/discord/login/?process=login'; 
+  }
+}
 
 export default (
     <Route path="/" component={App}>
         <IndexRoute component={Home} />
-        <Route path="dashboard" component={Dashboard} />
-        <Route path="decks" component={DeckIndex} />
-        <Route path="decklist" component={MyDecks} />
-        <Route path="deckbuilder" component={DeckBuilder} />
-        <Route path="tournaments" component={About} />
+        <Route path="dashboard" component={Dashboard} onEnter={requireAuth}/>
+        <Route path="decks" component={DeckIndex} onEnter={requireAuth}/>
+        <Route path="decklist" component={MyDecks} onEnter={requireAuth}/>
+        <Route path="deckbuilder" component={DeckBuilder} onEnter={requireAuth}/>
+        <Route path="tournaments" component={About} onEnter={requireAuth}/>
     </Route>
 );

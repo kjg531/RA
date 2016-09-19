@@ -188,8 +188,6 @@ STATICFILES_FINDERS = (
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#media-url
 MEDIA_URL = '/media/'
 
-MEDIA_ROOT = os.path.join(os.path.dirname(ROOT_DIR), 'media')
-
 # URL Configuration
 # ------------------------------------------------------------------------------
 ROOT_URLCONF = 'config.urls'
@@ -242,8 +240,6 @@ DEFAULT_AVATAR_URL = 'http://vignette3.wikia.nocookie.net/siivagunner/images/9/9
 
 
 # Channels stuff
-
-# CHANNELS STUFF
 
 CHANNEL_LAYERS = {
     "default": {

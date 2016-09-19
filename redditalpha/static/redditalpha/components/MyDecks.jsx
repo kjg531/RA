@@ -17,7 +17,6 @@ class MyDecks extends React.Component {
     };
   }
 
-
   loadDecks = () => {
     var request = $.ajax({
       url: '/api/decks/mine',

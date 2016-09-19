@@ -94,3 +94,5 @@ WEBPACK_LOADER = {
         'STATS_FILE': STATS_FILE
     }
 }
+
+MEDIA_ROOT = str(APPS_DIR.path('media'))

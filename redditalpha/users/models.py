@@ -82,10 +82,20 @@ class User(AbstractBaseUser, PermissionsMixin):
     def avatar_url(self):
         return self.avatar or settings.DEFAULT_AVATAR_URL
 
+    def auth_dict(self):
+        return {
+            'id': self.id,
+            'display_name': self.guess_display_name(),
+            'email': self.email,
+            'clan': self.clan,
+            'is_leader': self.is_leader,
+            'avatar': self.avatar_url(),
+        }
+
     def as_json(self):
         res = {
             'id': self.id,
-            'display_name': self.display_name,
+            'display_name': self.display_name(),
             'email': self.email,
             'clan': self.clan,
             'is_leader': self.is_leader,

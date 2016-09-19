@@ -13,7 +13,6 @@ export default class NavBar extends React.Component {
     super(props);
     this.state = {
       active: false,
-      authenticated: (AUTH.user === null ? false:true),
     };
   }
 
@@ -30,8 +29,8 @@ export default class NavBar extends React.Component {
   }
 
   render() {
-      if (this.state.authenticated) {
-        var topRightButton = <Avatar image={AVATAR_URL} onClick={this.handleToggle} theme={theme} />
+      if (this.props.user.authenticated) {
+        var topRightButton = <Avatar image={this.props.user.avatar} onClick={this.handleToggle} theme={theme} />
       } else {
         var topRightButton = <Button icon='add' href='/accounts/discord/login/?process=login' label='Add this' flat primary />
       }
