@@ -3,3 +3,12 @@
   border-radius: 12px;
   max-width: 330px;
 }
+
+.mastery {
+  &:hover {
+    background-color: #1D2030;
+    h4 {
+      color: white !important;
+    }
+  }
+}
