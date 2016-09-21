@@ -12,14 +12,14 @@ class Home extends React.Component {
 
   render() {
     return (
-      <Row style={{display: 'flex'}}>
-        <Col xs={12} md= {6} lg={4}>
+      <Row>
+        <Col xs>
         <Card theme={theme} style={{marginRight:20}}>
           <h2>Discord Servers</h2>
           <iframe style={{alignSelf: 'center', paddingBottom: 20, border: 'none'}} src="https://discordapp.com/widget?id=218534373169954816&theme=dark" width="300" height="400" allowtransparency="true" frameborder="0"></iframe>
         </Card>
-          </Col>
-        <Col xs={12} md= {6} lg={4}>
+       </Col>
+        <Col xs md lg>
         <Card theme={theme} style={{marginRight: 20}}>
           <h2> Twitch Streams</h2>
           <iframe src="http://streambadge.com/twitch/custom/2b2b2b/b9a3e3/808080/wwoody123/" style={{border:'none',height:'3em',width:'97%',margin: '1px 5px 5px 5px'}}></iframe>
@@ -27,7 +27,7 @@ class Home extends React.Component {
           <iframe src="http://streambadge.com/twitch/custom/2b2b2b/b9a3e3/808080/oden11/" style={{border:'none',height:'3em',width:'97%',margin: 5}}></iframe>
         </Card>
           </Col>
-        <Col xs={12} md= {6} lg={4}>
+        <Col xs md lg>
         <Card theme={theme}>
           <h2>Coaching</h2>
           <a className={theme.mastery} href="http://mastery.gg/coach/Woody" style={{border: '1px solid black', borderRadius:12, margin: '0 5px', textDecoration:'none'}}>
