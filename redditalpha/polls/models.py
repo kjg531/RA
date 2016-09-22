@@ -1,0 +1,51 @@
+from django.db import models
+
+
+class Poll(models.Model):
+    question = models.TextField()
+    closed = models.BooleanField(default=False)
+    created = models.DateTimeField(auto_now_add=True)
+    creator = models.ForeignKey('users.User', related_name='created_polls')
+
+    class Meta:
+        ordering = ('-created',)
+
+    def __str__(self):
+        return self.question
+
+    def as_dict(self):
+        return {
+            'id': self.id,
+            'question': self.question,
+            'closed': self.closed,
+            'created': self.created.isoformat(),
+            'creator': self.creator.display_name,
+            'choices': [choice.as_dict() for choice in self.choices.all()]
+        }
+
+
+class Choice(models.Model):
+    poll = models.ForeignKey('polls.Poll', related_name='choices')
+    text = models.CharField(max_length=200)
+
+    class Meta:
+        ordering = ('')
+        order_with_respect_to = 'poll'
+
+    def __str__(self):
+        return self.text
+
+    def as_dict(self):
+        return {
+            'id': self.id,
+            'text': self.text
+        }
+
+
+class Answer(models.Model):
+    poll = models.ForeignKey('polls.Poll', related_name='answers')
+    choice = models.ForeignKey('polls.Choice')
+    user = models.ForeignKey('users.User', related_name='answers')
+
+    def __str__(self):
+        return '{0} {1} ({2})'.format(self.poll.question, self.choice.text, self.user.display_name)
