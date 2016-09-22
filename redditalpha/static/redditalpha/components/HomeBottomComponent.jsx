@@ -16,10 +16,10 @@ export default class LogoButton extends React.Component {
         <Card theme={theme}>
           <h2>YouTube</h2>
           <div style={{padding:5, margin:5, borderRadius: 12, border: '1px solid black'}}>
-          <div className="g-ytsubscribe ytt" data-channelid="UCjC5dP9z3XQY6OEPWh5RiLw" data-layout="full" data-count="default"></div>
-          </div>
-          <div style={{padding:5, margin:5, borderRadius: 12, border: '1px solid black'}}>
-          <div className="g-ytsubscribe" data-channel="wwoody123" data-layout="full" data-count="default"></div>
+  <div className="g-ytsubscribe ytt" data-channelid="UCjC5dP9z3XQY6OEPWh5RiLw" data-layout="full" data-count="default"></div>
+  </div>
+  <div style={{padding:5, margin:5, borderRadius: 12, border: '1px solid black'}}>
+  <div className="g-ytsubscribe" data-channel="wwoody123" data-layout="full" data-count="default"></div>
             </div>
           <div style={{padding:5, margin:5, borderRadius: 12, border: '1px solid black'}}>
           <div className="g-ytsubscribe" data-channelid="UCx6U0bPb5XpShjnAmI_LXHw" data-layout="full" data-count="default"></div>
