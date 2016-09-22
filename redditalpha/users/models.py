@@ -87,7 +87,15 @@ class User(AbstractBaseUser, PermissionsMixin):
             'id': self.id,
             'display_name': self.guess_display_name(),
             'email': self.email,
-            'clan': self.clan,
+            'is_leader': self.is_leader,
+            'avatar': self.avatar_url(),
+        }
+
+    def as_dict(self):
+        return {
+            'id': self.id,
+            'display_name': self.guess_display_name(),
+            'email': self.email,
             'is_leader': self.is_leader,
             'avatar': self.avatar_url(),
         }
@@ -97,7 +105,6 @@ class User(AbstractBaseUser, PermissionsMixin):
             'id': self.id,
             'display_name': self.display_name(),
             'email': self.email,
-            'clan': self.clan,
             'is_leader': self.is_leader,
             'avatar': self.avatar_url(),
         }

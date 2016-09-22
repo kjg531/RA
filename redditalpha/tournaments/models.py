@@ -1,8 +1,20 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 
+
 class Series(models.Model):
     name = models.CharField(max_length=100)
+    created = models.DateTimeField(auto_now_add=True)
+    participants = models.ManyToManyField('users.User', related_name='series', blank=True)
+
+    def as_dict(self, user):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'created': self.created.isoformat(),
+            'participants': self.participants.count(),
+            'participating': user in self.participants.all()
+        }
 
 
 class Tournament(models.Model):
@@ -47,3 +59,6 @@ class Result(models.Model):
     tournament = models.ForeignKey('tournaments.Tournament', related_name='results')
     user = models.ForeignKey('users.User')
     cards_won = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(15000)])
+
+    class Meta:
+        unique_together = ('tournament', 'user',)

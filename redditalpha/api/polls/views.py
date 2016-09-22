@@ -9,12 +9,16 @@ from redditalpha.polls.models import Poll, Choice, Answer
 @require_http_methods(['GET'])
 @login_required
 def index(request):
-    poll = Poll.objects.filter(closed=False).exclude(answers__user=request.user).order_by('created').first()
+    poll = Poll.objects.filter(closed=False).order_by('created').last()
 
     if poll is not None:
-        return JsonResponse({'poll': poll.as_dict()})
+        return JsonResponse({
+            'poll': poll.as_dict(request.user)
+        })
     else:
-        return JsonResponse({})
+        return JsonResponse({
+            'poll': None
+        })
 
 
 @require_http_methods(['POST'])

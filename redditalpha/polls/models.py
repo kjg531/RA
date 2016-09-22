@@ -13,14 +13,34 @@ class Poll(models.Model):
     def __str__(self):
         return self.question
 
-    def as_dict(self):
+    def results(self):
+        res = []
+        total_votes = Answer.objects.filter(poll=self).count()
+        
+        for choice in self.choices.all():
+            id = choice.id
+            text = choice.text
+            votes = Answer.objects.filter(choice=choice, poll=self).count()
+            percentage = votes / total_votes * 100
+            res.append({
+                'id': id,
+                'text': text,
+                'votes': votes,
+                'percentage': percentage
+            })
+
+        return res
+
+    def as_dict(self, user):
         return {
             'id': self.id,
             'question': self.question,
             'closed': self.closed,
             'created': self.created.isoformat(),
             'creator': self.creator.display_name,
-            'choices': [choice.as_dict() for choice in self.choices.all()]
+            'choices': [choice.as_dict() for choice in self.choices.all()],
+            'taken': Answer.objects.filter(poll=self, user=user).exists(),
+            'results': self.results()
         }
 
 
