@@ -54,7 +54,8 @@ LOCAL_APPS = (
     'redditalpha.decks.apps.DecksConfig',
     'redditalpha.cards.apps.CardsConfig',
     'redditalpha.utils',
-    'redditalpha.api'
+    'redditalpha.api',
+    'redditalpha.polls',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
