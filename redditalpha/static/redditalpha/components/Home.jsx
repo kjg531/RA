@@ -2,7 +2,7 @@ import React from "react";
 import Card from 'react-toolbox/lib/card';
 import HomeMiddleComponent from './HomeMiddleComponent';
 import HomeBottomComponent from './HomeBottomComponent';
-
+import ClanList from './ClanList';
 import theme from './Home.scss';
 
 
@@ -16,6 +16,7 @@ class Home extends React.Component {
         </Card>
         <Card theme={theme}>
           <h2>Clans</h2>
+          <ClanList />
         </Card>
         <HomeMiddleComponent />
         <HomeBottomComponent />

@@ -40,34 +40,34 @@ export default class NavBar extends React.Component {
           <Drawer theme={theme} active={this.state.active} type='right' onOverlayClick={this.handleToggle}>
           <List selectable ripple>
             <ListItem
-              caption='Home'
-              leftIcon='home'
-              onClick={this.redirect.bind(this, '/')}
+      caption='Home'
+      leftIcon='home'
+      onClick={this.redirect.bind(this, '/')}
               theme={theme}
             />
             <ListItem
               caption='Dashboard'
               leftIcon='dashboard'
-              onClick={this.redirect.bind(this, '/dashboard')}
-              theme={theme}
-            />
-            <ListItem
-              caption='Deckbuilder'
-              leftIcon='build'
-              onClick={this.redirect.bind(this, '/deckbuilder')}
-              theme={theme}
-            />
-            <ListItem
-              caption='Browse'
-              leftIcon='pageview'
-              onClick={this.redirect.bind(this, '/decks')}
-              theme={theme}
-            />
-            <ListItem
-              caption='My Decks'
-              leftIcon='view_list'
-              onClick={this.redirect.bind(this, '/decklist')}
-              theme={theme}
+      onClick={this.redirect.bind(this, '/dashboard')}
+      theme={theme}
+    />
+    <ListItem
+      caption='Deckbuilder'
+  leftIcon='build'
+  onClick={this.redirect.bind(this, '/deckbuilder')}
+  theme={theme}
+/>
+<ListItem
+  caption='Browse'
+  leftIcon='pageview'
+  onClick={this.redirect.bind(this, '/decks')}
+  theme={theme}
+/>
+    <ListItem
+      caption='My Decks'
+      leftIcon='view_list'
+      onClick={this.redirect.bind(this, '/decklist')}
+      theme={theme}
             />
           </List>
           </Drawer>
