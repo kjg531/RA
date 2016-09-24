@@ -1,0 +1,9 @@
+.card {
+	border-radius: 12px;
+	min-height: 520px;
+	@media screen and (max-width: 420px) {
+		min-height: 270px !important;
+		height: 270px !important;
+		margin-bottom: 15px;
+	}
+}

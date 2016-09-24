@@ -24,20 +24,18 @@ class DeckList extends React.Component {
 
                       <div style={{display:'inline-flex'}} key={deck.id}>
                         <Card theme={theme}>
-                          <h5 style={{fontFamily: 'SuperCell', fontSize: '1.5em', 'line-height': 10, width: 25, paddingLeft: 20}} className="score">{deck.vote_sum}</h5>
+                          <h5 style={{fontFamily: 'SuperCell', fontSize: '1.5em', 'line-height': 10, width: 25, paddingLeft: 20, margin: 'auto'}} className="score">{deck.vote_sum}</h5>
 
-                            <div style={{display: 'block'}}>
+                            <div style={{display: 'block', margin: 'auto'}}>
                               <IconButton style={{display: 'block', transform: 'rotateZ(90deg)'}}  theme={theme} icon='chevron_left'  onClick={this.props.upvoteHandler.bind(this, deck.id)} accent={deck.vote_status == 1 ? true:false} />
                               <IconButton style={{display: 'block', transform: 'rotateZ(90deg)'}}  theme={theme} icon='chevron_right' onClick={this.props.downvoteHandler.bind(this, deck.id)} accent={deck.vote_status == -1 ? true:false} />
                             </div>
 
-                            <div>
-                              <Deck cards={deck.cards} />
-                            </div>
+                              <Deck style={{position: 'relative', top:5}} cards={deck.cards} />
                                               <div style={{marginTop:10}}>
                               <IconButton icon='content_copy' onClick={this.props.copyHandler.bind(this, deck.id)} disabled={deck.have_it ? true:false} floating accent mini />
                               <IconButton icon={deck.favorite? 'favorite':'favorite_border'} onClick={this.props.favoriteHandler.bind(this, deck.id)} accent />
-                              <h5 style={{fontFamily: 'SuperCell', fontSize: '.7em', paddingLeft: 4, marginTop: 6, paddingRight: 20}}>Favorites: {deck.favorite_sum}</h5>
+                              <h5 style={{fontFamily: 'SuperCell', fontSize: '.7em', paddingLeft: 4, marginTop: 6, paddingRight: 20, marginBottom:0}}>Favorites: {deck.favorite_sum}</h5>
                             </div>
                           </Card>
                         </div>

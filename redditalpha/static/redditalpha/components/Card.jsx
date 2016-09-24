@@ -2,8 +2,8 @@
  * Created by KG on 8/9/16.
  */
 
-import React from "react"
-
+import React from 'react';
+import theme from './Card.scss';
 class Card extends React.Component {
   constructor(props) {
     super(props);
@@ -12,7 +12,7 @@ class Card extends React.Component {
   style = {
     Common: {
       position: 'absolute',
-      top: 6,
+      top: 2.5,
       left: 2,
       fontFamily: 'SuperCell',
       color: 'white',
@@ -60,7 +60,11 @@ class Card extends React.Component {
       height: 24,
       textAlign: 'center',
       textShadow: '1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 2px #000',
-    }
+    },
+    images: {
+      height: '87px !important',
+      top: -3,
+    },
   }
 
   onClick = (event) => {
@@ -77,17 +81,17 @@ class Card extends React.Component {
       // cost      this.props.data.cost
       // image_url       this.props.data.image_url
       // selected      this.props.data.selected
-    if (this.props.data){
+    if (this.props.data) {
       return (
-        <div style={{display:'inline-block', position: 'relative', height:90, minWidth: 70}}>
-          <img style={{height:90, width:70}}src={this.props.data.image_url} onClick={this.onClick} />
+        <div style={{display: 'inline-block', position: 'relative', height: 90, minWidth: 70}}>
+          <img style={{height: '90px', width: '70px', position: 'relative'}} data-rarity={this.props.data.rarity} className={theme.imagesClass1} src={this.props.data.image_url} onClick={this.onClick} />
           <span style={this.style[this.props.data.rarity]} data-rarity={this.props.data.rarity}>{this.props.data.cost}</span>
         </div>
       );
     } else {
       return (
-        <div style={{display:'inline-block', position: 'relative', height:90, minWidth: 70, margin: 8}}>
-          <img style={{height:90, width:70}}src="/static/images/blank_card.png" />
+        <div style={{display: 'inline-block', position: 'relative', height: 90, minWidth: 70, margin: 8}}>
+          <img style={{height: 90, width: 70}}src="/static/images/blank_card.png" />
         </div>
       );
     }
@@ -96,11 +100,11 @@ class Card extends React.Component {
 
 Card.propTypes = {
   data: React.PropTypes.object.isRequired,
-  onClick: React.PropTypes.func
+  onClick: React.PropTypes.func,
 };
 
 Card.defaultProps = {
-  onClick: function(){} // no-op. by default, don't do anything on click
+  onClick: function() {},  // no-op. by default, don't do anything on click
 };
 
 export default Card;

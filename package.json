@@ -77,6 +77,7 @@
     "babel-plugin-__coverage__": "^11.0.0",
     "eslint": "^3.3.0",
     "eslint-loader": "^1.5.0",
+    "eslint-plugin-babel": "^3.3.0",
     "expect": "^1.20.2",
     "force-case-sensitivity-webpack-plugin": "^0.1.1",
     "karma": "^1.2.0",

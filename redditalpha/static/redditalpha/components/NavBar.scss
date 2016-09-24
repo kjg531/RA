@@ -42,4 +42,7 @@
   color: white;
   padding-left: 40px;
   font-family: SuperCell;
+  @media screen and (max-width: 767px) {
+    opacity: 0
+  }
 }

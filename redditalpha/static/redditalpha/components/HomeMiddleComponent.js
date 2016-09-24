@@ -12,7 +12,7 @@ class Home extends React.Component {
 
   render() {
     return (
-      <Row>
+      <Row style={{marginBottom:12}}>
         <Col xs={12} sm={6} lg={4}>
         <Card theme={theme} style={{marginRight:20}}>
           <h2>Discord Servers</h2>
