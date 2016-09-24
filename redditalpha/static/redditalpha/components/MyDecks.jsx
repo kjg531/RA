@@ -1,10 +1,8 @@
 import React from "react";
 import { render } from "react-dom";
 
-import Checkbox from 'react-toolbox/lib/checkbox';
-import Chip from 'react-toolbox/lib/chip';
-
 import MyDeckList from './MyDeckList';
+import TagFilter from './TagFilter';
 
 
 class MyDecks extends React.Component {
@@ -13,7 +11,7 @@ class MyDecks extends React.Component {
     this.state = {
       decks: [],
       tags: [],
-      tagFilters: []
+      tagFilters: [],
     };
   }
 
@@ -96,20 +94,21 @@ class MyDecks extends React.Component {
   }
 
   render() {
+    // <Checkbox
+    //     checked={this.state.tagFilters.indexOf(tag) >= 0}
+    //     label={<Chip>{tag}</Chip>}
+    //     onChange={this.toggleTagFilter.bind(this, tag)}
+    // />
     return (
       <div>
         <h1>These are your decks</h1>
 
         <div>
           <p>Here you can filter your decks by the tags you assigned to them</p>
-          {this.state.tags.map((tag) => {
-            return (
-              <Checkbox
-                checked={this.state.tagFilters.indexOf(tag) >= 0}
-                label={<Chip>{tag}</Chip>}
-                onChange={this.toggleTagFilter.bind(this, tag)}
-            />);
-          })}
+          <TagFilter
+            tags={this.state.tags} 
+            tagFilters={this.state.tagFilters}
+            toggleTagFilter={this.toggleTagFilter} />
         </div>
 
         <MyDeckList 
