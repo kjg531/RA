@@ -35,6 +35,14 @@ module.exports = (opts) => {
         filename: 'common-[hash].js',
         chunks: [],  // add common modules here
       }),
+      // new webpack.LoaderOptionsPlugin({
+      //    // test: /\.xxx$/, // may apply this only for some modules
+      //    options: {
+      //      sassLoader: {
+      //         data: '@import "' + path.resolve(__dirname, '../redditalpha/static/redditalpha/theme/_theme.scss') + '";',
+      //       },
+      //    }
+      //  })
     ];
   }
 
@@ -69,11 +77,9 @@ module.exports = (opts) => {
     watchOptions: {
       poll: 400
     },
-    sassLoader: {
-      data: '@import "' + path.resolve(__dirname, '../redditalpha/static/redditalpha/theme/_theme.scss') + '";'
-    },
+        
     resolve: {
-      extensions: ['', '.js', '.jsx'],
+      extensions: ['.js', '.jsx'],
       modules: [
         path.resolve(PROJECT_ROOT, 'redditalpha/static/redditalpha'),
         'node_modules',
