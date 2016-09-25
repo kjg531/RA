@@ -1,11 +1,13 @@
 import React from 'react';
 
+import { Link } from 'react-router'
+
 import Input from 'react-toolbox/lib/input';
 import {Button, IconButton} from 'react-toolbox/lib/button';
-
 import theme from './DeckNotes.scss'
 import Deck from './Deck';
 import Hand from './Hand';
+import Tagger from './Tagger';
 
 
 export default class DeckNotes extends React.Component {
@@ -95,6 +97,62 @@ export default class DeckNotes extends React.Component {
     });
   }
 
+  addTag = (tag) => {
+    if (this.state.deck.tags.indexOf(tag) >= 0){
+      return false
+    } else {
+      this.setState({
+        ...this.state,
+        deck: {
+          ...this.state.deck,
+          tags: this.state.deck.tags.concat(tag) 
+        }
+      });
+
+      var request = $.ajax({
+        url: '/api/decks/' + this.props.params.deckId + '/tags/add',
+        type: 'POST',
+        headers: {'X-CSRFTOKEN': DJ.CSRFTOKEN},
+        data: {tag: tag}
+      });
+
+      request.done((data, textStatus, jqXHR) => {
+        console.log('Tag added to deck');
+      });
+
+      request.fail((jqXHR, textStatus, errorThrown) => {
+        console.log('Error saving tag');
+      });
+
+      return true;
+    }
+  }
+
+  deleteTag = (tag) => {
+    this.setState({
+      ...this.state,
+      deck: {
+        ...this.state.deck,
+        tags: this.state.deck.tags.filter((item) => {return item != tag})
+      }
+    });
+
+    var request = $.ajax({
+      url: '/api/decks/' + this.props.params.deckId + '/tags/delete',
+      type: 'POST',
+      headers: {'X-CSRFTOKEN': DJ.CSRFTOKEN},
+      data: {tag: tag}
+    });
+
+    request.done((data, textStatus, jqXHR) => {
+      console.log('Deleted tag');
+    });
+
+    request.fail((jqXHR, textStatus, errorThrown) => {
+      console.log('Error deleting tag');
+    });
+  }
+
   render() {
     // TODO: LOADING SPINNER THING. YOU HAVE TO PUT IT ON LIKE 110, WHERE THAT <p> IS
     return (
@@ -107,6 +165,9 @@ export default class DeckNotes extends React.Component {
 
         <div>
           <h1>Deck</h1>
+          <Link to="/decklist" activeClassName="active">
+            <IconButton icon='arrow_back' floating accent mini />
+          </Link>
           {this.state.loading ? <p>loading...</p> : <Deck cards={this.state.deck.cards} />}
         </div>
 
@@ -120,6 +181,8 @@ export default class DeckNotes extends React.Component {
             onChange={this.handleNotesChange}
             onBlur={this.handleNotesBlur}
           />
+
+          {this.state.loading ? <Tagger tags={[]} addTagHandler={()=>{}} deleteTagHandler={()=>{}}/> : <Tagger tags={this.state.deck.tags} addTagHandler={this.addTag} deleteTagHandler={this.deleteTag}/>}
         </div>
 
         <div>

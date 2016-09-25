@@ -2,6 +2,8 @@ import React from 'react';
 import Input from 'react-toolbox/lib/input';
 import Chip from 'react-toolbox/lib/chip';
 import theme from './Tagger.scss'
+
+
 class Tagger extends React.Component {
   constructor(props){
     super(props);
@@ -19,7 +21,7 @@ class Tagger extends React.Component {
   }
 
   keyPress = (e) => {
-    if (e.key == ',' || e.key == 'Enter'){
+    if (e.key == ',' || e.key == 'Enter' || e.key == 'Tab'){
       let newTag = this.state.tag.trim();
       let added = this.props.addTagHandler(newTag);
       if (added){

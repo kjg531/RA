@@ -14,4 +14,6 @@ urlpatterns = [
     url(r'^(?P<id>\d+)/downvote$', views.downvote, name='downvote'),
     url(r'^(?P<id>\d+)/notes$', views.notes, name='notes'),
     url(r'^(?P<id>\d+)/hand/starter$', views.hand_starter, name='hand_starter'),
+    url(r'^(?P<id>\d+)/tags/add$', views.add_tag, name='add_tag'),
+    url(r'^(?P<id>\d+)/tags/delete$', views.delete_tag, name='delete_tag'),
 ]

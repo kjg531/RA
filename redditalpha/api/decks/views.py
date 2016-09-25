@@ -168,7 +168,7 @@ def notes(request, id):
 
     if request.method == 'GET':
         data = dict()
-        data['deck'] = deck.as_dict()
+        data['deck'] = deck.as_dict(user=request.user)
         data['deck']['hands'] = []
 
         for hand in deck.possible_hands():
@@ -235,4 +235,31 @@ def hand_starter(request, id):
         inclusion.starter = starter_card
         inclusion.save()
     
+    return JsonResponse({})
+
+
+@require_http_methods(['POST'])
+@login_required
+def add_tag(request, id):
+    deck = get_object_or_404(Deck, id=id)
+    tag = request.POST.get('tag', None)
+
+    if tag is not None:
+        try:
+            inclusion = DeckInclusion.objects.get(user=request.user, deck=deck)
+            Tag.objects.create(name=tag, inclusion=inclusion)
+        except DeckInclusion.DoesNotExist:
+            print('User tried to add tag to a deck that wasnt his yet')
+    return JsonResponse({})
+
+
+@require_http_methods(['POST'])
+@login_required
+def delete_tag(request, id):
+    deck = get_object_or_404(Deck, id=id)
+    tag = request.POST.get('tag', None)
+
+    if tag is not None:
+        Tag.objects.filter(name=tag, inclusion__user=request.user, inclusion__deck=deck).delete()
+
     return JsonResponse({})
