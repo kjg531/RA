@@ -11,11 +11,15 @@ import Deck from './Deck';
 class MyDeckList extends React.Component {
   constructor(props) {
     super(props)
-    this.style = {hidden: {display: 'none'}}
+    this.style = {
+      deckHidden: {display: 'none'},
+      toolboxInvisible: {opacity: 0}
+    };
     this.state = {
       'dialogOpen': false,
-      'deleteTarget': null
-    }
+      'deleteTarget': null,
+      'visibleToolboxes': []
+    };
   }
 
   isHidden = (deck) => {
@@ -52,6 +56,14 @@ class MyDeckList extends React.Component {
     this.closeDialog();
   }
 
+  toggleToolbox = (deckId) => {
+    if (this.state.visibleToolboxes.indexOf(deckId) >= 0){
+      this.setState({visibleToolboxes: this.state.visibleToolboxes.filter((id) => (id != deckId))});
+    }else{
+      this.setState({visibleToolboxes: this.state.visibleToolboxes.concat(deckId)});
+    }
+  }
+
   render() {
     let actions = [
       { label: "Yes", onClick: this.deleteConfirmed },
@@ -62,12 +74,16 @@ class MyDeckList extends React.Component {
       <div style={{display:'inline-block'}}>
         { this.props.decks.map((deck) => {
           return (
-            <div key={deck.id} style={this.isHidden(deck) ? this.style.hidden:{}}>
-              <IconButton onMouseUp={this.props.favoriteHandler.bind(this, deck.id)} icon={deck.favorite ? 'favorite':'favorite_border'} accent />
-              <IconButton onMouseUp={this.openDialog.bind(this, deck.id)} icon='delete' floating mini />
-              <span>{deck.tags.map((tag) => <Chip>{tag}</Chip>)}</span>
+            <div key={deck.id} style={this.isHidden(deck) ? this.style.deckHidden:{}}>
+              <IconButton onMouseUp={this.toggleToolbox.bind(this, deck.id)} icon='expand_less' accent />
+              <div style={this.state.visibleToolboxes.indexOf(deck.id) < 0 ? this.style.toolboxInvisible : {}}>
+                <IconButton onMouseUp={this.props.favoriteHandler.bind(this, deck.id)} icon={deck.favorite ? 'favorite':'favorite_border'} accent />
+                <IconButton onMouseUp={this.openDialog.bind(this, deck.id)} icon='delete' floating mini />
+                <Link to={"/decklist/" + deck.id} activeClassName="active"><IconButton icon='note_add' floating accent mini /></Link>
+                <span>{deck.tags.map((tag) => <Chip>{tag}</Chip>)}</span>
+              </div>
+
               <Deck cards={deck.cards} />
-              <Link to={"/decklist/" + deck.id} activeClassName="active"><IconButton icon='note_add' floating accent mini /></Link>
             </div>
           );
         })}
