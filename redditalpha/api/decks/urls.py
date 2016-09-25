@@ -12,4 +12,6 @@ urlpatterns = [
     url(r'^(?P<id>\d+)/favorite$', views.favorite, name='favorite'),
     url(r'^(?P<id>\d+)/upvote$', views.upvote, name='upvote'),
     url(r'^(?P<id>\d+)/downvote$', views.downvote, name='downvote'),
+    url(r'^(?P<id>\d+)/notes$', views.notes, name='notes'),
+    url(r'^(?P<id>\d+)/hand/starter$', views.hand_starter, name='hand_starter'),
 ]
