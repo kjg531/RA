@@ -35,7 +35,7 @@ class Tagger extends React.Component {
     return (
       <div className={theme.tagger}>
         <div>{this.props.tags.map((tag) => <Chip deletable onDeleteClick={this.props.deleteTagHandler.bind(this, tag)}>{tag}</Chip>)}</div>
-        <Input type='text' label='Add Tag to Deck!' name='tags' value={this.state.tag} onChange={this.handleChange} onKeyPress={this.keyPress}/>
+        <Input type='text' label='Add Tag to Deck!' name='tags' value={this.state.tag} onChange={this.handleChange} theme={theme} onKeyPress={this.keyPress}/>
       </div>
     )
   }

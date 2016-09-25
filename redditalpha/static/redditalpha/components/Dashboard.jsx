@@ -14,7 +14,7 @@ class Dashboard extends React.Component {
 
   render() {
     return (
-      <div style={{maxWidth:360}}>
+      <div style={{maxWidth:360, margin: 'auto'}}>
         <br/>
         <br/>
         <br/>

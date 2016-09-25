@@ -46,13 +46,13 @@ export default class LeaderboardDashlet extends React.Component {
 
     if (series == null){
       return (
-        <Card>
+        <Card theme={theme}>
           <h2>There is currently no ongoing tournament series</h2>
         </Card>
       );
     }else{
       return (
-        <Card>
+        <Card theme={theme}>
           <h2>{series.name}</h2>
           <List selectable ripple>
             <ListSubHeader caption='Leaderboard' />

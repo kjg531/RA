@@ -4,7 +4,7 @@ import { Link } from 'react-router'
 
 import {Button} from 'react-toolbox/lib/button';
 import Card from 'react-toolbox/lib/card';
-import theme from './PollDashlet.scss';
+import theme from './TournamentDashlet.scss';
 
 export default class TournamentDashlet extends React.Component {
   // static propTypes = {
@@ -64,7 +64,7 @@ export default class TournamentDashlet extends React.Component {
 
     if (series == null){
       return (
-        <Card>
+        <Card theme={theme}>
           <h2>Reddit Alpha Championship</h2>
           <p>Reddit Alpha Championship is a yearly 10 week tournament series aimed at finding the best Reddit Alpha Family Tourneament player of the year.</p>
           <p>Starting on the 2nd of October there will be 2 seperate 1 hour tournaments EVERY SUNDAY!!</p>
@@ -78,7 +78,7 @@ export default class TournamentDashlet extends React.Component {
       );
     }else{
       return (
-        <Card>
+        <Card theme={theme}>
           <h2>{series.name}</h2>
           <h3>{series.participants} users registered</h3>
 
