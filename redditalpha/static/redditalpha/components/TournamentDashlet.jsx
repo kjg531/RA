@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Link } from 'react-router'
+
 import {Button} from 'react-toolbox/lib/button';
 import Card from 'react-toolbox/lib/card';
 import theme from './PollDashlet.scss';
@@ -8,6 +10,12 @@ export default class TournamentDashlet extends React.Component {
   // static propTypes = {
   //   name: React.PropTypes.string,
   // };
+
+  style = {
+    button: {
+      width: '50%'
+    }
+  }
 
   constructor(props) {
     super(props);
@@ -73,7 +81,13 @@ export default class TournamentDashlet extends React.Component {
         <Card>
           <h2>{series.name}</h2>
           <h3>{series.participants} users registered</h3>
-          {series.participating ? <small>You've already registered</small>:<Button icon='bookmark' label='Register!' accent onClick={this.handleRegister}/>}
+
+          <div style={{display:'inline-block'}}>
+            {series.participating ? <small>You've already registered</small>:<Button style={this.style.button} icon='bookmark' label='Register!' accent onClick={this.handleRegister}/>}
+            <Link to="/rac" activeClassName="active">
+              <Button icon='bookmark' label='More Info' style={this.style.button} accent />
+            </Link>
+          </div>
         </Card>
       );
     }

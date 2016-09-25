@@ -9,6 +9,7 @@ import DeckIndex from './components/DeckIndex';
 import Home from './components/Home';
 import MyDecks from './components/MyDecks';
 import DeckNotes from './components/DeckNotes';
+import RAC from './components/RAC';
 
 import auth from './auth';
 
@@ -31,5 +32,6 @@ export default (
         <Route path="decklist/:deckId" component={DeckNotes} onEnter={requireAuth}/>
         <Route path="deckbuilder" component={DeckBuilder} onEnter={requireAuth}/>
         <Route path="tournaments" component={About} onEnter={requireAuth}/>
+        <Route path="rac" component={RAC} onEnter={requireAuth} />
     </Route>
 );
