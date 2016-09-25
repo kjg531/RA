@@ -5,6 +5,8 @@ export default class RAC extends React.Component {
   render() {
     return (
       <Card>
+        <br/>
+        <br/>
           <h2>Reddit Alpha Championship</h2>
           <p>Reddit Alpha Championship is a yearly 10 week tournament series aimed at finding the best Reddit Alpha Family Tourneament player of the year.</p>
           <p>Starting on the 2nd of October there will be 2 seperate 1 hour tournaments EVERY SUNDAY!!</p>
