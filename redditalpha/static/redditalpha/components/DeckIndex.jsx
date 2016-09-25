@@ -182,7 +182,7 @@ class DeckIndex extends React.Component {
         <br/>
         <br/>
 
-        <h1 style={{textAlign: 'center'}}>This is the deck index!</h1>
+        <h1 style={{textAlign: 'center'}}>My Decks</h1>
 
         <DeckList
           decks={this.state.decks}
@@ -197,9 +197,7 @@ class DeckIndex extends React.Component {
           active={this.state.dialogOpen}
           onEscKeyDown={this.closeDialog}
           onOverlayClick={this.closeDialog}
-          title='My awesome dialog'
-        >
-          <p>Deck copied</p>
+          title='Deck copied'>
         </Dialog>
       </div>
     )

@@ -36,10 +36,10 @@ class MyDeckList extends React.Component {
           return (
             <div key={deck.id} style={this.isHidden(deck) ? this.style.hidden:{}}>
               <IconButton onMouseUp={this.props.favoriteHandler.bind(this, deck.id)} icon={deck.favorite ? 'favorite':'favorite_border'} accent />
-              <Button onMouseUp={this.props.deleteHandler.bind(this, deck.id)} icon='delete' floating mini />
+              <IconButton onMouseUp={this.props.deleteHandler.bind(this, deck.id)} icon='delete' floating mini />
               <span>{deck.tags.map((tag) => <Chip>{tag}</Chip>)}</span>
               <Deck cards={deck.cards} />
-              <Link to={"/decklist/" + deck.id} activeClassName="active"><Button icon='add' floating accent mini /></Link>
+              <Link to={"/decklist/" + deck.id} activeClassName="active"><IconButton icon='note_add' floating accent mini /></Link>
             </div>
           );
         })}

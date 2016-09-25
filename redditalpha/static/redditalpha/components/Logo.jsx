@@ -20,7 +20,7 @@ export default class Logo extends React.Component {
 
   render() {
     return (
-            <img style={this.style.icon} src={iconImage}></img>
+            <img style={this.style.icon} className={this.props.className}src={iconImage}></img>
     )
   }
 }

@@ -98,7 +98,7 @@ export default class DeckNotes extends React.Component {
   render() {
     // TODO: LOADING SPINNER THING. YOU HAVE TO PUT IT ON LIKE 110, WHERE THAT <p> IS
     return (
-      <div>
+      <div style={{textAlign: 'center'}}>
         <h1>These is a deck!</h1>
 
         <div>
@@ -116,6 +116,7 @@ export default class DeckNotes extends React.Component {
             type='text'
             multiline label='Notes'
             value={this.state.notes}
+            className={theme.inputClass}
             onChange={this.handleNotesChange}
             onBlur={this.handleNotesBlur}
           />

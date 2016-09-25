@@ -36,6 +36,9 @@
 .rightIcon {
   position: absolute;
   right: 10px;
+  a {
+    color: white !important;
+  }
 }
 
 .title {
@@ -46,3 +49,4 @@
     opacity: 0
   }
 }
+

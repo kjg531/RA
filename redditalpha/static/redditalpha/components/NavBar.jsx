@@ -38,11 +38,10 @@ export default class NavBar extends React.Component {
                                    theme={ theme } />
     } else {
       var topRightButton = <Button
-                                   icon='add'
+                                   icon='exit_to_app'
                                    href='/accounts/discord/login/?process=login'
-                                   label='Add this'
-                                   flat
-                                   primary />
+                                   label='Login'
+                                   flat />
     }
     return (
     <div>

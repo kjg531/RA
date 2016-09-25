@@ -1,7 +1,7 @@
 import React from 'react';
 import {List, ListItem} from 'react-toolbox/lib/list';
 import theme from './ClanList.scss';
-
+import Logo from './Logo';
 
 export default class ClanList extends React.Component {
   render() {
@@ -9,7 +9,7 @@ export default class ClanList extends React.Component {
       <List theme={theme} selectable ripple>
         <hr className={theme.divColor} />
         <ListItem
-          avatar="http://ra.aaj.webfactional.com/static/images/icon.png"
+          avatar={<Logo className={theme.avatarFix}/>}
           caption="Reddit Alpha"
           legend="Leader: Woody"
           rightIcon="looks_one"
@@ -17,7 +17,7 @@ export default class ClanList extends React.Component {
         />
         <hr className={theme.divColor} />
         <ListItem
-          avatar="http://ra.aaj.webfactional.com/static/images/icon.png"
+          avatar={<Logo className={theme.avatarFix}/>}
           caption="Reddit Bravo"
           legend="Leader: boredbanker"
           rightIcon="looks_two"
@@ -25,7 +25,7 @@ export default class ClanList extends React.Component {
         />
         <hr className={theme.divColor} />
         <ListItem
-          avatar="http://ra.aaj.webfactional.com/static/images/icon.png"
+          avatar={<Logo className={theme.avatarFix}/>}
           caption="Reddit Charlie"
           legend="Leader: Fun"
           rightIcon="looks_3"
@@ -33,7 +33,7 @@ export default class ClanList extends React.Component {
         />
         <hr className={theme.divColor} />
          <ListItem
-          avatar="http://ra.aaj.webfactional.com/static/images/icon.png"
+          avatar={<Logo className={theme.avatarFix}/>}
           caption="Reddit Delta"
           legend="Leader: Harbringer"
           rightIcon="looks_4"
@@ -41,7 +41,7 @@ export default class ClanList extends React.Component {
         />
         <hr className={theme.divColor} />
         <ListItem
-          avatar="http://ra.aaj.webfactional.com/static/images/icon.png"
+          avatar={<Logo className={theme.avatarFix}/>}
           caption="Reddit Echo"
           legend="Leader: EvanYoutube"
           rightIcon="looks_5"
@@ -49,7 +49,7 @@ export default class ClanList extends React.Component {
         />
         <hr className={theme.divColor} />
         <ListItem
-          avatar="http://ra.aaj.webfactional.com/static/images/icon.png"
+          avatar={<Logo className={theme.avatarFix}/>}
           caption="Reddit Foxtrot"
           legend="Leader: John Cena"
           rightIcon="looks_6"

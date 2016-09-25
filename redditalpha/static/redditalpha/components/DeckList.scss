@@ -12,6 +12,11 @@
 }
 .card {
   flex-direction: inherit !important;
-  border: black solid 1px;
+  border: #e64e5f solid 3px;
   border-radius: 12px;
+}
+
+.rightWrapper {
+	margin: auto;
+	padding-right: 10px;
 }

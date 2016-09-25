@@ -31,11 +31,11 @@ class DeckList extends React.Component {
                               <IconButton style={{display: 'block', transform: 'rotateZ(90deg)'}}  theme={theme} icon='chevron_right' onClick={this.props.downvoteHandler.bind(this, deck.id)} accent={deck.vote_status == -1 ? true:false} />
                             </div>
 
-                              <Deck style={{position: 'relative', top:5}} cards={deck.cards} />
-                                              <div style={{marginTop:10}}>
+                              <Deck style={{position: 'relative', top: 15, marginBottom: 15}} cards={deck.cards} />
+                              <div className={theme.rightWrapper}>
                               <IconButton icon='content_copy' onClick={this.props.copyHandler.bind(this, deck.id)} disabled={deck.have_it ? true:false} floating accent mini />
-                              <IconButton icon={deck.favorite? 'favorite':'favorite_border'} onClick={this.props.favoriteHandler.bind(this, deck.id)} accent />
-                              <h5 style={{fontFamily: 'SuperCell', fontSize: '.7em', paddingLeft: 4, marginTop: 6, paddingRight: 20, marginBottom:0}}>Favorites: {deck.favorite_sum}</h5>
+                              <IconButton icon={deck.favorite ? 'favorite' : 'favorite_border'} onClick={this.props.favoriteHandler.bind(this, deck.id)} accent />
+                              <h5 style={{fontFamily: 'SuperCell', fontSize: '.7em', paddingLeft: 4, marginTop: -10, marginBottom:0}}>Favorites: <br/> {deck.favorite_sum}</h5>
                             </div>
                           </Card>
                         </div>
