@@ -2,6 +2,7 @@
   margin-top: 12px;
   border-radius: 12px;
   min-height: 520px;
+  border: 4px solid #581111;
 }
 
 .mastery {
@@ -11,4 +12,8 @@
       color: white !important;
     }
   }
+}
+
+.cardHotfix {
+	min-eight: 355px !important;
 }

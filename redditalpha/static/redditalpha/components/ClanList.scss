@@ -1,0 +1,30 @@
+.card {
+  [data-react-toolbox="avatar"] > img {
+    height: 65px !important;
+  }
+}
+
+.avatar {
+  height: 65px !important;
+}
+
+
+.itemAction {
+  [data-react-toolbox="font-icon"] {
+    color: #581111;
+  }
+}
+.divider {
+  background-color: #581111;
+}
+
+
+
+.divColor {
+    background-color: #581111 !important;
+    height: 1px;
+}
+
+.list {
+  margin-bottom: 0 !important;
+}

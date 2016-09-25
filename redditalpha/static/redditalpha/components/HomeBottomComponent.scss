@@ -1,9 +1,13 @@
 .card {
 	border-radius: 12px;
 	min-height: 520px;
-	@media screen and (max-width: 420px) {
+	border: 4px solid #581111;
+	@media screen and (max-width: 1200px) {
 		min-height: 270px !important;
-		height: 270px !important;
+		height: 270px;
 		margin-bottom: 15px;
 	}
+}
+.cardHotfix {
+	height: 520px !important;
 }
