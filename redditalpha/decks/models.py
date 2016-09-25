@@ -1,4 +1,6 @@
 import json
+import itertools
+
 from django.db import models
 
 from channels import Group
@@ -11,13 +13,20 @@ class Archetype(models.Model):
 
 class Tag(models.Model):
     name = models.TextField(max_length=30)
-    inclusion = models.ForeignKey('decks.Inclusion', related_name='tags')
+    inclusion = models.ForeignKey('decks.DeckInclusion', related_name='tags')
 
 
-class Inclusion(models.Model):
+class HandInclusion(models.Model):
+    # THROUGH model for user_hand m2m
+    user = models.ForeignKey('users.User', related_name='hand_inclusions')
+    hand = models.ForeignKey('decks.Hand', related_name='hand_inclusions')
+    starter = models.ForeignKey('cards.Card', related_name='hand_inclusions')
+
+
+class DeckInclusion(models.Model):
     # THROUGH model for user_deck m2m
-    user = models.ForeignKey('users.User', related_name='inclusions')
-    deck = models.ForeignKey('decks.Deck', related_name='inclusions')
+    user = models.ForeignKey('users.User', related_name='deck_inclusions')
+    deck = models.ForeignKey('decks.Deck', related_name='deck_inclusions')
     notes = models.TextField(blank=True)
 
     class Meta:
@@ -34,6 +43,16 @@ class Vote(models.Model):
 
     class Meta:
         unique_together = (('user', 'deck'))
+
+
+class Hand(models.Model):
+    deck = models.ForeignKey('decks.Deck', related_name='hands')
+    cards = models.ManyToManyField('cards.Card', related_name='hands')
+
+    class Meta:
+        verbose_name = 'hand'
+        verbose_name_plural = 'hands'
+
 
 class Deck(models.Model):
     # archetype = models.ForeignKey('Archetype', related_name='decks')
@@ -118,3 +137,58 @@ class Deck(models.Model):
         data = self.as_dict(user=user)
         data['action'] = action
         Group('deckfeed').send({'text': json.dumps(data)})
+
+    def possible_hands(self):
+        return itertools.combinations(self.cards.all(), 4)
+
+    def get_or_create_hand(self, card1_id, card2_id, card3_id, card4_id):
+        for hand in self.hands.all():
+            card_ids = hand.cards.values_list('id', flat=True)
+
+            if card1_id not in card_ids:
+                continue
+            if card2_id not in card_ids:
+                continue
+            if card3_id not in card_ids:
+                continue
+            if card4_id not in card_ids:
+                continue
+
+            # if we got this far, then this hand is
+            # the hand we are looking for, so return it
+
+            return hand
+        else:
+            # at this point, we know that the hand we want doesn't,
+            # so we create and return it
+
+            new_hand = Hand.objects.create(deck=self)
+            new_hand.cards.add(card1_id)
+            new_hand.cards.add(card2_id)
+            new_hand.cards.add(card3_id)
+            new_hand.cards.add(card4_id)
+
+            return new_hand
+
+    def get_or_none_hand(self, card1_id, card2_id, card3_id, card4_id):
+        for hand in self.hands.all():
+            card_ids = hand.cards.values_list('id', flat=True)
+
+            if card1_id not in card_ids:
+                continue
+            if card2_id not in card_ids:
+                continue
+            if card3_id not in card_ids:
+                continue
+            if card4_id not in card_ids:
+                continue
+
+            # if we got this far, then this hand is
+            # the hand we are looking for, so return it
+
+            return hand
+        else:
+            # at this point, we know that the hand we want doesn't,
+            # so we return None
+
+            return None 

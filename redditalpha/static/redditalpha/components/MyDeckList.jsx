@@ -1,6 +1,7 @@
 import React from "react";
 import {Button, IconButton} from 'react-toolbox/lib/button';
 import Chip from 'react-toolbox/lib/chip';
+import { Link } from 'react-router'
 
 import Deck from './Deck';
 
@@ -21,7 +22,6 @@ class MyDeckList extends React.Component {
     }else{
       for (var i = 0; i < deck.tags.length; i++){
         if (tagFilters.indexOf(deck.tags[i]) >= 0){
-          console.log(deck.tags[i] + ' isHidden false');
           return false;
         }
       }
@@ -39,6 +39,7 @@ class MyDeckList extends React.Component {
               <Button onMouseUp={this.props.deleteHandler.bind(this, deck.id)} icon='delete' floating mini />
               <span>{deck.tags.map((tag) => <Chip>{tag}</Chip>)}</span>
               <Deck cards={deck.cards} />
+              <Link to={"/decklist/" + deck.id} activeClassName="active"><Button icon='add' floating accent mini /></Link>
             </div>
           );
         })}

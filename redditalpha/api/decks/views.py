@@ -1,3 +1,5 @@
+import itertools
+
 from django.db.models import Sum
 from django.db.models.functions import Coalesce
 from django.http import HttpResponse, JsonResponse
@@ -5,7 +7,8 @@ from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_http_methods
 
-from redditalpha.decks.models import Deck, Vote, Inclusion, Tag
+from redditalpha.cards.models import Card
+from redditalpha.decks.models import Deck, Hand, Vote, DeckInclusion, HandInclusion, Tag
 from redditalpha.decks.forms import DeckForm
 
 
@@ -54,7 +57,7 @@ def mine(request):
                 new_deck.save()
                 form.save_m2m() # this saves the cards/deck relationships
 
-            inclusion = Inclusion.objects.create(
+            inclusion = DeckInclusion.objects.create(
                 user=me,
                 deck=new_deck,
                 notes=form.cleaned_data['notes']
@@ -77,8 +80,8 @@ def mine(request):
 def delete(request, id):
     deck = get_object_or_404(Deck, id=id)
     try:
-        Inclusion.objects.get(user=request.user, deck=deck).delete()
-    except Inclusion.DoesNotExist:
+        DeckInclusion.objects.get(user=request.user, deck=deck).delete()
+    except DeckInclusion.DoesNotExist:
         pass # meh
     return JsonResponse({})
 
@@ -156,3 +159,80 @@ def downvote(request, id):
 
     deck.socket_notify('update', user=request.user)
     return JsonResponse({'value': value})
+
+
+@require_http_methods(['GET', 'POST'])
+@login_required
+def notes(request, id):
+    deck = get_object_or_404(Deck, id=id)
+
+    if request.method == 'GET':
+        data = dict()
+        data['deck'] = deck.as_dict()
+        data['deck']['hands'] = []
+
+        for hand in deck.possible_hands():
+            # hand is a list of card objects
+            card_ids = [card.id for card in hand]
+
+            # get hand from db, if it exists
+            real_hand = deck.get_or_none_hand(*card_ids)
+            
+            # if the hand exists in db and it has been included by the user
+            if real_hand is not None:
+                # get inclusion of this hand from db, if it exists
+                inclusion = HandInclusion.objects.filter(user=request.user, hand=real_hand).first()
+                
+                if inclusion is not None:
+                    # we create the hand obj with the correct starter id (so it will show up as selected)
+                    data['deck']['hands'].append({
+                        'cards': card_ids,
+                        'starter': inclusion.starter.id
+                    })
+                else:
+                    # otherwise, we create the same obj, but leave the starter null
+                    data['deck']['hands'].append({
+                        'cards': card_ids,
+                        'starter': None
+                    })    
+            else:
+                # otherwise, we create the same obj, but leave the starter null
+                data['deck']['hands'].append({
+                    'cards': card_ids,
+                    'starter': None
+                })
+
+        try:
+            data['notes'] = DeckInclusion.objects.get(user=request.user, deck=deck).notes
+        except DeckInclusion.DoesNotExist:
+            data['notes'] = ''
+
+        return JsonResponse(data)
+    elif request.method == 'POST':
+        inclusion, created = DeckInclusion.objects.get_or_create(user=request.user, deck=deck)
+        inclusion.notes = request.POST.get('notes');              
+        inclusion.save()
+        return JsonResponse({})
+
+
+@require_http_methods(['POST'])
+@login_required
+def hand_starter(request, id):
+    deck = get_object_or_404(Deck, id=id)
+    card1_id = int(request.POST.get('card1_id', '0')) 
+    card2_id = int(request.POST.get('card2_id', '0')) 
+    card3_id = int(request.POST.get('card3_id', '0')) 
+    card4_id = int(request.POST.get('card4_id', '0'))
+    starter_id = request.POST.get('starter_id', '0')
+
+    starter_card = get_object_or_404(Card, id=starter_id)
+
+    hand = deck.get_or_create_hand(card1_id, card2_id, card3_id, card4_id)
+
+    inclusion, created = HandInclusion.objects.get_or_create(user=request.user, hand=hand, defaults={'starter':starter_card})
+    
+    if not created:
+        inclusion.starter = starter_card
+        inclusion.save()
+    
+    return JsonResponse({})

@@ -45,7 +45,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     clan = models.ForeignKey(Clan, on_delete=models.CASCADE, null=True)
     is_leader = models.BooleanField(default=False)
     avatar = models.URLField(blank=True)
-    decks = models.ManyToManyField('decks.Deck', related_name='users', through='decks.Inclusion')
+    decks = models.ManyToManyField('decks.Deck', related_name='users', through='decks.DeckInclusion')
+    hands = models.ManyToManyField('decks.Hand', related_name='users', through='decks.HandInclusion')
     favorite_decks = models.ManyToManyField('decks.Deck', related_name='fans')
     voted_decks = models.ManyToManyField('decks.Deck', related_name='voters', through='decks.Vote')
 
