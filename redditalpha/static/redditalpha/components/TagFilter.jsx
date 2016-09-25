@@ -34,7 +34,7 @@ export default class TagFilter extends React.Component {
                   return (
                     <Chip 
                       onClick={this.props.toggleTagFilter.bind(this, tag)}
-                      className={this.props.tagFilters.indexOf(tag) >= 0 ? theme.selectedChip : ''}
+                      className={this.props.tagFilters.indexOf(tag) >= 0 ? theme.selectedChip : theme.unselectedChip }
                     >
                       {tag}
                     </Chip>
