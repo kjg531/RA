@@ -1,9 +1,9 @@
 import React from "react";
 import { render } from "react-dom";
-import {Link} from "react-router";
+import {Link, browserHistory} from "react-router";
 import Input from 'react-toolbox/lib/input';
 import CardPicker from './CardPicker';
-
+import Loading from './Loading';
 
 class DeckBuilder extends React.Component {
   constructor(props){
@@ -65,6 +65,10 @@ class DeckBuilder extends React.Component {
   }
 
   saveDeck = () => {
+    if (this.state.selectedCards != 8){
+      return;
+    }
+
     let fd = new FormData();
 
     this.state.cards.map((card) =>{
@@ -95,17 +99,17 @@ class DeckBuilder extends React.Component {
     let self = this;
 
     request.done(function(data, textStatus, jqXHR) {
-      alert(data.status);
-      self.setState({
-        'submitting': false
-      });
+      setTimeout(()=>{
+        self.setState({'submitting': false});
+        browserHistory.push('/decklist');
+      }, 2000);
     });
 
     request.fail(function(jqXHR, textStatus, errorThrown) {
-      alert('Error: ' + jqXHR.responseJSON.cards[0]);
-      self.setState({
-        'submitting': false
-      });
+      setTimeout(()=>{
+        self.setState({'submitting': false});
+        browserHistory.push('/decklist');
+      }, 2000);
     });
   }
 
@@ -143,6 +147,9 @@ class DeckBuilder extends React.Component {
         <br/>
         <br/>
         <h1 style={{textAlign:'center'}}>Deck Builder</h1>
+
+        <Loading active={this.state.submitting}/>
+
         <CardPicker
           cards={this.state.cards}
           selectedCards={this.state.selectedCards}

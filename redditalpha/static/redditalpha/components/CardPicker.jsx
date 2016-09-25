@@ -32,12 +32,10 @@ class CardPicker extends React.Component {
         <CardList cards={this.props.cards.filter((card) => {return card.selected})} placeholders={8} clickHandler={this.props.clickHandler}/>
         <Button style={{position: 'fixed', bottom: 10, left: 10, zIndex: 10}}  icon='clear'onMouseUp={this.props.clearHandler} floating inverse mini />
         <Button style={{position: 'fixed', bottom: 10, right: 10, zIndex: 10}} icon='add'  onMouseUp={this.props.saveHandler}  theme={theme} floating accent  mini />
-        {this.props.submitting ? <ProgressBar mode="indeterminate" />:''}
         <br/>
         <Tagger tags={this.props.tags} addTagHandler={this.props.addTagHandler} deleteTagHandler={this.props.deleteTagHandler}/>
         <CardList cards={this.props.cards.filter((card) => {return !card.selected})} clickHandler={this.props.clickHandler}/>
         <br/>
-        
       </div>
     )
   }
