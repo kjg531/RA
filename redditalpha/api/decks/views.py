@@ -91,7 +91,7 @@ def delete(request, id):
 def copy(request, id):
     deck = get_object_or_404(Deck, id=id)
     try:
-        Inclusion.objects.create(user=request.user, deck=deck)
+        DeckInclusion.objects.create(user=request.user, deck=deck)
     except:
         pass # some sneaky bastards doing some shit
     return JsonResponse({})

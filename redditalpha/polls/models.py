@@ -21,7 +21,12 @@ class Poll(models.Model):
             id = choice.id
             text = choice.text
             votes = Answer.objects.filter(choice=choice, poll=self).count()
-            percentage = votes / total_votes * 100
+
+            if total_votes == 0:
+                percentage = 0
+            else:
+                percentage = votes / total_votes * 100
+
             res.append({
                 'id': id,
                 'text': text,
