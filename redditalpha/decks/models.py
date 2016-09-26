@@ -134,7 +134,8 @@ class Deck(models.Model):
 
     def socket_notify(self, action, user=None):
         assert action in ['add', 'update'], "You're using this function incorrectly!"
-        data = self.as_dict(user=user)
+        # this is questionable. not sure if i should keep it or not
+        data = self.as_dict(user=user) # this (user=user) part
         data['action'] = action
         Group('deckfeed').send({'text': json.dumps(data)})
 

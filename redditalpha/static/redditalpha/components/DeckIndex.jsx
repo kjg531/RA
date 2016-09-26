@@ -45,7 +45,12 @@ class DeckIndex extends React.Component {
       console.log('Deck update');
       this.setState({
         'decks': this.state.decks.map((deck) => {
-          return deck.id == data.id ? data:deck;
+          if (deck.id == data.id){
+            deck.vote_sum = data.vote_sum;
+            deck.favorite_sum = data.favorite_sum;
+          }
+
+          return deck;
         })
       });
     }
@@ -182,7 +187,7 @@ class DeckIndex extends React.Component {
         <br/>
         <br/>
 
-        <h1 style={{textAlign: 'center'}}>My Decks</h1>
+        <h1 style={{textAlign: 'center'}}>Decks</h1>
 
         <DeckList
           decks={this.state.decks}
