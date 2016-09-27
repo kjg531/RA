@@ -3,5 +3,5 @@ echo | pgrep -f runworker
 pkill -f runworker
 
 echo "Killing daphne:"
-echo | pregp -f daphne
+echo | pgrep -f daphne
 pkill -f daphne

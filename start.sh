@@ -6,7 +6,7 @@ echo | pgrep -f runworker
 
 echo "Starting daphne"
 
-nohup daphne -b 0.0.0.0 -p 21432 config.asgi:channel_layer
+nohup daphne -b 0.0.0.0 -p 21432 config.asgi:channel_layer &
 echo | pgrep -f daphne
 
 echo "Done"
