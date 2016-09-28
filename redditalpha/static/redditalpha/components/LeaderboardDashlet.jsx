@@ -56,7 +56,7 @@ export default class LeaderboardDashlet extends React.Component {
           <h2>{series.name}</h2>
           <List selectable ripple>
             <ListSubHeader caption='Leaderboard' />
-            {leaderboard.map((score, i) => (<ListItem avatar={score.user.avatar} caption={(i + 1) + ': ' + score.user.display_name} legend="" rightIcon={<i>{score.cards_won}</i>} />))}
+            {leaderboard.map((score, i) => (<ListItem avatar={score.user.avatar} caption={(i + 1) + ': ' + score.user.display_name} legend="" rightIcon={<span>{score.cards_won}</span>} />))}
           </List>
         </Card>
       );
