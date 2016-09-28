@@ -12,8 +12,8 @@ class Series(models.Model):
             'id': self.id,
             'name': self.name,
             'created': self.created.isoformat(),
-            'participants': self.participants.count(),
-            'participating': user in self.participants.all()
+            'participants': self.participants.filter(in_clan=True).count(),
+            'participating': user in self.participants.filter(in_clan=True).all()
         }
 
 
