@@ -35,7 +35,7 @@ export default class ClanList extends React.Component {
          <ListItem
           avatar={<Logo className={theme.avatarFix}/>}
           caption="Reddit Delta"
-          legend="Leader: Harbringer"
+          legend="Leader: Harbinger"
           rightIcon="looks_4"
           theme={theme}
         />

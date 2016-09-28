@@ -45,7 +45,7 @@ class UserChangeForm(forms.ModelForm):
             'display_name',
             'email',
             'password',
-            'clan',
+            'in_clan',
             'is_leader',
             'avatar',
             'is_staff',

@@ -57,7 +57,7 @@ class Tournament(models.Model):
 
 class Result(models.Model):
     tournament = models.ForeignKey('tournaments.Tournament', related_name='results')
-    user = models.ForeignKey('users.User')
+    user = models.ForeignKey('users.User', help_text='Only clan members are allowed to earn tournament points')
     cards_won = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(15000)])
 
     class Meta:

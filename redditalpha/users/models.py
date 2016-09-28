@@ -42,7 +42,7 @@ class UserManager(BaseUserManager):
 class User(AbstractBaseUser, PermissionsMixin):
     display_name = models.CharField(max_length=14, blank=True)
     email = models.EmailField(verbose_name='email address', max_length=255, unique=True)
-    clan = models.ForeignKey(Clan, on_delete=models.CASCADE, null=True)
+    in_clan = models.BooleanField(default=False)
     is_leader = models.BooleanField(default=False)
     avatar = models.URLField(blank=True)
     decks = models.ManyToManyField('decks.Deck', related_name='users', through='decks.DeckInclusion')
