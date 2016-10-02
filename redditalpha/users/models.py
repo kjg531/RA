@@ -19,6 +19,8 @@ from django.utils import timezone
 from allauth.account.signals import user_signed_up, user_logged_in
 
 from redditalpha.clans.models import Clan
+from redditalpha.tournaments.models import Result
+
 
 class UserManager(BaseUserManager):
     def create_user(self, email, password=None):
@@ -111,6 +113,9 @@ class User(AbstractBaseUser, PermissionsMixin):
         }
 
         return json.dumps(res)   
+
+    def cards_won_in_series(self, series):
+        return sum(list(Result.objects.filter(tournament__series=series, user=self).values_list('cards_won', flat=True))) or 0
 
 
 @receiver(user_signed_up)

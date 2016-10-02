@@ -41,6 +41,10 @@ THIRD_PARTY_APPS = (
     'allauth.socialaccount',  # registration
     'redditalpha.utils.providers.discord',
     'channels',
+    'adminsortable',
+    'easy_thumbnails',
+    'filer',
+    'mptt',
 )
 
 # Apps specific for this project go here.
@@ -248,3 +252,8 @@ CHANNEL_LAYERS = {
         "ROUTING": "redditalpha.routing.channel_routing",
     },
 }
+
+
+# easy_thumbnail for retina displays
+
+THUMBNAIL_HIGH_RESOLUTION = True

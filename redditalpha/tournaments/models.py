@@ -1,6 +1,10 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 
+from adminsortable.models import SortableMixin
+from adminsortable.fields import SortableForeignKey
+from filer.fields.image import FilerImageField
+
 
 class Series(models.Model):
     name = models.CharField(max_length=100)
@@ -19,40 +23,43 @@ class Series(models.Model):
 
 class Tournament(models.Model):
     SIZE_CHOICES = (
+        (50, '50 players'),
         (100, '100 players'),
-        (150, '150 players'),
         (200, '200 players'),
-        (250, '250 players'),
-        (300, '300 players'),
-        (500, '500 playesr'),
-        (600, '600 players'),
-        (800, '800 players'),
-        (1000, '1000 players')
-    )
-
-    LENGTH_CHOICES = (
-        (1, '1h'),
-        (2, '2h'),
-        (3, '3h'),
-        (4, '4h'),
-        (8, '8h'),
-        (24, '1d'),
-        (48, '2d'),
-        (72, '3d'),
+        (1000, '1000 players'),
     )
 
     name = models.CharField(max_length=100)
     series = models.ForeignKey('tournaments.Series', related_name='tournaments')
     start = models.DateTimeField()
-    length = models.IntegerField(choices=LENGTH_CHOICES)
     size = models.IntegerField(choices=SIZE_CHOICES)
     created = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         ordering = ('name',)
 
+    def save(self, *args, **kwargs):
+        super(Tournament, self).save(*args, **kwargs)
+
+        for participant in self.series.participants.filter(in_clan=True):
+            print('saving result for ')
+            print(participant)
+            result, created = self.results.get_or_create(user=participant, defaults={'cards_won': 0})
+            print(result)
+            print('created? {}'.format(created))
+
     def __str__(self):
         return self.name
+
+
+class Screenshot(SortableMixin):
+    tournament = SortableForeignKey('tournaments.Tournament')
+    image = FilerImageField(related_name='screenshots')
+
+    order = models.PositiveIntegerField(default=0, editable=False, db_index=True)
+
+    class Meta:
+        ordering = ('order',)
 
 
 class Result(models.Model):
@@ -62,3 +69,9 @@ class Result(models.Model):
 
     class Meta:
         unique_together = ('tournament', 'user',)
+
+    def subtotal_cards_won(self):
+        return self.total_cards_won() - self.cards_won
+
+    def total_cards_won(self):
+        return self.user.cards_won_in_series(self.tournament.series)
