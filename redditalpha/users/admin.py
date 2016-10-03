@@ -15,8 +15,7 @@ class UserAdmin(AuthUserAdmin):
 
     fieldsets = (
         (None, {'fields': ('display_name', 'email', 'password')}),
-        ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser',
-                                       'groups', 'user_permissions')}),
+        ('Permissions', {'fields': ('in_clan', 'is_active', 'is_staff', 'is_superuser')}),
         ('Important dates', {'fields': ('last_login', 'date_joined')}),
     )
 
@@ -29,7 +28,7 @@ class UserAdmin(AuthUserAdmin):
 
     ordering = ('email',)
 
-    list_display = ('display_name', 'email', 'clan', 'is_leader', 'avatar',)
+    list_display = ('display_name', 'email', 'in_clan', 'is_leader', 'avatar',)
     search_fields = ['display_name', 'email']
 
 admin.site.register(User, UserAdmin)

@@ -84,7 +84,7 @@ class Card extends React.Component {
     if (this.props.data) {
       return (
         <div style={{display: 'inline-block', position: 'relative', height: 90, minWidth: 70}}>
-          <img style={{height: '90px', width: '70px', position: 'relative'}} data-rarity={this.props.data.rarity} className={theme.imagesClass1} src={this.props.data.image_url} onClick={this.onClick} />
+          <img style={{height: '90px', width: '70px', position: 'relative'}} data-rarity={this.props.data.rarity} className={theme.imagesClass1} src={this.props.data.image_url} onClick={this.onClick} title={this.props.data.name}/>
           <span style={this.style[this.props.data.rarity]} data-rarity={this.props.data.rarity}>{this.props.data.cost}</span>
         </div>
       );

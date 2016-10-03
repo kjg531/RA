@@ -21,7 +21,7 @@ class CardAdmin(admin.ModelAdmin):
         'card_type'
     )
 
-    readonly_fields = ('name',)
+    # readonly_fields = ('name',)
     inlines = [BalanceInline]
 
 admin.site.register(Card, CardAdmin)

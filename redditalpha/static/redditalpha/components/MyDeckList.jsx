@@ -13,7 +13,8 @@ class MyDeckList extends React.Component {
     super(props)
     this.style = {
       deckHidden: {display: 'none'},
-      toolboxInvisible: {opacity: 0}
+      toolboxInvisible: {opacity: 0, marginLeft:50},
+      toolboxVisible: {opacity: 1, marginLeft:50}
     };
     this.state = {
       'dialogOpen': false,
@@ -75,15 +76,17 @@ class MyDeckList extends React.Component {
         { this.props.decks.map((deck) => {
           return (
             <div key={deck.id} style={this.isHidden(deck) ? this.style.deckHidden:{}}>
-              <IconButton onMouseUp={this.toggleToolbox.bind(this, deck.id)} icon='expand_less' accent />
-              <div style={this.state.visibleToolboxes.indexOf(deck.id) < 0 ? this.style.toolboxInvisible : {}}>
-                <IconButton onMouseUp={this.props.favoriteHandler.bind(this, deck.id)} icon={deck.favorite ? 'favorite':'favorite_border'} accent />
+              <div style={this.state.visibleToolboxes.indexOf(deck.id) < 0 ? this.style.toolboxInvisible : this.style.toolboxVisible}>
+                <IconButton onMouseUp={this.props.favoriteHandler.bind(this, deck.id)} icon={deck.favorite ? 'favorite':'favorite_border'} />
                 <IconButton onMouseUp={this.openDialog.bind(this, deck.id)} icon='delete' floating mini />
-                <Link to={"/decklist/" + deck.id} activeClassName="active"><IconButton icon='note_add' floating accent mini /></Link>
+                <Link to={"/decklist/" + deck.id} activeClassName="active"><IconButton icon='note_add' floating mini /></Link>
                 <span>{deck.tags.map((tag) => <Chip>{tag}</Chip>)}</span>
               </div>
 
-              <Deck cards={deck.cards} />
+              <IconButton onMouseUp={this.toggleToolbox.bind(this, deck.id)} icon='expand_less' style={{bottom: 35}}/>
+              <div style={{display:"inline-block"}}>
+                <Deck cards={deck.cards} />
+              </div>
             </div>
           );
         })}

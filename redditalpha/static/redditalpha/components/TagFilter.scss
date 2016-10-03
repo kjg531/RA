@@ -1,5 +1,11 @@
 .selectedChip {
-  color: black;
-  background-color: red;
+  color: white;
+  background-color: black;
+  font-family: Roboto;
 }
 
+.unselectedChip {
+  color: black;
+  background-color: #e64e5f;
+  font-family: Roboto;
+}

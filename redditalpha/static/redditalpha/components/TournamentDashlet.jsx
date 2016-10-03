@@ -83,9 +83,9 @@ export default class TournamentDashlet extends React.Component {
           <h3>{series.participants} users registered</h3>
 
           <div style={{display:'inline-block'}}>
-            {series.participating ? <small>You've already registered</small>:<Button style={this.style.button} icon='bookmark' label='Register!' accent onClick={this.handleRegister}/>}
+            {series.participating ? <small>You've already registered</small>:<Button style={this.style.button} icon='bookmark' label='Register!' onClick={this.handleRegister}/>}
             <Link to="/rac" activeClassName="active">
-              <Button icon='bookmark' label='More Info' style={this.style.button} accent />
+              <Button icon='bookmark' label='More Info' style={this.style.button} />
             </Link>
           </div>
         </Card>

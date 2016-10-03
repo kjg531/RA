@@ -82,7 +82,7 @@ class PollDashlet extends React.Component {
               {poll.choices.map((choice) => <RadioButton key={choice.id} label={choice.text} value={choice.id} theme={theme}/>)}
             </RadioGroup>
             <hr/>
-            <Button icon='bookmark' label='Vote' accent onClick={this.handleVote}/>
+            <Button icon='bookmark' label='Vote' onClick={this.handleVote}/>
           </Card>
         );
       }

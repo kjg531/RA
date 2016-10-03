@@ -1,9 +1,17 @@
-.radioChecked:before {
-    top: 2.1px;
-    left: 2px;
-    width: 21px;
-    height: 21px;
+[data-react-toolbox="radio-group"] {
+  margin: 20px !important;
+  text-align: left !important;
 }
+
+.radioChecked:before {
+  top: 2.1px;
+  left: 2px;
+  width: 21px;
+  height: 21px;
+}
+
+
+
 .card {
 	border-radius: 12px;
 	text-align: center;

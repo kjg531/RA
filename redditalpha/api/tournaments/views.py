@@ -33,7 +33,7 @@ def leaderboard(request):
     series = Series.objects.last()
     scores = []
 
-    for user in series.participants.all():
+    for user in series.participants.filter(in_clan=True).all():
         cards_won = Result.objects.filter(
             user=user,
             tournament__series=series
