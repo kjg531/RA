@@ -5,3 +5,12 @@
   font-family: Roboto;
 }
 
+.item {
+  padding: 0 10px !important;
+}
+
+.itemText {
+  width: 150px !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
