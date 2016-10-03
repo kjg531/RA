@@ -28,7 +28,7 @@ export default class LogoButton extends React.Component {
     render() {
         return (
             <div>
-                <a className="twitter-timeline" href="https://twitter.com/RedditAlpha/lists/reddit-alpha" width="300" height="400">
+                      <a className="twitter-timeline" href="https://twitter.com/RedditAlpha/lists/reddit-alpha" width="300" height="400">
             Tweets from https://twitter.com/twitter/lists/official-twitter-accts
                  </a>
             </div>

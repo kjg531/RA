@@ -18,7 +18,7 @@ class Dashboard extends React.Component {
         <br/>
         <br/>
         <br/>
-        <br/>
+      <br/>
         <br/>
         <PollDashlet />
         <br/>

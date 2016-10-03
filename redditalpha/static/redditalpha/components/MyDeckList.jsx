@@ -30,12 +30,12 @@ class MyDeckList extends React.Component {
     }else{
       for (var i = 0; i < deck.tags.length; i++){
         if (tagFilters.indexOf(deck.tags[i]) >= 0){
-          return false;
+              return false;
         }
       }
       return true;
     }
-  }
+    }
 
   openDialog = (deckId) => {
     this.setState({

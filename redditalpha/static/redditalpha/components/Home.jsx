@@ -15,7 +15,7 @@ class Home extends React.Component {
         <p>The Reddit Alpha Clan Family was established by Woody shortly after the Clash Royale soft launch. From humble beginnings, Reddit Alpha has grown into a Global Top 100 clan with hundreds of members throughout a thriving feeder system of six affiliate clans. We are a founding member of Reddit's Royale Clan System and have claimed the championship of every RCS tournament so far.</p>
       </Card>
         <Card theme={theme}>
-          <h2>Clans</h2>
+                      <h2>Clans</h2>
           <ClanList />
         </Card>
         <HomeMiddleComponent />

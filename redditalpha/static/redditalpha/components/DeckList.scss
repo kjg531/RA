@@ -1,5 +1,3 @@
-
-
 .icon {
   font-size: .5em;
 }
@@ -11,7 +9,8 @@
   font-size: 1.5em;
 }
 .card {
-  flex-direction: inherit !important;
+  -ms-flex-direction: inherit !important;
+      flex-direction: inherit !important;
   border: #e64e5f solid 3px;
   border-radius: 12px;
 }
