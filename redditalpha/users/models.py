@@ -64,6 +64,9 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     USERNAME_FIELD = 'email'
 
+    class Meta:
+        ordering = ('display_name',)
+
     def get_full_name(self):
         return self.display_name
 
