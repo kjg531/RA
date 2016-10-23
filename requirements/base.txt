@@ -53,3 +53,7 @@ django-webpack-loader==0.3.3
 channels
 beautifulsoup4
 django-admin-sortable==2.0.18
+
+easy-thumbnails
+django_admin_sortable
+django-filer
