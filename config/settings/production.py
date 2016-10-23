@@ -204,7 +204,7 @@ CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "asgi_redis.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [("localhost", 12894)],
+            "hosts": [("localhost", 6379)],
         },
         "ROUTING": "redditalpha.routing.channel_routing",
     },
