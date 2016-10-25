@@ -37,10 +37,11 @@ const users = [
 export default class RAC extends React.Component {
   constructor(props) {
     super(props);
-    this.state {
-      selected=[0,1,2,3,4,5,6,7]
-    }
+    this.state = {
+      selected: [0,1,2,3,4,5,6,7]
+    };
   }
+
   render() {
     return (
       <Card>
