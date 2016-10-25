@@ -38,11 +38,12 @@ def leaderboard(request):
             user=user,
             tournament__series=series
         ).aggregate(cards_won=Coalesce(Sum('cards_won'), 0))['cards_won']
-       
-        scores.append({
-            'user': user.as_dict(),
-            'cards_won': cards_won
-        })
+        
+        if cards_won > 0:
+            scores.append({
+                'user': user.as_dict(),
+                'cards_won': cards_won
+            })
 
     scores.sort(reverse=True, key=lambda s: s['cards_won'])
     return JsonResponse({

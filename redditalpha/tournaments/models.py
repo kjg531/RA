@@ -11,6 +11,9 @@ class Series(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     participants = models.ManyToManyField('users.User', related_name='series', blank=True)
 
+    def __str__(self):
+        return self.name
+
     def as_dict(self, user):
         return {
             'id': self.id,

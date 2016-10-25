@@ -41,5 +41,9 @@ class TournamentAdmin(NonSortableParentAdmin):
     inlines = [ScreenshotInline, ResultInline]
 
 
+class SeriesAdmin(admin.ModelAdmin):
+    filter_horizontal = ('participants',)
+
+
 admin.site.register(Tournament, TournamentAdmin)
-admin.site.register(Series)
+admin.site.register(Series, SeriesAdmin)
