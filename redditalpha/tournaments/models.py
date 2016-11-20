@@ -45,11 +45,7 @@ class Tournament(models.Model):
         super(Tournament, self).save(*args, **kwargs)
 
         for participant in self.series.participants.filter(in_clan=True):
-            print('saving result for ')
-            print(participant)
             result, created = self.results.get_or_create(user=participant, defaults={'cards_won': 0})
-            print(result)
-            print('created? {}'.format(created))
 
     def __str__(self):
         return self.name
