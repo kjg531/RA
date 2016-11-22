@@ -18,7 +18,7 @@ class ResultInline(admin.TabularInline):
     # def subtotal_cards_won(self, obj):
     #     return self.total_cards_won(obj) - obj.cards_won
     # subtotal_cards_won.short_description = 'Cards Won (so far)'
-    
+
     # def total_cards_won(self, obj):
     #     return obj.user.cards_won_in_series(obj.tournament.series)
 
@@ -26,10 +26,10 @@ class ResultInline(admin.TabularInline):
     #     qs = super(ResultInline, self).get_queryset(request)
     #     qs.annotate(sub=Value())
 
-    def formfield_for_foreignkey(self, db_field, request, **kwargs):
-        if db_field.name == 'user':
-            kwargs['queryset'] = User.objects.filter(in_clan=True)
-        return super(ResultInline, self).formfield_for_foreignkey(db_field, request, **kwargs)
+    # def formfield_for_foreignkey(self, db_field, request, **kwargs):
+    #     if db_field.name == 'user':
+    #         kwargs['queryset'] = User.objects.filter(in_clan=True)
+    #     return super(ResultInline, self).formfield_for_foreignkey(db_field, request, **kwargs)
 
 
 class ScreenshotInline(SortableStackedInline):

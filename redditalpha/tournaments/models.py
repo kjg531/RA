@@ -69,8 +69,11 @@ class Result(models.Model):
     class Meta:
         unique_together = ('tournament', 'user',)
 
+    def __str__(self):
+        return str(self.user)
+
     def subtotal_cards_won(self):
-        return self.total_cards_won() - self.cards_won
+        return self.total_cards_won() - (self.cards_won or 0)
 
     def total_cards_won(self):
         return self.user.cards_won_in_series(self.tournament.series)
