@@ -1,1 +1,1 @@
-export {default} from './dark.js';
+export default from './dark.js';

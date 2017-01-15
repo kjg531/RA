@@ -4,7 +4,7 @@ import {Router, browserHistory} from 'react-router';
 import {Provider} from 'react-redux';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import theme from './theme';
+import theme from './theme/dark.js';
 import routes from './routes';
 import configureStore from './store/configureStore';
 

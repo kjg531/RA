@@ -68,7 +68,7 @@ module.exports = (opts) => {
           exclude: /node_modules/,
           loaders: ['babel-loader'],
         },
-        {test: /\.scss$/, loader: 'style!css?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!sass?sourceMap' },
+        {test: /\.scss$/, loader: 'style-loader!css-loader?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!sass-loader?sourceMap' },
         {test: /\.css$/, loader: 'style-loader!css-loader?modules', include: /flexboxgrid/},
         {test: /\.(png|jpg|gif)$/, loader: 'url-loader', query: {limit: 8192}},  // inline base64 URLs <=8k
         {test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'file-loader'},
@@ -77,7 +77,7 @@ module.exports = (opts) => {
     watchOptions: {
       poll: 400
     },
-        
+
     resolve: {
       extensions: ['.js', '.jsx'],
       modules: [
