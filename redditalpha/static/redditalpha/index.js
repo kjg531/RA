@@ -3,11 +3,11 @@ import ReactDOM from 'react-dom';
 import {Router, browserHistory} from 'react-router';
 import {Provider} from 'react-redux';
 
+import injectTapEventPlugin from 'react-tap-event-plugin';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import theme from './theme/dark.js';
 import routes from './routes';
 import configureStore from './store/configureStore';
-
 
 const STORE = configureStore();
 const ROOT_ELEMENT = 'main';
@@ -24,3 +24,5 @@ ReactDOM.render(
   </Provider>,
   document.getElementById(ROOT_ELEMENT)
 );
+
+injectTapEventPlugin();

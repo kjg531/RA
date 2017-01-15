@@ -1,52 +1,52 @@
-.appBar {
-  background-color: black;
-  height: 60px;
-}
-
-.avatar {
-  height: 45px !important;
-  width: 45px !important;
-}
-
-.drawer {
-  position: absolute;
-  top: 60px !important;
-  bottom: 0px;
-  right:0;
-  background-color: black !important;
-  transition: .3s;
-  border: none !important;
-}
-
-
-.itemAction > [data-react-toolbox="font-icon"] {
-  color: white !important;
-}
-
-.itemText {
-  font-family: SuperCell;
-  color: white !important;
-}
-
-.leftIcon {
-  position: absolute;
-  left: 0px;
-}
-
-.rightIcon {
-  position: absolute;
-  right: 10px;
-  a {
-    color: white !important;
-  }
-}
-
-.title {
-  color: white;
-  padding-left: 40px;
-  font-family: SuperCell;
-  @media screen and (max-width: 767px) {
-    opacity: 0
-  }
-}
-
+// .appBar {
+//   background-color: black;
+//   height: 60px;
+// }
+//
+// .avatar {
+//   height: 45px !important;
+//   width: 45px !important;
+// }
+//
+// .drawer {
+//   position: absolute;
+//   top: 60px !important;
+//   bottom: 0px;
+//   right:0;
+//   background-color: black !important;
+//   transition: .3s;
+//   border: none !important;
+// }
+//
+//
+// .itemAction > [data-react-toolbox="font-icon"] {
+//   color: white !important;
+// }
+//
+// .itemText {
+//   font-family: SuperCell;
+//   color: white !important;
+// }
+//
+// .leftIcon {
+//   position: absolute;
+//   left: 0px;
+// }
+//
+// .rightIcon {
+//   position: absolute;
+//   right: 10px;
+//   a {
+//     color: white !important;
+//   }
+// }
+//
+// .title {
+//   color: white;
+//   padding-left: 40px;
+//   font-family: SuperCell;
+//   @media screen and (max-width: 767px) {
+//     opacity: 0
+//   }
+// }
+//

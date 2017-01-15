@@ -8,4 +8,8 @@ export default getMuiTheme({
     ...darkTheme.palette,
     canvasColor: '#303030',
   },
+  appBar: {
+    color: '#303030',
+    textColor: '#FFFFFF'
+  },
 });
