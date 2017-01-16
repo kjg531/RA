@@ -60,7 +60,7 @@
     "react-router": "^3.0.0-alpha.3",
     "react-sortable-pane": "^0.5.3",
     "react-swipeable-views": "^0.6.5",
-    "react-tap-event-plugin": "^1.0.0",
+    "react-tap-event-plugin": "2.0.1",
     "react-toolbox": "^1.2.1",
     "redux": "^3.5.2",
     "sass": "^0.5.0",

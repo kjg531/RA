@@ -12,4 +12,7 @@ export default getMuiTheme({
     color: '#303030',
     textColor: '#FFFFFF'
   },
+  textField: {
+    floatingLabelColor: '#000'
+  }
 });

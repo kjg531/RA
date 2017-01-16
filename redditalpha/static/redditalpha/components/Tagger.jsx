@@ -1,5 +1,6 @@
 import React from 'react';
 import Input from 'react-toolbox/lib/input';
+import TextField from 'material-ui/TextField';
 import Chip from 'react-toolbox/lib/chip';
 import theme from './Tagger.scss'
 
@@ -35,11 +36,20 @@ class Tagger extends React.Component {
     return (
       <div className={theme.tagger}>
         <div>{this.props.tags.map((tag) => <Chip deletable onDeleteClick={this.props.deleteTagHandler.bind(this, tag)}>{tag}</Chip>)}</div>
-        <Input type='text' label='Add Tag to Deck!' name='tags' value={this.state.tag} onChange={this.handleChange} theme={theme} onKeyPress={this.keyPress}/>
+        <TextField
+          floatingLabelText="Add Tag to Deck!"
+          name='tags'
+          value={this.state.tag}
+          onChange={this.handleChange}
+          theme={theme}
+          onKeyPress={this.keyPress}
+          underlineStyle={{borderColor: '#303030'}}
+        />
       </div>
     )
   }
 }
+{/* <Input type='text' label='Add Tag to Deck!' name='tags' value={this.state.tag} onChange={this.handleChange} theme={theme} onKeyPress={this.keyPress}/> */}
 
 Tagger.propTypes = {
   tags: React.PropTypes.array.isRequired,
