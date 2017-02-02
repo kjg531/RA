@@ -1,10 +1,10 @@
 import React from 'react';
-import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
+// import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import HomeMiddleComponent from './HomeMiddleComponent';
 import HomeBottomComponent from './HomeBottomComponent';
 import ClanList from './ClanList';
-// import Card from 'react-toolbox/lib/card';
-// import theme from './Home.scss';
+import Card from 'react-toolbox/lib/card';
+import theme from './Home.scss';
 
 
 class Home extends React.Component {
@@ -19,13 +19,6 @@ class Home extends React.Component {
         <Card theme={theme}>
           <h2>Clans</h2>
           <ClanList />
-        </Card>
-
-        <Card>
-          <CardText>
-            <h2>Clans</h2>
-            <ClanList />
-          </CardText>
         </Card>
 
         <HomeMiddleComponent />

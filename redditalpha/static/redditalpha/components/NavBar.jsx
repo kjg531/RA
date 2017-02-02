@@ -22,7 +22,7 @@ export default class NavBar extends Component {
   render() {
     return (
       <AppBar
-        title="Title"
+        title="Reddit Alpha Clan Family"
         iconElementLeft={<HomeButton />}
         iconElementRight={this.props.user.authenticated ? <NavMenu /> : <Login />}
       />
