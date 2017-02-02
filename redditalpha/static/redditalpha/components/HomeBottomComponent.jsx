@@ -17,6 +17,7 @@ export default class LogoButton extends React.Component {
           <div style={{padding:5, margin:5, borderRadius: 12}}>
             <div className="g-ytsubscribe ytt" data-channelid="UCjC5dP9z3XQY6OEPWh5RiLw" data-layout="full" data-count="default"></div><br/>
             <div className="g-ytsubscribe" data-channel="wwoody123" data-layout="full" data-count="default"></div><span>  </span>
+            <div className="g-ytsubscribe" data-channelid="UCwrRYl8cfH9WPrsvFeoXzig" data-layout="full" data-count="default"></div><span>  </span>
             <div className="g-ytsubscribe" data-channelid="UCx6U0bPb5XpShjnAmI_LXHw" data-layout="full" data-count="default"></div>
           </div>
         </Card>
