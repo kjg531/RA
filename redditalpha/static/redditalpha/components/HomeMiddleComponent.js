@@ -24,8 +24,8 @@ class Home extends React.Component {
           <h2> Twitch Streams</h2>
           <iframe src="http://streambadge.com/twitch/custom/2b2b2b/b9a3e3/808080/wwoody123/" style={{border:'none',height:'3em',margin: '0 5px 5px 5px'}}></iframe>
           <iframe src="http://streambadge.com/twitch/custom/2b2b2b/b9a3e3/808080/darthjarjarcr/" style={{border:'none',height:'3em',margin: '10px 5px 5px 5px'}}></iframe>
+          <iframe src="http://streambadge.com/twitch/custom/2b2b2b/b9a3e3/808080/gohaawks/" style={{border:'none',height:'3em',margin: '10px 5px 5px 5px'}}></iframe>
           <iframe src="http://streambadge.com/twitch/custom/2b2b2b/b9a3e3/808080/marcel_p_clash/" style={{border:'none',height:'3em',margin: '10px 5px 5px 5px'}}></iframe>
-          <iframe src="http://streambadge.com/twitch/custom/2b2b2b/b9a3e3/808080/raintown7/" style={{border:'none',height:'3em',margin: '10px 5px 5px 5px'}}></iframe>
           <iframe src="http://streambadge.com/twitch/custom/2b2b2b/b9a3e3/808080/oden11/" style={{border:'none',height:'3em',margin: '10px 5px 5px 5px'}}></iframe>
         </Card>
           </Col>
