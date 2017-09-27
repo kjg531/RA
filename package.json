@@ -14,7 +14,9 @@
     "build": "NODE_ENV=production npm run webpack",
     "dev": "NODE_ENV=local npm run babel -- ./node_modules/.bin/webpack-dev-server --progress --hot --watch",
     "mainServer": "/home/vagrant/venv/bin/python manage.py runserver 0.0.0.0:8000",
-    "start": "npm run dev & npm run mainServer"
+    "start": "npm run dev & npm run mainServer",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "author": "Kenneth Gabbara",
   "license": "Not open source",
@@ -71,7 +73,8 @@
     "webpack": "^2.1.0-beta.20",
     "webpack-bundle-tracker": "0.0.93",
     "webpack-dev-server": "^2.1.0-beta.0",
-    "whatwg-fetch": "^1.0.0"
+    "whatwg-fetch": "^1.0.0",
+    "snyk": "^1.41.1"
   },
   "devDependencies": {
     "babel-plugin-__coverage__": "^11.0.0",
@@ -98,5 +101,6 @@
     "redux-devtools-multiple-monitors": "^1.0.1",
     "redux-immutable-state-invariant": "1.2.3",
     "redux-slider-monitor": "^1.0.7"
-  }
+  },
+  "snyk": true
 }
